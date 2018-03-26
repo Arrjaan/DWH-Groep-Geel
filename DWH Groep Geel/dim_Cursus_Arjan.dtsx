@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Cursus_Arjan"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{C633E57B-E262-48DC-AEC7-81CA04623EA8}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{D62F2DCA-6E8B-443B-8041-EDA685EBC4FB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -32,6 +32,722 @@
           version="1">
           <components>
             <component
+              refId="Package\Inladen Dim_Cursus\Bereken Checksum"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Checksum Transformation; Konesans Ltd; Copyright © 2016 Konesans Ltd; http://www.konesans.com"
+              description="Checksum Transformation for SQL Server Integration Services 2016"
+              name="Bereken Checksum"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The Checksum Transformation algorithm used to produce the resulting checksum value."
+                  name="ChecksumAlgorithm"
+                  typeConverter="Konesans.Dts.Pipeline.ChecksumTransform.ChecksumTransform+ChecksumAlgorithm, Konesans.Dts.Pipeline.ChecksumTransform, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b2ab4a111192992b">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Konesans.ChecksumTransformation</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput]"
+                  errorRowDisposition="FailComponent"
+                  name="ChecksumInput">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[CursusOmschrijvingId]"
+                      cachedDataType="i4"
+                      cachedName="CursusOmschrijvingId"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusOmschrijvingId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[TrainerId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[StartDatum]"
+                      cachedDataType="dbDate"
+                      cachedName="StartDatum"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[StartDatum]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[MaxAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MaxAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MaxAantalDeelnemers]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[MinAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MinAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MinAantalDeelnemers]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[AantalDagen]"
+                      cachedDataType="i4"
+                      cachedName="AantalDagen"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[AantalDagen]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Bereken Checksum.Outputs[ChecksumOutput]"
+                  exclusionGroup="1"
+                  name="ChecksumOutput"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Outputs[ChecksumOutput].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Bereken Checksum.Outputs[ChecksumOutput].Columns[Checksum]"
+                      name="Checksum">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Checksum transformation result column indicator."
+                          name="Checksum">Checksum</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input].Columns[src_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="src_CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_CursusId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Nieuwe Regels]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Nieuwe Regels"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(tgt_CursusId)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Verwijderde Regels]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Verwijderde Regels"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(src_CursusId)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Gewijzigde Regels]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Gewijzigde Regels"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]} != #{Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">src_Checksum != tgt_Checksum</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert nieuwe rijen"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dim_Cursus]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Connections[OleDbConnection]"
+                  connectionManagerID="{050B2171-467B-4554-8819-8CA363EC4776}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[TrainerId]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[TrainerId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].Columns[StartDatum]"
+                      cachedDataType="dbDate"
+                      cachedName="StartDatum"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[StartDatum]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[StartDatum]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].Columns[MaxAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MaxAantalDeelnemers"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[MaxAantalDeelnemers]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].Columns[MinAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MinAantalDeelnemers"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[MinAantalDeelnemers]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].Columns[Omschrijving]"
+                      cachedDataType="nText"
+                      cachedName="Omschrijving"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[Omschrijving]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[Omschrijving]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].Columns[AantalDagen]"
+                      cachedDataType="i4"
+                      cachedName="AantalDagen"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[AantalDagen]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[AantalDagen]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[DimKey]"
+                      dataType="i4"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[CursusId]"
+                      dataType="i4"
+                      name="CursusId" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[TrainerId]"
+                      dataType="i4"
+                      name="TrainerId" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[StartDatum]"
+                      dataType="dbDate"
+                      name="StartDatum" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[MaxAantalDeelnemers]"
+                      dataType="ui1"
+                      name="MaxAantalDeelnemers" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[MinAantalDeelnemers]"
+                      dataType="ui1"
+                      name="MinAantalDeelnemers" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[Omschrijving]"
+                      dataType="nText"
+                      name="Omschrijving" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[AantalDagen]"
+                      dataType="i4"
+                      name="AantalDagen" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[CurrentFlag]"
+                      dataType="bool"
+                      name="CurrentFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidTill]"
+                      dataType="dbTimeStamp"
+                      name="ValidTill" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[CursusOmschrijvingId]"
+                      cachedDataType="i4"
+                      cachedName="CursusOmschrijvingId"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusOmschrijvingId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[TrainerId]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[StartDatum]"
+                      cachedDataType="dbDate"
+                      cachedName="StartDatum"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[StartDatum]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[MaxAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MaxAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MaxAantalDeelnemers]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[MinAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MinAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MinAantalDeelnemers]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[Omschrijving]"
+                      cachedDataType="nText"
+                      cachedName="Omschrijving"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[Omschrijving]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[AantalDagen]"
+                      cachedDataType="i4"
+                      cachedName="AantalDagen"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[AantalDagen]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Bereken Checksum.Outputs[ChecksumOutput].Columns[Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input].Columns[CursusID]"
+                      cachedDataType="i4"
+                      cachedName="CursusID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[CursusID]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]"
+                      cachedDataType="i4"
+                      cachedName="DimKey"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[DimKey]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]"
+                      name="src_CursusId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[CursusId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[CursusOmschrijvingId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[CursusOmschrijvingId]"
+                      name="CursusOmschrijvingId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[CursusOmschrijvingId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[TrainerId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[TrainerId]"
+                      name="TrainerId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[TrainerId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[StartDatum]"
+                      dataType="dbDate"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[StartDatum]"
+                      name="StartDatum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[StartDatum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MaxAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MaxAantalDeelnemers]"
+                      name="MaxAantalDeelnemers">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[MaxAantalDeelnemers]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MinAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MinAantalDeelnemers]"
+                      name="MinAantalDeelnemers">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[MinAantalDeelnemers]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[Omschrijving]"
+                      dataType="nText"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[Omschrijving]"
+                      name="Omschrijving">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[Omschrijving]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[AantalDagen]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[AantalDagen]"
+                      name="AantalDagen">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[AantalDagen]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]"
+                      name="src_Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[DimKey]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[DimKey]"
+                      name="DimKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]"
+                      name="tgt_Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]"
+                      name="tgt_CursusId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input].Columns[CursusID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Inladen Dim_Cursus\Multicast"
               componentClassID="Microsoft.Multicast"
               contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -47,9 +763,23 @@
               <outputs>
                 <output
                   refId="Package\Inladen Dim_Cursus\Multicast.Outputs[Multicast Output 1]"
-                  dangling="true"
                   deleteOutputOnPathDetached="true"
                   name="Multicast Output 1"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
                   synchronousInputId="Package\Inladen Dim_Cursus\Multicast.Inputs[Multicast Input 1]">
                   <externalMetadataColumns />
                 </output>
@@ -114,6 +844,7 @@
               <outputs>
                 <output
                   refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output]"
+                  isSorted="true"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
@@ -124,6 +855,7 @@
                       externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
                       lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusId]"
                       name="CursusId"
+                      sortKeyPosition="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusOmschrijvingId]"
@@ -244,6 +976,150 @@
                       refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Ophalen DWH"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Ophalen DWH"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dim_Cursus]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DimKey, CursusID, Checksum FROM DWH.dbo.dim_Cursus WHERE CurrentFlag = 1 ORDER BY CursusID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inladen Dim_Cursus\Ophalen DWH.Connections[OleDbConnection]"
+                  connectionManagerID="{050B2171-467B-4554-8819-8CA363EC4776}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      name="DimKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[CursusID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].ExternalColumns[CursusID]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].Columns[CursusID]"
+                      name="CursusID"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      dataType="i4"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output].ExternalColumns[CursusID]"
+                      dataType="i4"
+                      name="CursusID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[CursusID]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[CursusID]"
+                      name="CursusID" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -423,18 +1299,993 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[src_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="src_CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[CursusOmschrijvingId]"
+                      cachedDataType="i4"
+                      cachedName="CursusOmschrijvingId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[CursusOmschrijvingId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[TrainerId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[TrainerId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[StartDatum]"
+                      cachedDataType="dbDate"
+                      cachedName="StartDatum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[StartDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[StartDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[MaxAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MaxAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MaxAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[MinAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MinAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MinAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[Omschrijving]"
+                      cachedDataType="nText"
+                      cachedName="Omschrijving"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[Omschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[Omschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[AantalDagen]"
+                      cachedDataType="i4"
+                      cachedName="AantalDagen"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[AantalDagen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[AantalDagen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[DimKey]"
+                      cachedDataType="i4"
+                      cachedName="DimKey"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[tgt_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_CursusId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[src_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="src_CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[CursusOmschrijvingId]"
+                      cachedDataType="i4"
+                      cachedName="CursusOmschrijvingId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[CursusOmschrijvingId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[TrainerId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[TrainerId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[StartDatum]"
+                      cachedDataType="dbDate"
+                      cachedName="StartDatum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[StartDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[StartDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[MaxAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MaxAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MaxAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[MinAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MinAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MinAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[Omschrijving]"
+                      cachedDataType="nText"
+                      cachedName="Omschrijving"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[Omschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[Omschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[AantalDagen]"
+                      cachedDataType="i4"
+                      cachedName="AantalDagen"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[AantalDagen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[AantalDagen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[DimKey]"
+                      cachedDataType="i4"
+                      cachedName="DimKey"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[tgt_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_CursusId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_CursusId]"
+                      name="src_CursusId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]"
+                      name="CursusOmschrijvingId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[TrainerId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[TrainerId]"
+                      name="TrainerId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[StartDatum]"
+                      dataType="dbDate"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[StartDatum]"
+                      name="StartDatum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]"
+                      name="MaxAantalDeelnemers" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]"
+                      name="MinAantalDeelnemers" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[Omschrijving]"
+                      dataType="nText"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[Omschrijving]"
+                      name="Omschrijving" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[AantalDagen]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[AantalDagen]"
+                      name="AantalDagen" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      name="src_Checksum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[DimKey]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      name="tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[tgt_CursusId]"
+                      name="tgt_CursusId" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Union All 1"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All 1"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[src_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="src_CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[CursusOmschrijvingId]"
+                      cachedDataType="i4"
+                      cachedName="CursusOmschrijvingId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[CursusOmschrijvingId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[TrainerId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[TrainerId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[StartDatum]"
+                      cachedDataType="dbDate"
+                      cachedName="StartDatum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[StartDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[StartDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[MaxAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MaxAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MaxAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[MinAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MinAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MinAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[Omschrijving]"
+                      cachedDataType="nText"
+                      cachedName="Omschrijving"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[Omschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[Omschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[AantalDagen]"
+                      cachedDataType="i4"
+                      cachedName="AantalDagen"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[AantalDagen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[AantalDagen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[DimKey]"
+                      cachedDataType="i4"
+                      cachedName="DimKey"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[tgt_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_CursusId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[src_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="src_CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[CursusOmschrijvingId]"
+                      cachedDataType="i4"
+                      cachedName="CursusOmschrijvingId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[CursusOmschrijvingId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[TrainerId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[TrainerId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[StartDatum]"
+                      cachedDataType="dbDate"
+                      cachedName="StartDatum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[StartDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[StartDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[MaxAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MaxAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MaxAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[MinAantalDeelnemers]"
+                      cachedDataType="ui1"
+                      cachedName="MinAantalDeelnemers"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[MinAantalDeelnemers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[Omschrijving]"
+                      cachedDataType="nText"
+                      cachedName="Omschrijving"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[Omschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[Omschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[AantalDagen]"
+                      cachedDataType="i4"
+                      cachedName="AantalDagen"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[AantalDagen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[AantalDagen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[DimKey]"
+                      cachedDataType="i4"
+                      cachedName="DimKey"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[tgt_CursusId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_CursusId"
+                      lineageId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_CursusId]"
+                      name="src_CursusId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[CursusOmschrijvingId]"
+                      name="CursusOmschrijvingId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[TrainerId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[TrainerId]"
+                      name="TrainerId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[StartDatum]"
+                      dataType="dbDate"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[StartDatum]"
+                      name="StartDatum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MaxAantalDeelnemers]"
+                      name="MaxAantalDeelnemers" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[MinAantalDeelnemers]"
+                      name="MinAantalDeelnemers" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[Omschrijving]"
+                      dataType="nText"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[Omschrijving]"
+                      name="Omschrijving" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[AantalDagen]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[AantalDagen]"
+                      name="AantalDagen" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      name="src_Checksum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[DimKey]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      name="tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1].Columns[tgt_CursusId]"
+                      name="tgt_CursusId" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Update CurrentFlag"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Update CurrentFlag"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE dim_Cursus SET CurrentFlag = 0 WHERE DimKey = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Connections[OleDbConnection]"
+                  connectionManagerID="{050B2171-467B-4554-8819-8CA363EC4776}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].Columns[DimKey]"
+                      cachedDataType="i4"
+                      cachedName="DimKey"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Update CurrentFlag.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Update CurrentFlag.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
-              refId="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
+              refId="Package\Inladen Dim_Cursus.Paths[ChecksumOutput]"
+              endId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Left Input]"
+              name="ChecksumOutput"
+              startId="Package\Inladen Dim_Cursus\Bereken Checksum.Outputs[ChecksumOutput]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Gewijzigde Regels]"
               endId="Package\Inladen Dim_Cursus\Multicast.Inputs[Multicast Input 1]"
+              name="Gewijzigde Regels"
+              startId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Gewijzigde Regels]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
+              endId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput]"
               name="Lookup Match Output"
               startId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Merge Join Output]"
+              endId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]"
+              name="Merge Join Output"
+              startId="Package\Inladen Dim_Cursus\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Multicast Output 1]"
+              endId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2]"
+              name="Multicast Output 1"
+              startId="Package\Inladen Dim_Cursus\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Multicast Output 2]"
+              endId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2]"
+              name="Multicast Output 2"
+              startId="Package\Inladen Dim_Cursus\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Nieuwe Regels]"
+              endId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1]"
+              name="Nieuwe Regels"
+              startId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Nieuwe Regels]" />
             <path
               refId="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output]"
               endId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Inputs[Lookup Input]"
               name="OLE DB Source Output"
               startId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output1]"
+              endId="Package\Inladen Dim_Cursus\Merge Join.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\Inladen Dim_Cursus\Ophalen DWH.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Union All Output 1]"
+              endId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input]"
+              name="Union All Output 1"
+              startId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Union All Output 11]"
+              endId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Inladen Dim_Cursus\Union All 1.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Verwijderde Regels]"
+              endId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1]"
+              name="Verwijderde Regels"
+              startId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Verwijderde Regels]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -463,41 +2314,159 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
     design-time-name="Package\Inladen Dim_Cursus">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="153.6,41.6"
           Id="Package\Inladen Dim_Cursus\Ophalen Cursus"
-          TopLeft="99.4285731218299,29.976471008644" />
+          TopLeft="42.7,5.49999999999995" />
         <NodeLayout
           Size="228,41.6"
           Id="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving"
-          TopLeft="134.857145153746,105.835295601947" />
+          TopLeft="5.5,107.1" />
         <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output]"
-          TopLeft="176.22857312183,71.576471008644">
+          TopLeft="119.5,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="72.6285720319165,34.2588245933031"
+              EndConnector="0,60"
               Start="0,0"
-              End="72.6285720319165,26.7588245933031">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.1294122966516" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.1294122966516"
-                    Point2="0,17.1294122966516"
-                    Point3="4,17.1294122966516" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Inladen Dim_Cursus\Bereken Checksum"
+          TopLeft="34.7,208.7" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
+          TopLeft="119.5,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="68.6285720319165,17.1294122966516" />
-                  <mssgle:CubicBezierSegment
-                    Point1="68.6285720319165,17.1294122966516"
-                    Point2="72.6285720319165,17.1294122966516"
-                    Point3="72.6285720319165,21.1294122966516" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="146.4,41.6"
+          Id="Package\Inladen Dim_Cursus\Ophalen DWH"
+          TopLeft="265.3,208.7" />
+        <NodeLayout
+          Size="131.2,42.4"
+          Id="Package\Inladen Dim_Cursus\Merge Join"
+          TopLeft="272.9,310.3" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[ChecksumOutput]"
+          TopLeft="119.5,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="198.466666666667,60"
+              Start="0,0"
+              End="198.466666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="72.6285720319165,26.7588245933031" />
+                    End="0,31.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.566265060241"
+                    Point2="0,35.566265060241"
+                    Point3="4,35.566265060241" />
+                  <mssgle:LineSegment
+                    End="194.466666666667,35.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="194.466666666667,35.566265060241"
+                    Point2="198.466666666667,35.566265060241"
+                    Point3="198.466666666667,39.566265060241" />
+                  <mssgle:LineSegment
+                    End="198.466666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output1]"
+          TopLeft="338.5,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5333333333334,60"
+              Start="0,0"
+              End="20.5333333333334,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.566265060241"
+                    Point2="0,35.566265060241"
+                    Point3="4,35.566265060241" />
+                  <mssgle:LineSegment
+                    End="16.5333333333334,35.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5333333333334,35.566265060241"
+                    Point2="20.5333333333334,35.566265060241"
+                    Point3="20.5333333333334,39.566265060241" />
+                  <mssgle:LineSegment
+                    End="20.5333333333334,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Inladen Dim_Cursus\Conditional Split"
+          TopLeft="260.5,412.7" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Merge Join Output]"
+          TopLeft="338.5,352.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -509,41 +2478,241 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
         <NodeLayout
           Size="121.6,41.6"
           Id="Package\Inladen Dim_Cursus\Multicast"
-          TopLeft="280.000004768372,186.588237910947" />
+          TopLeft="285.142861998811,503.717650499311" />
         <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
-          TopLeft="248.857145153746,147.435295601947">
+          Id="Package\Inladen Dim_Cursus.Paths[Gewijzigde Regels]"
+          TopLeft="342.221430999406,454.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="91.9428596146253,39.1529423090001"
+              EndConnector="0,49.4176504993109"
               Start="0,0"
-              End="91.9428596146253,31.6529423090001">
+              End="0,41.9176504993109">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.5764711545001" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,15.5764711545001"
-                    Point2="0,19.5764711545001"
-                    Point3="4,19.5764711545001" />
-                  <mssgle:LineSegment
-                    End="87.9428596146253,19.5764711545001" />
-                  <mssgle:CubicBezierSegment
-                    Point1="87.9428596146253,19.5764711545001"
-                    Point2="91.9428596146253,19.5764711545001"
-                    Point3="91.9428596146253,23.5764711545001" />
-                  <mssgle:LineSegment
-                    End="91.9428596146253,31.6529423090001" />
+                    End="0,41.9176504993109" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-2.21995691143737,24.5764711545001,96.3827734375,11.609375"
+              BoundingBox="-40.57009765625,15.1272822809054,81.1401953125,11.6630859375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Inladen Dim_Cursus\Update CurrentFlag"
+          TopLeft="76.0000012942723,589.929414776205" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Inladen Dim_Cursus\Union All"
+          TopLeft="111.428573326189,507.200001166849" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Verwijderde Regels]"
+          TopLeft="313.833333333333,454.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-141.604760007145,52.9000011668486"
+              Start="0,0"
+              End="-141.604760007145,45.4000011668486">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4822339763852" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.4822339763852"
+                    Point2="0,21.4822339763852"
+                    Point3="-4,21.4822339763852" />
+                  <mssgle:LineSegment
+                    End="-137.604760007145,21.4822339763852" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-137.604760007145,21.4822339763852"
+                    Point2="-141.604760007145,21.4822339763852"
+                    Point3="-141.604760007145,25.4822339763852" />
+                  <mssgle:LineSegment
+                    End="-141.604760007145,45.4000011668486" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-114.068141722322,26.4822339763852,86.5315234375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Multicast Output 1]"
+          TopLeft="285.142861998811,526.25882583308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-52.1142886726224,0"
+              Start="0,0"
+              End="-44.6142886726224,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-44.6142886726224,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Union All Output 1]"
+          TopLeft="172.228573326189,548.800001166849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.6285720319164,41.1294136093562"
+              Start="0,0"
+              End="-10.6285720319164,33.6294136093562">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5647068046781" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5647068046781"
+                    Point2="0,20.5647068046781"
+                    Point3="-4,20.5647068046781" />
+                  <mssgle:LineSegment
+                    End="-6.62857203191641,20.5647068046781" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.62857203191641,20.5647068046781"
+                    Point2="-10.6285720319164,20.5647068046781"
+                    Point3="-10.6285720319164,24.5647068046781" />
+                  <mssgle:LineSegment
+                    End="-10.6285720319164,33.6294136093562" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="131.2,41.6"
+          Id="Package\Inladen Dim_Cursus\Union All 1"
+          TopLeft="514.857151625108,532.094119320114" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Nieuwe Regels]"
+          TopLeft="375.5,454.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="204.957151625108,77.7941193201138"
+              Start="0,0"
+              End="204.957151625108,70.2941193201138">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.8030159002073" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.8030159002073"
+                    Point2="0,26.8030159002073"
+                    Point3="4,26.8030159002073" />
+                  <mssgle:LineSegment
+                    End="200.957151625108,26.8030159002073" />
+                  <mssgle:CubicBezierSegment
+                    Point1="200.957151625108,26.8030159002073"
+                    Point2="204.957151625108,26.8030159002073"
+                    Point3="204.957151625108,30.8030159002073" />
+                  <mssgle:LineSegment
+                    End="204.957151625108,70.2941193201138" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="69.6309976875539,31.8030159002073,65.69515625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Multicast Output 2]"
+          TopLeft="406.742861998811,524.517650499311">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="108.114289626297,28.3764688208029"
+              Start="0,0"
+              End="100.614289626297,28.3764688208029">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="50.0571448131484,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="50.0571448131484,0"
+                    Point2="54.0571448131484,0"
+                    Point3="54.0571448131484,4" />
+                  <mssgle:LineSegment
+                    End="54.0571448131484,24.3764688208029" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54.0571448131484,24.3764688208029"
+                    Point2="54.0571448131484,28.3764688208029"
+                    Point3="58.0571448131484,28.3764688208029" />
+                  <mssgle:LineSegment
+                    End="100.614289626297,28.3764688208029" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Inladen Dim_Cursus\Insert nieuwe rijen"
+          TopLeft="504.571437164229,614.6823557725" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Union All Output 11]"
+          TopLeft="580.457151625108,573.694119320114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.51428553912103,40.9882364523866"
+              Start="0,0"
+              End="8.51428553912103,33.4882364523866">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4941182261933" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4941182261933"
+                    Point2="0,20.4941182261933"
+                    Point3="4,20.4941182261933" />
+                  <mssgle:LineSegment
+                    End="4.51428553912103,20.4941182261933" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.51428553912103,20.4941182261933"
+                    Point2="8.51428553912103,20.4941182261933"
+                    Point3="8.51428553912103,24.4941182261933" />
+                  <mssgle:LineSegment
+                    End="8.51428553912103,33.4882364523866" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -582,6 +2751,32 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inladen Dim_Cursus\Ophalen DWH">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inladen Dim_Cursus\Insert nieuwe rijen">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
