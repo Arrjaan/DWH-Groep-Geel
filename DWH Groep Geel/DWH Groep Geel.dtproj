@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">WS724</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbZ8CZ4BthkC7rNrWyL3+kwAAAAACAAAAAAAQZgAAAAEAACAAAACDR0uPIv0KQ2XRaH+AuSvDgfoDn/Ya9ip6A1SS7GqT4AAAAAAOgAAAAAIAACAAAAD4Rj/2alNCfALiwPFj3bdk0b2dOc1TvpsKHAIts0DKSZAAAABBrLuiBysz3R5dcf06hYaYRnsa64viS+fK09c/IkskRIdKcK1ShlJ8ScN5Y3nlUZUxDNTBWejNzaLs/xFPw7/A5qPfgcUYOIwNS5oUY5KAbEEcVNO95cYfU5pQlcGChmODwkT91mNneLgowD/zdyy4orjXtNYXv2iOcO8bJKBQvks+/HaDnTUP6Y/EELPEeZxAAAAAeatNOmBfv8lRTrgmb4b55PmxE0YBjuGqV7rZBvLyVkIRvATcWuGSFLvl3zz1rrJvfZTEZGloAaLbOodG3Nd4Ag==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA86pZivmi40+4SH+rYKVf0QAAAAACAAAAAAAQZgAAAAEAACAAAAAZjONrMgIXQm2brbrEYgyf+q2iVNR2DbgoaLt6k+CrzQAAAAAOgAAAAAIAACAAAADkhzC2+DoQJthvyPpqcu9AtArswuboKxEAc3YP38Lwv5AAAAAWdmdz6z4KMQCJD6DZjDv9MV28XixYFxkOLjQfbnuYUsgziu9K7BiHByJZTZhm3Vj0UlU0gqru3yBvPf72xaqRVJApvErsVETLhEW1gnp3pAwiNYnL53jCYoMqvImuhtoNUsUR1RQ8TIhikf1I4YpaICDRuMhfMJ6dosxHfwtZHPNH1ZmfhDjx56Ax9iSWNTNAAAAAGqsIczp5iJfE0ODS9awm0xrjefspaWFmJv9eZmeW03M+iy9awKvwoiO77HIZX/vJljFtxl2Rn0cMhAVrZSF0QA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -160,7 +160,7 @@
         <ConnectionProviderMappings />
         <ConnectionSecurityMappings />
         <DatabaseStorageLocations />
-        <TargetServerVersion>SQLServer2017</TargetServerVersion>
+        <TargetServerVersion>SQLServer2016</TargetServerVersion>
         <ParameterConfigurationValues />
       </Options>
     </Configuration>

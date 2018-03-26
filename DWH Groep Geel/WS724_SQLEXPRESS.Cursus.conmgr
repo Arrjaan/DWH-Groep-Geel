@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:ObjectName="WS724_SQLEXPRESS.Cursus"
   DTS:DTSID="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}"
