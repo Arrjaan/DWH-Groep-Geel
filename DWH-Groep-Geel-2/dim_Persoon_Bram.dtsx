@@ -1,25 +1,25 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="3/26/2018 9:29:24 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="WS724"
   DTS:CreatorName="WS724\User"
-  DTS:DTSID="{E9351DFF-B738-46DA-A34C-43A64B65B9D0}"
+  DTS:DTSID="{A9C077E8-2D8D-4BCB-9C59-93D20029AB55}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.92"
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Persoon_Bram"
   DTS:PackageType="5"
   DTS:VersionBuild="9"
-  DTS:VersionGUID="{A581B4FB-53DA-4BB8-9D7E-7AEB096F34CC}">
+  DTS:VersionGUID="{AE7D7CB1-F9EA-4923-BBA6-8F8E348A419B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{79FBAB11-9639-43AA-B070-DF98BC8507C0}"
+      DTS:DTSID="{CE9ABA4C-5805-4EC1-A5F8-1FD33909AA1E}"
       DTS:ObjectName="WS726\SQLEXPRESS.DWH">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -33,7 +33,7 @@
       DTS:refId="Package\create table"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{73571032-A143-4AFE-80B0-3F2ADB07A057}"
+      DTS:DTSID="{EF2260A5-BD86-40D9-8EE1-CD6C0DE2F762}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="create table"
@@ -41,7 +41,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{79FBAB11-9639-43AA-B070-DF98BC8507C0}"
+          SQLTask:Connection="{CE9ABA4C-5805-4EC1-A5F8-1FD33909AA1E}"
           SQLTask:SqlStatementSource="drop table  [DWH].dbo.[dim_Persoon]&#xA;create table [DWH].dbo.[dim_Persoon](&#xA;[PersoonID]  [int] NOT NULL,&#xA;[Dim_Key] [bigint] IDENTITY(1,1) NOT NULL ,&#xA;[Voornaam] [nvarchar](50) NULL ,&#xA;[Tussenvoegsel] [nvarchar](50) NULL,&#xA;[Achternaam] [nvarchar](50) NULL,&#xA;[IsTrainer] [bit] NOT NULL,&#xA;[IsCursist] [bit] NOT NULL,&#xA;[Checksum] [int] NOT NULL,&#xA;[Currentflag] [bit] NOT NULL,&#xA;[ValidFrom] [datetime] NOT NULL,&#xA;[ValidUntil]  [datetime] NOT NULL)&#xA;&#xA;truncate table [dim_Persoon]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -49,7 +49,7 @@
       DTS:refId="Package\dim_Persoon"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{E1070A2F-87E0-4A11-9A8D-87CDF86898D5}"
+      DTS:DTSID="{1203C8C7-F681-4D45-B8B2-886A227F36AC}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="dim_Persoon"
@@ -110,8 +110,8 @@
               <connections>
                 <connection
                   refId="Package\dim_Persoon\Importeer dboPersoon.Connections[OleDbConnection]"
-                  connectionManagerID="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS.Cursus]"
+                  connectionManagerID="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:invalid"
+                  connectionManagerRefId="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:invalid"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -306,7 +306,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{FE28ED1F-27BF-4A05-A89A-338F576471F4}"
+      DTS:DTSID="{5F637494-0ED1-4F5A-8492-89076AE68640}"
       DTS:From="Package\create table"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
