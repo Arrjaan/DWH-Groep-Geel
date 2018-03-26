@@ -1,18 +1,18 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="3/26/2018 9:29:24 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="WS724"
   DTS:CreatorName="WS724\User"
-  DTS:DTSID="{A9C077E8-2D8D-4BCB-9C59-93D20029AB55}"
+  DTS:DTSID="{30C65582-2395-4E90-A446-9CCC80F91B05}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.92"
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Persoon_Bram"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{AE7D7CB1-F9EA-4923-BBA6-8F8E348A419B}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{2AEA9834-D7FB-42A9-A354-9737F09DC9BF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -60,11 +60,121 @@
           version="1">
           <components>
             <component
-              refId="Package\dim_Persoon\Importeer dboPersoon"
+              refId="Package\dim_Persoon\Checksum Transformation"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Checksum Transformation; Konesans Ltd; Copyright © 2016 Konesans Ltd; http://www.konesans.com"
+              description="Checksum Transformation for SQL Server Integration Services 2016"
+              name="Checksum Transformation"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The Checksum Transformation algorithm used to produce the resulting checksum value."
+                  name="ChecksumAlgorithm"
+                  typeConverter="Konesans.Dts.Pipeline.ChecksumTransform.ChecksumTransform+ChecksumAlgorithm, Konesans.Dts.Pipeline.ChecksumTransform, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b2ab4a111192992b">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Konesans.ChecksumTransformation</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput]"
+                  errorRowDisposition="FailComponent"
+                  name="ChecksumInput">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[PersoonID]"
+                      cachedDataType="i4"
+                      cachedName="PersoonID"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersoonID]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Dim_Key]"
+                      cachedDataType="i8"
+                      cachedName="Dim_Key"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dim_Key]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Voornaam]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Tussenvoegsel]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsel"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Achternaam]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Achternaam]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTrainer]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Currentflag]"
+                      cachedDataType="bool"
+                      cachedName="Currentflag"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[ValidUntil]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidUntil]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\Checksum Transformation.Outputs[ChecksumOutput]"
+                  exclusionGroup="1"
+                  name="ChecksumOutput"
+                  synchronousInputId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      name="Checksum">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Checksum transformation result column indicator."
+                          name="Checksum">Checksum</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="Importeer dboPersoon"
+              name="OLE DB Source"
               usesDispositions="true"
               version="7">
               <properties>
@@ -75,7 +185,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Persoon]</property>
+                  name="OpenRowset">[dbo].[dim_Persoon]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -109,187 +219,244 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\dim_Persoon\Importeer dboPersoon.Connections[OleDbConnection]"
-                  connectionManagerID="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:invalid"
-                  connectionManagerRefId="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:invalid"
+                  refId="Package\dim_Persoon\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output]"
+                  refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersoonID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
-                      name="PersoonId"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersoonID]"
+                      name="PersoonID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dim_Key]"
+                      dataType="i8"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Dim_Key]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dim_Key]"
+                      name="Dim_Key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
                       length="50"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Voornaam]"
                       name="Voornaam"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]"
+                      dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsel]"
                       length="50"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
-                      name="Tussenvoegsels"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]"
+                      name="Tussenvoegsel"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
                       length="50"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Achternaam]"
                       name="Achternaam"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[MailAdres]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[MailAdres]"
-                      length="128"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[MailAdres]"
-                      name="MailAdres"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTrainer]"
                       dataType="bool"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      name="IsTrainer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCursist]"
                       name="IsCursist"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]"
                       dataType="bool"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
-                      name="IsTrainer"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]"
+                      name="Currentflag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      name="ValidUntil"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
                       dataType="i4"
-                      name="PersoonId" />
+                      name="PersoonID" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Dim_Key]"
+                      dataType="i8"
+                      name="Dim_Key" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      dataType="wstr"
                       length="50"
                       name="Voornaam" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsel]"
+                      dataType="wstr"
                       length="50"
-                      name="Tussenvoegsels" />
+                      name="Tussenvoegsel" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      dataType="wstr"
                       length="50"
                       name="Achternaam" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[MailAdres]"
-                      codePage="1252"
-                      dataType="str"
-                      length="128"
-                      name="MailAdres" />
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
                       dataType="bool"
                       name="IsCursist" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
                       dataType="bool"
-                      name="IsTrainer" />
+                      name="Currentflag" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntil" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output]"
+                  refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
                       dataType="i4"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
-                      name="PersoonId" />
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
+                      name="PersoonID" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Dim_Key]"
+                      dataType="i8"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Dim_Key]"
+                      name="Dim_Key" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      dataType="wstr"
                       length="50"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
                       name="Voornaam" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsel]"
+                      dataType="wstr"
                       length="50"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
-                      name="Tussenvoegsels" />
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsel]"
+                      name="Tussenvoegsel" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
-                      codePage="1252"
-                      dataType="str"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      dataType="wstr"
                       length="50"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
                       name="Achternaam" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[MailAdres]"
-                      codePage="1252"
-                      dataType="str"
-                      length="128"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[MailAdres]"
-                      name="MailAdres" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
                       dataType="bool"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
-                      name="IsCursist" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
-                      dataType="bool"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
                       name="IsTrainer" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      name="IsCursist" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Checksum]"
                       dataType="i4"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      name="Currentflag" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -298,6 +465,13 @@
               </outputs>
             </component>
           </components>
+          <paths>
+            <path
+              refId="Package\dim_Persoon.Paths[OLE DB Source Output]"
+              endId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput]"
+              name="OLE DB Source Output"
+              startId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -373,16 +547,54 @@
     design-time-name="Package\dim_Persoon">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="185.6,41.6"
-          Id="Package\dim_Persoon\Importeer dboPersoon"
-          TopLeft="177.142860159582,19.5764708627879" />
+          Size="151.2,41.6"
+          Id="Package\dim_Persoon\OLE DB Source"
+          TopLeft="176.000002997262,79.5294128800759" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\dim_Persoon\Checksum Transformation"
+          TopLeft="274.857147537932,163.952943475849" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[OLE DB Source Output]"
+          TopLeft="251.600002997262,121.129412880076">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="124.85714454067,42.8235305957728"
+              Start="0,0"
+              End="124.85714454067,35.3235305957728">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4117652978864" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.4117652978864"
+                    Point2="0,21.4117652978864"
+                    Point3="4,21.4117652978864" />
+                  <mssgle:LineSegment
+                    End="120.85714454067,21.4117652978864" />
+                  <mssgle:CubicBezierSegment
+                    Point1="120.85714454067,21.4117652978864"
+                    Point2="124.85714454067,21.4117652978864"
+                    Point3="124.85714454067,25.4117652978864" />
+                  <mssgle:LineSegment
+                    End="124.85714454067,35.3235305957728" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\dim_Persoon\Importeer dboPersoon">
+    design-time-name="Package\dim_Persoon\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
