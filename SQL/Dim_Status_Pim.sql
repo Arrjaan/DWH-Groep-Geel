@@ -3,8 +3,8 @@ Create Table DimStatus (
 [DimKey] [bigint] IDENTITY(1,1) NOT NULL,
 [Status] nvarchar(16) NOT NULL,
 [Checksum] [int] NOT NULL,
-[ValidFrom] [datetime] NOT NULL,
-[ValidUntill] [datetime] NOT NULL,
+[ValidFrom] [datetime] NOT NULL default Getdate(),
+[ValidUntill] [datetime] NOT NULL default '9999-12-31',
 [CurrentFlag] [bit] NOT NULL
 );
 
