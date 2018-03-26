@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="WS724_SQLEXPRESS.DWH"
+  DTS:DTSID="{50133DFB-29DA-4323-B161-B6467C669842}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=WS724\SQLEXPRESS;Initial Catalog=DWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
