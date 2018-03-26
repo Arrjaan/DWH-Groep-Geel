@@ -1,18 +1,18 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="3/26/2018 3:36:27 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="WS720"
   DTS:CreatorName="WS720\User"
-  DTS:DTSID="{34F78F78-E61E-435A-A6DF-3B78810CDFF0}"
+  DTS:DTSID="{BF9CAFB9-6AB6-481D-876F-FCD4D42FE70A}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.92"
   DTS:LocaleID="2057"
   DTS:ObjectName="DimStatusPim"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{BBCCBDBD-F552-49AF-A7B2-22E78410B3DA}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{64AEA73B-48C4-4235-9164-F82D14F4AC64}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -493,7 +493,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -671,7 +671,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select DeelnameId, Status From dbo.Deelname Order by DeelnameId</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select DeelnameId, Status From dbo.Deelname Order by DeelnameId</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -803,7 +803,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select DeelnameId, DimKey, Checksum From DimStatus Order By DeelnameId</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select DeelnameId, DimKey, Checksum From DimStatus Order By DeelnameId</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1102,13 +1102,21 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="141.6,41.6"
-          Id="Package\DimStatusPim\SrcDeelname"
-          TopLeft="36.3,5.49999999999995" />
+          Size="172,41.6"
+          Id="Package\DimStatusPim\OLE DB Destination"
+          TopLeft="96.5714302160302,493.08235839791" />
         <NodeLayout
           Size="148,41.6"
           Id="Package\DimStatusPim\Full Outer Join"
           TopLeft="240.1,310.3" />
+        <NodeLayout
+          Size="141.6,41.6"
+          Id="Package\DimStatusPim\SrcDeelname"
+          TopLeft="36.3,5.49999999999995" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\DimStatusPim\Conditional Split"
+          TopLeft="236.1,411.9" />
         <NodeLayout
           Size="168,41.6"
           Id="Package\DimStatusPim\ValidFrUnCurrentFl"
@@ -1122,19 +1130,31 @@
           Id="Package\DimStatusPim\TgtStatus"
           TopLeft="251.7,208.7" />
         <EdgeLayout
-          Id="Package\DimStatusPim.Paths[ChecksumOutput]"
-          TopLeft="107.1,148.7">
+          Id="Package\DimStatusPim.Paths[OLE DB Source Output1]"
+          TopLeft="314.1,250.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="23.3333333333334,59.9999999999999"
               Start="0,0"
-              End="0,52.5">
+              End="23.3333333333334,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,31.614973262032" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.614973262032"
+                    Point2="0,35.614973262032"
+                    Point3="4,35.614973262032" />
+                  <mssgle:LineSegment
+                    End="19.3333333333334,35.614973262032" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.3333333333334,35.614973262032"
+                    Point2="23.3333333333334,35.614973262032"
+                    Point3="23.3333333333334,39.614973262032" />
+                  <mssgle:LineSegment
+                    End="23.3333333333334,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1157,6 +1177,64 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Nieuwe Regels]"
+          TopLeft="314.1,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-131.52856978397,39.5823583979097"
+              Start="0,0"
+              End="-131.52856978397,32.0823583979097">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.7911791989549" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.7911791989549"
+                    Point2="0,19.7911791989549"
+                    Point3="-4,19.7911791989549" />
+                  <mssgle:LineSegment
+                    End="-127.52856978397,19.7911791989549" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-127.52856978397,19.7911791989549"
+                    Point2="-131.52856978397,19.7911791989549"
+                    Point3="-131.52856978397,23.7911791989549" />
+                  <mssgle:LineSegment
+                    End="-131.52856978397,32.0823583979097" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-98.6118630169849,24.7911791989549,65.69515625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Merge Join Output]"
+          TopLeft="314.1,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1200,108 +1278,43 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DimStatusPim.Paths[OLE DB Source Output1]"
-          TopLeft="314.1,250.3">
+          Id="Package\DimStatusPim.Paths[ChecksumOutput]"
+          TopLeft="107.1,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="23.3333333333334,59.9999999999999"
+              EndConnector="0,60"
               Start="0,0"
-              End="23.3333333333334,52.4999999999999">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.614973262032" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.614973262032"
-                    Point2="0,35.614973262032"
-                    Point3="4,35.614973262032" />
-                  <mssgle:LineSegment
-                    End="19.3333333333334,35.614973262032" />
-                  <mssgle:CubicBezierSegment
-                    Point1="19.3333333333334,35.614973262032"
-                    Point2="23.3333333333334,35.614973262032"
-                    Point3="23.3333333333334,39.614973262032" />
-                  <mssgle:LineSegment
-                    End="23.3333333333334,52.4999999999999" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\DimStatusPim\Conditional Split"
-          TopLeft="236.1,411.9" />
-        <EdgeLayout
-          Id="Package\DimStatusPim.Paths[Merge Join Output]"
-          TopLeft="314.1,351.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="172,41.6"
-          Id="Package\DimStatusPim\OLE DB Destination"
-          TopLeft="96.5714302160302,493.08235839791" />
-        <EdgeLayout
-          Id="Package\DimStatusPim.Paths[Nieuwe Regels]"
-          TopLeft="314.1,453.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-131.52856978397,39.5823583979097"
-              Start="0,0"
-              End="-131.52856978397,32.0823583979097">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,15.7911791989549" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,15.7911791989549"
-                    Point2="0,19.7911791989549"
-                    Point3="-4,19.7911791989549" />
-                  <mssgle:LineSegment
-                    End="-127.52856978397,19.7911791989549" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-127.52856978397,19.7911791989549"
-                    Point2="-131.52856978397,19.7911791989549"
-                    Point3="-131.52856978397,23.7911791989549" />
-                  <mssgle:LineSegment
-                    End="-131.52856978397,32.0823583979097" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-98.6118630169849,24.7911791989549,65.69515625,11.6630859375"
-              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimStatusPim\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DimStatusPim\SrcDeelname">
     <Properties>
@@ -1320,19 +1333,6 @@
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DimStatusPim\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
