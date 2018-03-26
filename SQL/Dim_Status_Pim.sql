@@ -4,7 +4,7 @@ Create Table DimStatus (
 [Status] nvarchar(16) NOT NULL,
 [Checksum] [int] NOT NULL,
 [ValidFrom] [datetime] NOT NULL,
-[ValidUntil] [datetime] NOT NULL,
+[ValidUntill] [datetime] NOT NULL,
 [CurrentFlag] [bit] NOT NULL
 );
 
