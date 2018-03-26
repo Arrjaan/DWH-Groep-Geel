@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/26/2018 3:57:11 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="KVL-KLT072"
+  DTS:CreatorName="KVL-KLT072\Evert-Jan"
+  DTS:DTSID="{25B93F4C-163B-4683-9703-D4888DB64CA5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.92"
+  DTS:LocaleID="1043"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{284F2C7D-5FF8-4FFF-92EC-31149BAC7E25}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>
