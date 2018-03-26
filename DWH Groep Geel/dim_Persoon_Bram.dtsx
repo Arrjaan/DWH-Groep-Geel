@@ -1,0 +1,398 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/26/2018 9:29:24 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WS724"
+  DTS:CreatorName="WS724\User"
+  DTS:DTSID="{E9351DFF-B738-46DA-A34C-43A64B65B9D0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.92"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="dim_Persoon_Bram"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{A581B4FB-53DA-4BB8-9D7E-7AEB096F34CC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{79FBAB11-9639-43AA-B070-DF98BC8507C0}"
+      DTS:ObjectName="WS726\SQLEXPRESS.DWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=WS726\SQLEXPRESS;Initial Catalog=DWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\create table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{73571032-A143-4AFE-80B0-3F2ADB07A057}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{79FBAB11-9639-43AA-B070-DF98BC8507C0}"
+          SQLTask:SqlStatementSource="drop table  [DWH].dbo.[dim_Persoon]&#xA;create table [DWH].dbo.[dim_Persoon](&#xA;[PersoonID]  [int] NOT NULL,&#xA;[Dim_Key] [bigint] IDENTITY(1,1) NOT NULL ,&#xA;[Voornaam] [nvarchar](50) NULL ,&#xA;[Tussenvoegsel] [nvarchar](50) NULL,&#xA;[Achternaam] [nvarchar](50) NULL,&#xA;[IsTrainer] [bit] NOT NULL,&#xA;[IsCursist] [bit] NOT NULL,&#xA;[Checksum] [int] NOT NULL,&#xA;[Currentflag] [bit] NOT NULL,&#xA;[ValidFrom] [datetime] NOT NULL,&#xA;[ValidUntil]  [datetime] NOT NULL)&#xA;&#xA;truncate table [dim_Persoon]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\dim_Persoon"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E1070A2F-87E0-4A11-9A8D-87CDF86898D5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="dim_Persoon"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\dim_Persoon\Importeer dboPersoon"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Importeer dboPersoon"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Persoon]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Persoon\Importeer dboPersoon.Connections[OleDbConnection]"
+                  connectionManagerID="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS.Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      name="Voornaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      name="Achternaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[MailAdres]"
+                      length="128"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[MailAdres]"
+                      name="MailAdres"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      name="IsCursist"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      name="IsTrainer"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      dataType="i4"
+                      name="PersoonId" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tussenvoegsels" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="MailAdres" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      dataType="bool"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      name="PersoonId" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      name="Voornaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      name="Achternaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[MailAdres]"
+                      name="MailAdres" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      name="IsCursist" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      name="IsTrainer" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Importeer dboPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FE28ED1F-27BF-4A05-A89A-338F576471F4}"
+      DTS:From="Package\create table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\dim_Persoon" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\create table"
+          TopLeft="100.00000170299,11.0117648603182" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\dim_Persoon"
+          TopLeft="175.428574416102,99.7176484573259" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="168.00000170299,52.6117648603182">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="77.8285727131123,47.1058835970077"
+              Start="0,0"
+              End="77.8285727131123,39.6058835970077">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5529417985038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5529417985038"
+                    Point2="0,23.5529417985038"
+                    Point3="4,23.5529417985038" />
+                  <mssgle:LineSegment
+                    End="73.8285727131123,23.5529417985038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="73.8285727131123,23.5529417985038"
+                    Point2="77.8285727131123,23.5529417985038"
+                    Point3="77.8285727131123,27.5529417985038" />
+                  <mssgle:LineSegment
+                    End="77.8285727131123,39.6058835970077" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\dim_Persoon">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\dim_Persoon\Importeer dboPersoon"
+          TopLeft="177.142860159582,19.5764708627879" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\dim_Persoon\Importeer dboPersoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
