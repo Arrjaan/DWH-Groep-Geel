@@ -1,0 +1,589 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/26/2018 9:29:24 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WS724"
+  DTS:CreatorName="WS724\User"
+  DTS:DTSID="{162997EB-7D5F-4D8D-87D5-765F3D4558B6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.92"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="dim_Cursus_Arjan"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{C633E57B-E262-48DC-AEC7-81CA04623EA8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Inladen Dim_Cursus"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AFF8657B-B769-4C5C-B217-9DD0434736C5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Inladen Dim_Cursus"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Inladen Dim_Cursus\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Multicast.Outputs[Multicast Output 1]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Ophalen Cursus"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Ophalen Cursus"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Cursus]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Connections[OleDbConnection]"
+                  connectionManagerID="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS.Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      name="CursusId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusOmschrijvingId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[CursusOmschrijvingId]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusOmschrijvingId]"
+                      name="CursusOmschrijvingId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[TrainerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[TrainerId]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[TrainerId]"
+                      name="TrainerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[StartDatum]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[StartDatum]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[StartDatum]"
+                      name="StartDatum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MaxAantalDeelnemers]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[MaxAantalDeelnemers]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MaxAantalDeelnemers]"
+                      name="MaxAantalDeelnemers"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MinAantalDeelnemers]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[MinAantalDeelnemers]"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[MinAantalDeelnemers]"
+                      name="MinAantalDeelnemers"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      dataType="i4"
+                      name="CursusId" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[CursusOmschrijvingId]"
+                      dataType="i4"
+                      name="CursusOmschrijvingId" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[TrainerId]"
+                      dataType="i4"
+                      name="TrainerId" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[StartDatum]"
+                      dataType="dbDate"
+                      name="StartDatum" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[MaxAantalDeelnemers]"
+                      dataType="ui1"
+                      name="MaxAantalDeelnemers" />
+                    <externalMetadataColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].ExternalColumns[MinAantalDeelnemers]"
+                      dataType="ui1"
+                      name="MinAantalDeelnemers" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      name="CursusId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[CursusOmschrijvingId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[CursusOmschrijvingId]"
+                      name="CursusOmschrijvingId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[TrainerId]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[TrainerId]"
+                      name="TrainerId" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[StartDatum]"
+                      dataType="dbDate"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[StartDatum]"
+                      name="StartDatum" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[MaxAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[MaxAantalDeelnemers]"
+                      name="MaxAantalDeelnemers" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[MinAantalDeelnemers]"
+                      dataType="ui1"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[MinAantalDeelnemers]"
+                      name="MinAantalDeelnemers" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Toevoegen CursusOmschrijving"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[CursusOmschrijving]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[CursusOmschrijving]) [refTable]
+where [refTable].[CursusOmschrijvingId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CursusOmschrijvingId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Omschrijving" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AantalDagen" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusOmschrijvingId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Connections[OleDbConnection]"
+                  connectionManagerID="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS.Cursus]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Inputs[Lookup Input].Columns[CursusOmschrijvingId]"
+                      cachedDataType="i4"
+                      cachedName="CursusOmschrijvingId"
+                      lineageId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output].Columns[CursusOmschrijvingId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CursusOmschrijvingId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[Omschrijving]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[Omschrijving]"
+                      name="Omschrijving"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Omschrijving</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[AantalDagen]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[AantalDagen]"
+                      name="AantalDagen"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AantalDagen</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
+              endId="Package\Inladen Dim_Cursus\Multicast.Inputs[Multicast Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output]"
+              endId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Inladen Dim_Cursus\Ophalen Cursus.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="175.2,41.6"
+          Id="Package\Inladen Dim_Cursus"
+          TopLeft="96.5714302160303,44.6588241557349" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Inladen Dim_Cursus">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Inladen Dim_Cursus\Ophalen Cursus"
+          TopLeft="99.4285731218299,29.976471008644" />
+        <NodeLayout
+          Size="228,41.6"
+          Id="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving"
+          TopLeft="134.857145153746,105.835295601947" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output]"
+          TopLeft="176.22857312183,71.576471008644">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.6285720319165,34.2588245933031"
+              Start="0,0"
+              End="72.6285720319165,26.7588245933031">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.1294122966516" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.1294122966516"
+                    Point2="0,17.1294122966516"
+                    Point3="4,17.1294122966516" />
+                  <mssgle:LineSegment
+                    End="68.6285720319165,17.1294122966516" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.6285720319165,17.1294122966516"
+                    Point2="72.6285720319165,17.1294122966516"
+                    Point3="72.6285720319165,21.1294122966516" />
+                  <mssgle:LineSegment
+                    End="72.6285720319165,26.7588245933031" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Inladen Dim_Cursus\Multicast"
+          TopLeft="280.000004768372,186.588237910947" />
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
+          TopLeft="248.857145153746,147.435295601947">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.9428596146253,39.1529423090001"
+              Start="0,0"
+              End="91.9428596146253,31.6529423090001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5764711545001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5764711545001"
+                    Point2="0,19.5764711545001"
+                    Point3="4,19.5764711545001" />
+                  <mssgle:LineSegment
+                    End="87.9428596146253,19.5764711545001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="87.9428596146253,19.5764711545001"
+                    Point2="91.9428596146253,19.5764711545001"
+                    Point3="91.9428596146253,23.5764711545001" />
+                  <mssgle:LineSegment
+                    End="91.9428596146253,31.6529423090001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-2.21995691143737,24.5764711545001,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inladen Dim_Cursus\Ophalen Cursus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[CursusOmschrijving]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
