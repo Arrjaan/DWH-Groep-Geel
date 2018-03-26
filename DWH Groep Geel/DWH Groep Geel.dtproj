@@ -26,19 +26,30 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">WS724</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
+<<<<<<< HEAD
           <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOlWPuwZjg0mgg23QuD4NMwAAAAACAAAAAAAQZgAAAAEAACAAAAA76u+vOsckTHrN5b5Aw41rW5R1K+PhFJitZDaCJ1rfZQAAAAAOgAAAAAIAACAAAABt4/64sxrrAAfGj80mPMk8K+Yv3uXxFYZLQu6CEIx135AAAABreBKHHfc90EwaVkjEZ6ewYmZVTRtvIk+hXn8LzyktsgrQZBGKFdQzK5WVAKLka+3C6lY7I7FcWKh2AONOsQutA3K7QbyBmtNOhVkaDqcrjA2sPo4I5x2mjBJWkz/IC/e93L2gVDUqF+2ABZWYgzZlWsaXGVaHQoEfd37UKjL3UqWuxvb3OF3T09O3XLrzcKVAAAAASx8cVnXridIJQcCtLD1p6LPnh+pPwVZevczJUsIZ+/JNtIDPfqx/VHO5KxTQ3MCys8p7HyBvEAbr2yLoL0mfng==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
           <SSIS:Package SSIS:Name="Template dimensietabel Visual studio.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="dim_Persoon.dtsx" SSIS:EntryPoint="1" />
+=======
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbZ8CZ4BthkC7rNrWyL3+kwAAAAACAAAAAAAQZgAAAAEAACAAAACAJ33JeZVFbkBF2/IkHvQyPV9Q3fGXnstxPsNyTIJKTAAAAAAOgAAAAAIAACAAAACbJLMNEEunyn6iyk01/5lKCnqBQ+IzYNC1/TzBRg5MTJAAAADJcf6a8jjunIANCsqxrnb/ChK6pQWD3urgiIFRh7n0m3/SjeGb5Pqv9LR63+rKeAQbqpUFesvAKcibjTewX5G7q16Bbed7GM9d8CBORxMuu/bV8i7fnOYfm/7bcMGL96u+SoDVyozvziycIxLpb90D4WRembNQuIuKSakZ4YrNOaYECdDpX/UPpAPtmZ8UhTFAAAAAmJLbZmChSmLONW3QMBBL79ML4dz4+4QCbviOOAbam75yZwdB2FbU+vf52O31aUIc8NaRqnkvBadgmw+s3BeM9Q==</SSIS:Property>
+          <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
+        </SSIS:Properties>
+        <SSIS:Packages>
+          <SSIS:Package SSIS:Name="dim_Cursus_Arjan.dtsx" SSIS:EntryPoint="1" />
+>>>>>>> f0a6be7b0f221530f7fe7dd8797bc366bef4bf5b
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="WS724_SQLEXPRESS.Cursus.conmgr" />
+          <SSIS:ConnectionManager SSIS:Name="WS724_SQLEXPRESS.DWH.conmgr" />
         </SSIS:ConnectionManagers>
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters>
             <SSIS:Parameter SSIS:Name="CM.WS724_SQLEXPRESS.Cursus.InitialCatalog">
+<<<<<<< HEAD
+=======
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -68,6 +79,7 @@
               </SSIS:Properties>
             </SSIS:Parameter>
             <SSIS:Parameter SSIS:Name="CM.WS724_SQLEXPRESS.Cursus.RetainSameConnection">
+>>>>>>> f0a6be7b0f221530f7fe7dd8797bc366bef4bf5b
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -93,7 +105,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">WS726\SQLEXPRESS</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">WS724\SQLEXPRESS</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -111,8 +123,82 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.WS724_SQLEXPRESS.DWH.InitialCatalog">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">DWH</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.WS724_SQLEXPRESS.DWH.Password">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.WS724_SQLEXPRESS.DWH.RetainSameConnection">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.WS724_SQLEXPRESS.DWH.ServerName">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">WS726\SQLEXPRESS</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.WS724_SQLEXPRESS.DWH.UserName">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
           </SSIS:ProjectConnectionParameters>
           <SSIS:PackageInfo>
+<<<<<<< HEAD
             <SSIS:PackageMetaData SSIS:Name="Template dimensietabel Visual studio.dtsx">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">{FB6BAC3A-7E2F-4268-92D9-3C8E2E8A1E45}</SSIS:Property>
@@ -258,6 +344,18 @@
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionGUID">{F60A3234-A7BD-4CA4-9A1B-8AC5B48D12E3}</SSIS:Property>
+=======
+            <SSIS:PackageMetaData SSIS:Name="dim_Cursus_Arjan.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{162997EB-7D5F-4D8D-87D5-765F3D4558B6}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">dim_Cursus_Arjan</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{C633E57B-E262-48DC-AEC7-81CA04623EA8}</SSIS:Property>
+>>>>>>> f0a6be7b0f221530f7fe7dd8797bc366bef4bf5b
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
