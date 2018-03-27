@@ -1,6 +1,6 @@
 use DWH 
 CREATE TABLE Fct_Resultaten(
-[DimKey] BIGINT NOT NULL IDENTITY(1,1),
+[ResultaatID] BIGINT NOT NULL IDENTITY(1,1),
 [PersoonID] int not null,
 [CursusID] int not null,
 [Geslaagd] bit not null, 
