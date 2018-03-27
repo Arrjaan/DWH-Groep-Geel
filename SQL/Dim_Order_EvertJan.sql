@@ -37,34 +37,97 @@ GO
 select * from [DWH].[dbo].[dim_Order]
 
 
--- test case updating and history
+-- test case updating and history: Add new
 
-use Cursus
+use [Cursus]
 
-Update  [Cursus].[Order] set  [Cursus].[Order].[Omschrijving] = 'Dagelijks bachanaal' WHERE [Omschrijving] = 'Lunchkosten'
-Update  [Cursus].[Order] set  [Cursus].[Order].[Omschrijving] = 'Lunchkosten' WHERE [Omschrijving] = 'Dagelijks bachanaal'
+SELECT COUNT([DimKey]) FROM [DWH].[dbo].[dim_Order]
+
+Update  [Cursus].[dbo].[Order] set  [Cursus].[dbo].[Order].[Omschrijving] = 'Dagelijks bachanaal' WHERE [Omschrijving] = 'Lunchkosten'
+
+--Run package in Visual Studio
+
+SELECT * FROM [DWH].[dbo].[dim_Order] WHERE CurrentFlag = 0
+SELECT COUNT([DimKey]) FROM [DWH].[dbo].[dim_Order]
+
+
+-- test case updating and history: Remove old
+
+SELECT COUNT([DimKey]) FROM [DWH].[dbo].[dim_Order]
+
+Update  [Cursus].[dbo].[Order] set  [Cursus].[dbo].[Order].[Omschrijving] = 'Lunchkosten' WHERE [Omschrijving] = 'Dagelijks bachanaal'
+
+--Run package in Visual Studio
+
+SELECT * FROM [DWH].[dbo].[dim_Order] WHERE CurrentFlag = 0
+SELECT COUNT([DimKey]) FROM [DWH].[dbo].[dim_Order]
+
+
+
 
 -- test constraints per column
 
 use DWH
 
 --DimKey
-Update  [DWH].[dim_Order] set  [Cursus].[dim_Order].[DimKey] = 2 WHERE [DimKey] = 1 -- test uniciteit van waarden
-SELECT COUNT([DimKey]), COUNT(DISTINCT([DimKey])) from [DWH].[dim_Order] -- test not null
+Update  [DWH].[dbo].[dim_Order] set  [Cursus].[dim_Order].[DimKey] = 2 WHERE [DimKey] = 1 -- test uniciteit van waarden als verieste
+SELECT COUNT([DimKey]), COUNT(DISTINCT([DimKey])) from [DWH].[dbo].[dim_Order] -- test uniciteit van waarden in tabel
 
 --OrderType
-SELECT COUNT([OrderType]), COUNT(DISTINCT([OrderType])) from [DWH].[dim_Order] -- test not null
---OrderOmschrijving
-SELECT COUNT([OrderOmschrijving]), COUNT(DISTINCT([OrderOmschrijving])) from [DWH].[dim_Order] -- test not null
---Bedrag
-SELECT COUNT([Bedrag]), COUNT(DISTINCT([Bedrag])) from [DWH].[dim_Order] -- test not null
---Checksum
-SELECT COUNT([Checksum]), COUNT(DISTINCT([Checksum])) from [DWH].[dim_Order] -- test not null
---ValidUntil
-SELECT COUNT([ValidUntil]), COUNT(DISTINCT([ValidUntil])) from [DWH].[dim_Order] -- test not null
---ValidFrom
-SELECT COUNT([ValidFrom]), COUNT(DISTINCT([ValidFrom])) from [DWH].[dim_Order] -- test not null
---CurrentFlag
-SELECT COUNT([CurrentFlag]), COUNT(DISTINCT([CurrentFlag])) from [DWH].[dim_Order] -- test not null
+SELECT * from [DWH].[dbo].[dim_Order] WHERE [OrderType] IS NULL-- test no nulls present
 
-select * from  [DWH].[dim_Order]
+SELECT * into dim_Order_copy from [DWH].[dbo].[dim_Order] --test nulls not insertable
+update [DWH].[dbo].[dim_Order_copy] set [OrderType] = NULL where [DimKey] = 1
+select * from [DWH].[dbo].[dim_Order_copy] where DimKey = 1
+drop table dim_Order_copy 
+
+--OrderOmschrijving
+SELECT * from [DWH].[dbo].[dim_Order] WHERE OrderOmschrijving IS NULL-- test no nulls present
+
+SELECT * into dim_Order_copy from [DWH].[dbo].[dim_Order] --test nulls not insertable
+update [DWH].[dbo].[dim_Order_copy] set OrderOmschrijving = NULL where [DimKey] = 1
+select * from [DWH].[dbo].[dim_Order_copy] where DimKey = 1
+drop table dim_Order_copy 
+
+--Bedrag
+SELECT * from [DWH].[dbo].[dim_Order] WHERE [OrderBedrag] IS NULL-- test no nulls present
+
+SELECT * into dim_Order_copy from [DWH].[dbo].[dim_Order] --test nulls not insertable
+update [DWH].[dbo].[dim_Order_copy] set [OrderBedrag] = NULL where [DimKey] = 1
+select * from [DWH].[dbo].[dim_Order_copy] where DimKey = 1
+drop table dim_Order_copy 
+
+--Checksum
+SELECT * from [DWH].[dbo].[dim_Order] WHERE [Checksum] IS NULL-- test no nulls present
+
+SELECT * into dim_Order_copy from [DWH].[dbo].[dim_Order] --test nulls not insertable
+update [DWH].[dbo].[dim_Order_copy] set [Checksum] = NULL where [DimKey] = 1
+select * from [DWH].[dbo].[dim_Order_copy] where DimKey = 1
+drop table dim_Order_copy 
+
+--ValidUntil
+SELECT * from [DWH].[dbo].[dim_Order] WHERE [ValidUntil] IS NULL-- test no nulls present
+
+SELECT * into dim_Order_copy from [DWH].[dbo].[dim_Order] --test nulls not insertable
+update [DWH].[dbo].[dim_Order_copy] set [ValidUntil] = NULL where [DimKey] = 1
+select * from [DWH].[dbo].[dim_Order_copy] where DimKey = 1
+drop table dim_Order_copy 
+
+--ValidFrom
+SELECT * from [DWH].[dbo].[dim_Order] WHERE [ValidFrom] IS NULL-- test no nulls present
+
+SELECT * into dim_Order_copy from [DWH].[dbo].[dim_Order] --test nulls not insertable
+update [DWH].[dbo].[dim_Order_copy] set [ValidFrom] = NULL where [DimKey] = 1
+select * from [DWH].[dbo].[dim_Order_copy] where DimKey = 1
+drop table dim_Order_copy 
+
+--CurrentFlag
+SELECT * from [DWH].[dbo].[dim_Order] WHERE [CurrentFlag] IS NULL-- test no nulls present
+
+SELECT * into dim_Order_copy from [DWH].[dbo].[dim_Order] --test nulls not insertable
+update [DWH].[dbo].[dim_Order_copy] set [CurrentFlag] = NULL where [DimKey] = 1
+select * from [DWH].[dbo].[dim_Order_copy] where DimKey = 1
+drop table dim_Order_copy 
+
+
+select * from  [DWH].[dbo].[dim_Order]
