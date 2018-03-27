@@ -1,19 +1,3004 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="3/26/2018 3:57:11 PM"
+  DTS:CreationDate="3/26/2018 4:33:51 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="KVL-KLT072"
   DTS:CreatorName="KVL-KLT072\Evert-Jan"
-  DTS:DTSID="{25B93F4C-163B-4683-9703-D4888DB64CA5}"
+  DTS:DTSID="{65511F59-FE99-43F3-88B8-AA2467BC4943}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.92"
   DTS:LocaleID="1043"
-  DTS:ObjectName="Package1"
+  DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionGUID="{284F2C7D-5FF8-4FFF-92EC-31149BAC7E25}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{94E311F5-9FE6-44B9-9604-38800760884E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\dim_Order_EvertJan"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CA9FD8C2-88AF-4CF2-95E5-842BE5041596}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="dim_Order_EvertJan"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\dim_Order_EvertJan\Added rows 1"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Added rows 1"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[tgt_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="tgt_OrderNummer"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[src_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="src_OrderNummer"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderType]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderType]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderOmschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[OrderDatum]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="OrderDatum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[OrderBedrag]"
+                      cachedDataType="numeric"
+                      cachedName="OrderBedrag"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderBedrag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3]"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[tgt_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="tgt_OrderNummer"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[src_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="src_OrderNummer"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderType]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderType]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderOmschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[OrderDatum]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="OrderDatum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[OrderBedrag]"
+                      cachedDataType="numeric"
+                      cachedName="OrderBedrag"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderBedrag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 1]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[DimKey]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]"
+                      name="tgt_OrderNummer" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      name="tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]"
+                      name="src_OrderNummer" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderType]"
+                      name="OrderType" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]"
+                      name="OrderOmschrijving" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]"
+                      name="OrderCategorie1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]"
+                      name="OrderCategorie2" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderDatum]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderDatum]"
+                      name="OrderDatum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]"
+                      dataType="numeric"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]"
+                      name="OrderBedrag"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      name="src_Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      dataType="date"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      dataType="date"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Checksum Transformation"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Checksum Transformation; Konesans Ltd; Copyright © 2014 Konesans Ltd; http://www.konesans.com"
+              description="Checksum Transformation for SQL Server Integration Services 2014"
+              name="Checksum Transformation"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The Checksum Transformation algorithm used to produce the resulting checksum value."
+                  name="ChecksumAlgorithm"
+                  typeConverter="Konesans.Dts.Pipeline.ChecksumTransform.ChecksumTransform+ChecksumAlgorithm, Konesans.Dts.Pipeline.ChecksumTransform, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b2ab4a111192992b">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Konesans.ChecksumTransformation</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput]"
+                  errorRowDisposition="FailComponent"
+                  name="ChecksumInput">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderType]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie1]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie2]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput].Columns[OrderDatum]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="OrderDatum"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderDatum]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput].Columns[OrderBedrag]"
+                      cachedDataType="numeric"
+                      cachedName="OrderBedrag"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderBedrag]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Checksum Transformation.Outputs[ChecksumOutput]"
+                  exclusionGroup="1"
+                  name="ChecksumOutput"
+                  synchronousInputId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      name="Checksum">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Checksum transformation result column indicator."
+                          name="Checksum">Checksum</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Conditional split combined table1"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional split combined table1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input].Columns[tgt_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="tgt_OrderNummer"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input].Columns[src_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="src_OrderNummer"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Verwijderde regels]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Verwijderde regels"
+                  synchronousInputId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(src_OrderNummer)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Toegevoegde regels]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Toegevoegde regels"
+                  synchronousInputId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(tgt_OrderNummer)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Gewijzigde regels]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Gewijzigde regels"
+                  synchronousInputId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]} != #{Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">tgt_Checksum != src_Checksum</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]"
+                      name="ValidUntil"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Full outer join source and target"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Full outer join source and target"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input].Columns[OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="OrderNummer"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[OrderNummer]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[DimKey]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="OrderNummer"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderNummer]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderType]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie1]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie2]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderDatum]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="OrderDatum"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderDatum]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderBedrag]"
+                      cachedDataType="numeric"
+                      cachedName="OrderBedrag"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderBedrag]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[DimKey]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[DimKey]"
+                      name="DimKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input].Columns[DimKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]"
+                      name="tgt_OrderNummer"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input].Columns[OrderNummer]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]"
+                      name="tgt_Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]"
+                      name="src_OrderNummer">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderNummer]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderType]"
+                      name="OrderType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderOmschrijving]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderOmschrijving]"
+                      name="OrderOmschrijving">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderOmschrijving]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie1]"
+                      name="OrderCategorie1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderCategorie1]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie2]"
+                      name="OrderCategorie2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderCategorie2]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderDatum]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderDatum]"
+                      name="OrderDatum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderDatum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderBedrag]"
+                      dataType="numeric"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderBedrag]"
+                      name="OrderBedrag"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[OrderBedrag]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]"
+                      name="src_Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast mutated rows to removed and added">
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Mutate added rows in target"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Mutate added rows in target"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dim_Order]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Order_EvertJan\Mutate added rows in target.Connections[OleDbConnection]"
+                  connectionManagerID="{0639C076-53EA-4069-AD85-3A2B5B41685C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[KVL-KLT072_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderType]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderType]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderOmschrijving]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderCategorie1]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderCategorie2]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[OrderDatum]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="OrderDatum"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderDatum]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderDatum]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[OrderBedrag]"
+                      cachedDataType="numeric"
+                      cachedName="OrderBedrag"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderBedrag]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[src_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="src_OrderNummer"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderNummer]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]" />
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[src_Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[DimKey]"
+                      dataType="i8"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderNummer]"
+                      dataType="i8"
+                      name="OrderNummer" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OrderType" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderOmschrijving]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OrderOmschrijving" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderCategorie1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OrderCategorie1" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      name="OrderCategorie2" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderDatum]"
+                      dataType="dbDate"
+                      name="OrderDatum" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[OrderBedrag]"
+                      dataType="numeric"
+                      name="OrderBedrag"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input].ExternalColumns[CurrentFlag]"
+                      dataType="bool"
+                      name="CurrentFlag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Mutate added rows in target.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Mutate added rows in target.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate added rows in target.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Mutate added rows in target.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Mutate removed rows in target"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Mutate removed rows in target"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE Dim_Order 
+SET [ValidUntil] = GETDATE(), [CurrentFlag] = 0
+WHERE
+CurrentFlag=1 AND OrderNummer = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Connections[OleDbConnection]"
+                  connectionManagerID="{0639C076-53EA-4069-AD85-3A2B5B41685C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[KVL-KLT072_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Inputs[OLE DB Command Input].Columns[src_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="src_OrderNummer"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Mutate removed rows in target.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i8"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Mutate removed rows in target.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Mutate removed rows in target.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Mutate removed rows in target.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate removed rows in target.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Mutate removed rows in target.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Mutate ValidFrom"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Mutate ValidFrom"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Mutate ValidFrom.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate ValidFrom.Inputs[Derived Column Input].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Mutate ValidFrom.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Mutate ValidFrom.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Mutate ValidFrom.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\dim_Order_EvertJan\Mutate ValidFrom.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate ValidFrom.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Mutate ValidFrom.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Mutate ValidFrom.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Mutate ValidFrom.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Removed rows 1"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Removed rows 1"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[tgt_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="tgt_OrderNummer"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[src_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="src_OrderNummer"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderType]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderType]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderOmschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[OrderDatum]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="OrderDatum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[OrderBedrag]"
+                      cachedDataType="numeric"
+                      cachedName="OrderBedrag"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderBedrag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[tgt_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="tgt_OrderNummer"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[src_OrderNummer]"
+                      cachedDataType="i8"
+                      cachedName="src_OrderNummer"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_OrderNummer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderType]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderType]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderOmschrijving]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderCategorie2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[OrderDatum]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="OrderDatum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderDatum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderDatum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[OrderBedrag]"
+                      cachedDataType="numeric"
+                      cachedName="OrderBedrag"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[OrderBedrag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[DimKey]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_OrderNummer]"
+                      name="tgt_OrderNummer" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      name="tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_OrderNummer]"
+                      name="src_OrderNummer" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderType]"
+                      name="OrderType" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderOmschrijving]"
+                      name="OrderOmschrijving" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie1]"
+                      name="OrderCategorie1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderCategorie2]"
+                      name="OrderCategorie2" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderDatum]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderDatum]"
+                      name="OrderDatum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]"
+                      dataType="numeric"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[OrderBedrag]"
+                      name="OrderBedrag"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      name="src_Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      dataType="date"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      dataType="date"
+                      lineageId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Select from Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Select from Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+[OrderNummer],
+[OrderType],
+[Omschrijving] as OrderOmschrijving,
+[OrderCategorie1],
+[OrderCategorie2],
+[Datum] as OrderDatum,
+[Bedrag] as OrderBedrag
+FROM
+[Cursus].[dbo].[Order]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Order_EvertJan\Select from Source.Connections[OleDbConnection]"
+                  connectionManagerID="{71C68CBB-45AC-48D4-9CC3-DB06FD0AB204}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[KVL-KLT072_SQLEXPRESS.Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderNummer]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderNummer]"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderNummer]"
+                      name="OrderNummer"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderType]"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderType]"
+                      name="OrderType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderOmschrijving]"
+                      length="100"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]"
+                      name="OrderOmschrijving"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie1]"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie1]"
+                      name="OrderCategorie1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie2]"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderCategorie2]"
+                      name="OrderCategorie2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderDatum]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderDatum]"
+                      length="10"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderDatum]"
+                      name="OrderDatum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderBedrag]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderBedrag]"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].Columns[OrderBedrag]"
+                      name="OrderBedrag"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderNummer]"
+                      dataType="i8"
+                      name="OrderNummer" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OrderType" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderOmschrijving]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OrderOmschrijving" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="OrderCategorie1" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      name="OrderCategorie2" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderDatum]"
+                      dataType="wstr"
+                      length="10"
+                      name="OrderDatum" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output].ExternalColumns[OrderBedrag]"
+                      dataType="numeric"
+                      name="OrderBedrag"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderNummer]"
+                      name="OrderNummer" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderType]"
+                      name="OrderType" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderOmschrijving]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderOmschrijving]"
+                      name="OrderOmschrijving" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderCategorie1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderCategorie1]"
+                      name="OrderCategorie1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderCategorie2]"
+                      name="OrderCategorie2" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderDatum]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderDatum]"
+                      name="OrderDatum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderBedrag]"
+                      dataType="numeric"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[OrderBedrag]"
+                      name="OrderBedrag"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Order_EvertJan\Select from Target"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Select from Target"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+[DimKey],
+[OrderNummer],
+[Checksum]
+FROM
+[DWH].[dbo].[dim_Order]
+WHERE
+[Currentflag]=1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Order_EvertJan\Select from Target.Connections[OleDbConnection]"
+                  connectionManagerID="{0639C076-53EA-4069-AD85-3A2B5B41685C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[KVL-KLT072_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      name="DimKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[OrderNummer]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].ExternalColumns[OrderNummer]"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[OrderNummer]"
+                      name="OrderNummer"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      dataType="i8"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].ExternalColumns[OrderNummer]"
+                      dataType="i8"
+                      name="OrderNummer" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[OrderNummer]"
+                      dataType="i8"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[OrderNummer]"
+                      name="OrderNummer" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[ChecksumOutput]"
+              endId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Right Input]"
+              name="ChecksumOutput"
+              startId="Package\dim_Order_EvertJan\Checksum Transformation.Outputs[ChecksumOutput]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Derived Column Output]"
+              endId="Package\dim_Order_EvertJan\Conditional split combined table1.Inputs[Conditional Split Input]"
+              name="Derived Column Output"
+              startId="Package\dim_Order_EvertJan\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Derived Column Output1]"
+              endId="Package\dim_Order_EvertJan\Mutate added rows in target.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\dim_Order_EvertJan\Mutate ValidFrom.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Gewijzigde regels]"
+              endId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Inputs[Multicast Input 1]"
+              name="Gewijzigde regels"
+              startId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Gewijzigde regels]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Merge Join Output]"
+              endId="Package\dim_Order_EvertJan\Derived Column.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\dim_Order_EvertJan\Full outer join source and target.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Multicast Output 1]"
+              endId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 2]"
+              name="Multicast Output 1"
+              startId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Multicast Output 2]"
+              endId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 3]"
+              name="Multicast Output 2"
+              startId="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[OLE DB Source Output]"
+              endId="Package\dim_Order_EvertJan\Full outer join source and target.Inputs[Merge Join Left Input]"
+              name="OLE DB Source Output"
+              startId="Package\dim_Order_EvertJan\Select from Target.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[OLE DB Source Output1]"
+              endId="Package\dim_Order_EvertJan\Checksum Transformation.Inputs[ChecksumInput]"
+              name="OLE DB Source Output"
+              startId="Package\dim_Order_EvertJan\Select from Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Toegevoegde regels]"
+              endId="Package\dim_Order_EvertJan\Added rows 1.Inputs[Union All Input 2]"
+              name="Toegevoegde regels"
+              startId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Toegevoegde regels]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Union All Output 1]"
+              endId="Package\dim_Order_EvertJan\Mutate removed rows in target.Inputs[OLE DB Command Input]"
+              name="Union All Output 1"
+              startId="Package\dim_Order_EvertJan\Removed rows 1.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Union All Output 11]"
+              endId="Package\dim_Order_EvertJan\Mutate ValidFrom.Inputs[Derived Column Input]"
+              name="Union All Output 1"
+              startId="Package\dim_Order_EvertJan\Added rows 1.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\dim_Order_EvertJan.Paths[Verwijderde regels]"
+              endId="Package\dim_Order_EvertJan\Removed rows 1.Inputs[Union All Input 1]"
+              name="Verwijderde regels"
+              startId="Package\dim_Order_EvertJan\Conditional split combined table1.Outputs[Verwijderde regels]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\dim_Order_EvertJan"
+          TopLeft="65,65" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\dim_Order_EvertJan">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="202,42"
+          Id="Package\dim_Order_EvertJan\Checksum Transformation"
+          TopLeft="233,107.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\dim_Order_EvertJan\Derived Column"
+          TopLeft="257,311.5" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\dim_Order_EvertJan\Mutate ValidFrom"
+          TopLeft="464,719.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\dim_Order_EvertJan\Select from Target"
+          TopLeft="5.49999999999994,107.5" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\dim_Order_EvertJan\Mutate removed rows in target"
+          TopLeft="10.5000000000001,719.5" />
+        <NodeLayout
+          Size="299,42"
+          Id="Package\dim_Order_EvertJan\Multicast mutated rows to removed and added"
+          TopLeft="184.5,515.5" />
+        <NodeLayout
+          Size="235,42"
+          Id="Package\dim_Order_EvertJan\Conditional split combined table1"
+          TopLeft="216.5,413.5" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\dim_Order_EvertJan\Full outer join source and target"
+          TopLeft="219,209.5" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\dim_Order_EvertJan\Removed rows 1"
+          TopLeft="44,617.5" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\dim_Order_EvertJan\Added rows 1"
+          TopLeft="473,617.5" />
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Verwijderde regels]"
+          TopLeft="277.25,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-154.25,162"
+              Start="0,0"
+              End="-154.25,154.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.2117812061711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51.2117812061711"
+                    Point2="0,55.2117812061711"
+                    Point3="-4,55.2117812061711" />
+                  <mssgle:LineSegment
+                    End="-150.25,55.2117812061711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-150.25,55.2117812061711"
+                    Point2="-154.25,55.2117812061711"
+                    Point3="-154.25,59.2117812061711" />
+                  <mssgle:LineSegment
+                    End="-154.25,154.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-119.08576171875,60.2117812061711,83.9215234375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Union All Output 1]"
+          TopLeft="123,659.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[OLE DB Source Output]"
+          TopLeft="88.9999999999999,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="208,60"
+              Start="0,0"
+              End="208,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.7512953367876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.7512953367876"
+                    Point2="0,35.7512953367876"
+                    Point3="4,35.7512953367876" />
+                  <mssgle:LineSegment
+                    End="204,35.7512953367876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="204,35.7512953367876"
+                    Point2="208,35.7512953367876"
+                    Point3="208,39.7512953367876" />
+                  <mssgle:LineSegment
+                    End="208,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Multicast Output 1]"
+          TopLeft="285.5,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-162.5,60"
+              Start="0,0"
+              End="-162.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1916167664671" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1916167664671"
+                    Point2="0,24.1916167664671"
+                    Point3="-4,24.1916167664671" />
+                  <mssgle:LineSegment
+                    End="-158.5,24.1916167664671" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-158.5,24.1916167664671"
+                    Point2="-162.5,24.1916167664671"
+                    Point3="-162.5,28.1916167664671" />
+                  <mssgle:LineSegment
+                    End="-162.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Gewijzigde regels]"
+          TopLeft="334,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-39.26509765625,20.41845703125,78.5301953125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="213,42"
+          Id="Package\dim_Order_EvertJan\Mutate added rows in target"
+          TopLeft="463,803" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\dim_Order_EvertJan\Select from Source"
+          TopLeft="248,7" />
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Union All Output 11]"
+          TopLeft="545,659.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[OLE DB Source Output1]"
+          TopLeft="333,49">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.5"
+              Start="0,0"
+              End="0,51">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[ChecksumOutput]"
+          TopLeft="334,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37,60"
+              Start="0,0"
+              End="37,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.7512953367876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.7512953367876"
+                    Point2="0,35.7512953367876"
+                    Point3="4,35.7512953367876" />
+                  <mssgle:LineSegment
+                    End="33,35.7512953367876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33,35.7512953367876"
+                    Point2="37,35.7512953367876"
+                    Point3="37,39.7512953367876" />
+                  <mssgle:LineSegment
+                    End="37,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Merge Join Output]"
+          TopLeft="334,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Derived Column Output]"
+          TopLeft="334,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Toegevoegde regels]"
+          TopLeft="390.75,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="154.25,162"
+              Start="0,0"
+              End="154.25,154.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.2117812061711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51.2117812061711"
+                    Point2="0,55.2117812061711"
+                    Point3="4,55.2117812061711" />
+                  <mssgle:LineSegment
+                    End="150.25,55.2117812061711" />
+                  <mssgle:CubicBezierSegment
+                    Point1="150.25,55.2117812061711"
+                    Point2="154.25,55.2117812061711"
+                    Point3="154.25,59.2117812061711" />
+                  <mssgle:LineSegment
+                    End="154.25,154.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="31.796328125,60.2117812061711,90.65734375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Multicast Output 2]"
+          TopLeft="382.5,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="162.5,60"
+              Start="0,0"
+              End="162.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1916167664671" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1916167664671"
+                    Point2="0,24.1916167664671"
+                    Point3="4,24.1916167664671" />
+                  <mssgle:LineSegment
+                    End="158.5,24.1916167664671" />
+                  <mssgle:CubicBezierSegment
+                    Point1="158.5,24.1916167664671"
+                    Point2="162.5,24.1916167664671"
+                    Point3="162.5,28.1916167664671" />
+                  <mssgle:LineSegment
+                    End="162.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Order_EvertJan.Paths[Derived Column Output1]"
+          TopLeft="545,761.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24.5,41.5"
+              Start="0,0"
+              End="24.5,34">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.75"
+                    Point2="0,20.75"
+                    Point3="4,20.75" />
+                  <mssgle:LineSegment
+                    End="20.5,20.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.5,20.75"
+                    Point2="24.5,20.75"
+                    Point3="24.5,24.75" />
+                  <mssgle:LineSegment
+                    End="24.5,34" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\dim_Order_EvertJan\Select from Target">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\dim_Order_EvertJan\Mutate added rows in target">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\dim_Order_EvertJan\Select from Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

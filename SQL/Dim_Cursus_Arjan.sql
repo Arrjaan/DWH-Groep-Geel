@@ -1,7 +1,7 @@
 DROP TABLE DWH.[dbo].[dim_Cursus]
 
 CREATE TABLE DWH.[dbo].[dim_Cursus](
-	[DimKey] int NOT NULL,
+	[DimKey] int IDENTITY(1,1) PRIMARY KEY,
 	[CursusId] [int] NOT NULL,
 	[TrainerId] [int] NOT NULL,
 	[StartDatum] [date] NOT NULL,
@@ -10,11 +10,7 @@ CREATE TABLE DWH.[dbo].[dim_Cursus](
 	[Omschrijving] [ntext] NULL,
 	[AantalDagen] [int] NOT NULL,
 	[Checksum] [int] NOT NULL,
-	[CurrentFlag] [bit] NOT NULL,
+	[CurrentFlag] [bit] NOT NULL DEFAULT 1,
 	[ValidFrom] [datetime] NOT NULL,
-	[ValidTill] [datetime] NOT NULL
- CONSTRAINT [PK_DimKey] PRIMARY KEY CLUSTERED 
-(
-	[DimKey] ASC
-)
+	[ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31'
 )
