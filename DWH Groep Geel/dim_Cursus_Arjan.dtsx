@@ -11,28 +11,12 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Cursus_Arjan"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{6254F3CD-2B53-48C3-9B84-84BC052F5B78}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{B4AD31DF-DD79-408A-941D-348D33ADEEBD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
-    <DTS:Executable
-      DTS:refId="Package\Create Table"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{61E6D11D-1038-4A01-9840-29AB2848B974}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Create Table"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
-          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Cursus'))&#xA;BEGIN&#xA;    CREATE TABLE DWH.[dbo].[dim_Cursus](&#xA;&#x9;[DimKey] int IDENTITY(1,1) PRIMARY KEY,&#xA;&#x9;[CursusId] [int] NOT NULL,&#xA;&#x9;[TrainerId] [int] NOT NULL,&#xA;&#x9;[StartDatum] [date] NOT NULL,&#xA;&#x9;[MaxAantalDeelnemers] [tinyint] NOT NULL,&#xA;&#x9;[MinAantalDeelnemers] [tinyint] NOT NULL,&#xA;&#x9;[Omschrijving] [ntext] NULL,&#xA;&#x9;[AantalDagen] [int] NOT NULL,&#xA;&#x9;[Checksum] [int] NOT NULL,&#xA;&#x9;[CurrentFlag] [bit] NOT NULL DEFAULT 1,&#xA;&#x9;[ValidFrom] [datetime] NOT NULL,&#xA;&#x9;[ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31'&#xA;)&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Inladen Dim_Cursus"
       DTS:CreationName="Microsoft.Pipeline"
@@ -2705,16 +2689,6 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
-  <DTS:PrecedenceConstraints>
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint]"
-      DTS:CreationName=""
-      DTS:DTSID="{D49D4A8C-457C-4CA7-A22D-B0C1D0C34AB9}"
-      DTS:From="Package\Create Table"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint"
-      DTS:To="Package\Inladen Dim_Cursus" />
-  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -2726,49 +2700,11 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
           Size="175.2,41.6"
           Id="Package\Inladen Dim_Cursus"
           TopLeft="5.50000000000001,107.1" />
-        <NodeLayout
-          Size="140,41.6"
-          Id="Package\Create Table"
-          TopLeft="11.1,5.49999999999995" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="81.1,47.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="12,59.9999999999999"
-              Start="0,0"
-              End="12,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26"
-                    Point2="0,30"
-                    Point3="4,30" />
-                  <mssgle:LineSegment
-                    End="8,30" />
-                  <mssgle:CubicBezierSegment
-                    Point1="8,30"
-                    Point2="12,30"
-                    Point3="12,34" />
-                  <mssgle:LineSegment
-                    End="12,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2778,25 +2714,29 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Inladen Dim_Cursus\Update CurrentFlag"
-          TopLeft="334.1,819.099999999999" />
-        <NodeLayout
-          Size="131.2,41.6"
-          Id="Package\Inladen Dim_Cursus\Union All 1"
-          TopLeft="110.1,717.5" />
-        <NodeLayout
-          Size="184.8,41.6"
-          Id="Package\Inladen Dim_Cursus\Toevoegen ValidDates"
-          TopLeft="205.3,412.7" />
-        <NodeLayout
           Size="121.6,41.6"
           Id="Package\Inladen Dim_Cursus\Union All"
           TopLeft="358.9,717.5" />
         <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Inladen Dim_Cursus\Multicast"
+          TopLeft="236.9,615.9" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Inladen Dim_Cursus\Update CurrentFlag"
+          TopLeft="334.1,819.099999999999" />
+        <NodeLayout
+          Size="228,41.6"
+          Id="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving"
+          TopLeft="183.7,107.1" />
+        <NodeLayout
           Size="168.8,41.6"
           Id="Package\Inladen Dim_Cursus\Insert nieuwe rijen"
           TopLeft="91.3000000000001,819.099999999999" />
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\Inladen Dim_Cursus\Toevoegen ValidDates"
+          TopLeft="205.3,412.7" />
         <NodeLayout
           Size="156,41.6"
           Id="Package\Inladen Dim_Cursus\Conditional Split"
@@ -2806,17 +2746,13 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
           Id="Package\Inladen Dim_Cursus\Ophalen Cursus"
           TopLeft="220.9,5.49999999999995" />
         <NodeLayout
-          Size="228,41.6"
-          Id="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving"
-          TopLeft="183.7,107.1" />
-        <NodeLayout
           Size="146.4,41.6"
           Id="Package\Inladen Dim_Cursus\Ophalen DWH"
           TopLeft="5.50000000000004,208.7" />
         <NodeLayout
-          Size="121.6,41.6"
-          Id="Package\Inladen Dim_Cursus\Multicast"
-          TopLeft="236.9,615.9" />
+          Size="131.2,41.6"
+          Id="Package\Inladen Dim_Cursus\Union All 1"
+          TopLeft="110.1,717.5" />
         <NodeLayout
           Size="131.2,42.4"
           Id="Package\Inladen Dim_Cursus\Merge Join"
@@ -2857,7 +2793,7 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-0.765761718749978,60.6773109243697,86.5315234375,11.6630859375"
+              BoundingBox="-0.765761718749957,60.6773109243697,86.5315234375,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
