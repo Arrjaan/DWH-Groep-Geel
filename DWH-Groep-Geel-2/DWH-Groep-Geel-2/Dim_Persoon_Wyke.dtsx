@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Dim_Persoon_Wyke"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{BA232897-8D84-4F66-BF2D-AA5E9F488AD9}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{4607A4E9-AA76-4A58-9DB3-C7608FED458E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -715,8 +715,8 @@ WHERE DimKey = ?</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Nieuwe regels Persoon.Connections[OleDbConnection]"
-                  connectionManagerID="{16E61059-7440-4F64-9C2A-F63E0CB2F2F0}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[Cursus]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1178,8 +1178,8 @@ ORDER BY [PersoonID]</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Target Persoon.Connections[OleDbConnection]"
-                  connectionManagerID="{16E61059-7440-4F64-9C2A-F63E0CB2F2F0}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[Cursus]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1372,8 +1372,8 @@ WHERE [Dimkey] = ?</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Verwijderde regels Persoon.Connections[OleDbConnection]"
-                  connectionManagerID="{16E61059-7440-4F64-9C2A-F63E0CB2F2F0}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[Cursus]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1499,8 +1499,8 @@ WHERE [Dimkey] = ?</property>
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Connections[OleDbConnection]"
-                  connectionManagerID="{16E61059-7440-4F64-9C2A-F63E0CB2F2F0}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[Cursus]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
