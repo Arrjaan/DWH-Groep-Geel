@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="DimStatusPim"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{6CEABE3F-DAFF-4D67-B5E1-6413FC624148}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{E4BBA29F-139C-4DDF-B99A-9095610A60C0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -85,6 +85,668 @@
                           name="Checksum">Checksum</property>
                       </properties>
                     </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimStatusPim\CombineInsert"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="CombineInsert"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="Status"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[Src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Src_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[Tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="Tgt_DimKey"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[Tgt_DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_DeelnameId"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[Tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1].Columns[CurrentFlag]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="CurrentFlag"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[CurrentFlag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[CurrentFlag]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="Status"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[Src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Src_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[Tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="Tgt_DimKey"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[Tgt_DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_DeelnameId"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[Tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2].Columns[CurrentFlag]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="CurrentFlag"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[CurrentFlag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[CurrentFlag]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[DeelnameId]"
+                      name="DeelnameId" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Src_Checksum]"
+                      name="Src_Checksum" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DimKey]"
+                      dataType="i8"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DimKey]"
+                      name="Tgt_DimKey" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]"
+                      name="Tgt_DeelnameId" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Tgt_Checksum]"
+                      name="Tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      dataType="date"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      dataType="date"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[CurrentFlag]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[CurrentFlag]"
+                      name="CurrentFlag" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimStatusPim\CombineUpdate"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="CombineUpdate"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="Status"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[Src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Src_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[Tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="Tgt_DimKey"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[Tgt_DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_DeelnameId"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[Tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1].Columns[CurrentFlag]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="CurrentFlag"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[CurrentFlag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[CurrentFlag]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="Status"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[Src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Src_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Src_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[Tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="Tgt_DimKey"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[Tgt_DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_DeelnameId"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_DeelnameId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[Tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Tgt_Checksum"
+                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2].Columns[CurrentFlag]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="CurrentFlag"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[CurrentFlag]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[CurrentFlag]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[DeelnameId]"
+                      name="DeelnameId" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Src_Checksum]"
+                      name="Src_Checksum" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DimKey]"
+                      dataType="i8"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DimKey]"
+                      name="Tgt_DimKey" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DeelnameId]"
+                      name="Tgt_DeelnameId" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_Checksum]"
+                      name="Tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      dataType="date"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      dataType="date"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[CurrentFlag]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[CurrentFlag]"
+                      name="CurrentFlag" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -297,12 +959,12 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntill]"
+                      refId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]"
                       dataType="date"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntill]"
-                      name="ValidUntill"
+                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidUntil]"
+                      name="ValidUntil"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -445,9 +1107,8 @@
                       refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].Columns[DeelnameId]"
                       cachedDataType="i4"
                       cachedName="DeelnameId"
-                      cachedSortKeyPosition="1"
                       externalMetadataColumnId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[DeelnameId]"
-                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[DeelnameId]" />
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[DeelnameId]" />
                     <inputColumn
                       refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].Columns[Status]"
                       cachedCodepage="1252"
@@ -455,19 +1116,19 @@
                       cachedLength="16"
                       cachedName="Status"
                       externalMetadataColumnId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
-                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Status]" />
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Status]" />
                     <inputColumn
                       refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].Columns[Src_Checksum]"
                       cachedDataType="i4"
                       cachedName="Src_Checksum"
                       externalMetadataColumnId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
-                      lineageId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output].Columns[Src_Checksum]" />
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[Src_Checksum]" />
                     <inputColumn
                       refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
                       cachedDataType="date"
                       cachedName="ValidFrom"
                       externalMetadataColumnId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
-                      lineageId="Package\DimStatusPim\Derived Column.Outputs[Derived Column Output].Columns[ValidFrom]" />
+                      lineageId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1].Columns[ValidFrom]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -481,7 +1142,8 @@
                       name="DimKey" />
                     <externalMetadataColumn
                       refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
-                      dataType="wstr"
+                      codePage="1252"
+                      dataType="str"
                       length="16"
                       name="Status" />
                     <externalMetadataColumn
@@ -493,13 +1155,13 @@
                       dataType="dbTimeStamp"
                       name="ValidFrom" />
                     <externalMetadataColumn
-                      refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntill]"
-                      dataType="dbTimeStamp"
-                      name="ValidUntill" />
-                    <externalMetadataColumn
                       refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[CurrentFlag]"
                       dataType="bool"
                       name="CurrentFlag" />
+                    <externalMetadataColumn
+                      refId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntil" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -694,6 +1356,44 @@
                       </properties>
                     </outputColumn>
                   </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimStatusPim\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\DimStatusPim\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimStatusPim\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\DimStatusPim\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DimStatusPim\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\DimStatusPim\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DimStatusPim\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\DimStatusPim\Multicast.Inputs[Multicast Input 1]">
                   <externalMetadataColumns />
                 </output>
               </outputs>
@@ -974,6 +1674,120 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\DimStatusPim\VerwijderenDusUpdaten"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="VerwijderenDusUpdaten"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Update DimStatus
+Set CurrentFlag = 0, ValidUntil = ?
+ Where DimKey = ? </property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimStatusPim\VerwijderenDusUpdaten.Connections[OleDbConnection]"
+                  connectionManagerID="{9AD0BB4A-9347-45CB-9841-3049A0537C30}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS720_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      externalMetadataColumnId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[ValidUntil]" />
+                    <inputColumn
+                      refId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input].Columns[Tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="Tgt_DimKey"
+                      externalMetadataColumnId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1].Columns[Tgt_DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i8"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimStatusPim\VerwijderenDusUpdaten.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DimStatusPim\VerwijderenDusUpdaten.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimStatusPim\VerwijderenDusUpdaten.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\VerwijderenDusUpdaten.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimStatusPim\VerwijderenDusUpdaten.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimStatusPim\VerwijderenDusUpdaten.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
@@ -992,8 +1806,18 @@
               name="Merge Join Output"
               startId="Package\DimStatusPim\Full Outer Join.Outputs[Merge Join Output]" />
             <path
+              refId="Package\DimStatusPim.Paths[Multicast Output 1]"
+              endId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 2]"
+              name="Multicast Output 1"
+              startId="Package\DimStatusPim\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\DimStatusPim.Paths[Multicast Output 2]"
+              endId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 2]"
+              name="Multicast Output 2"
+              startId="Package\DimStatusPim\Multicast.Outputs[Multicast Output 2]" />
+            <path
               refId="Package\DimStatusPim.Paths[Nieuwe Regels]"
-              endId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input]"
+              endId="Package\DimStatusPim\CombineInsert.Inputs[Union All Input 1]"
               name="Nieuwe Regels"
               startId="Package\DimStatusPim\Conditional Split.Outputs[Nieuwe Regels]" />
             <path
@@ -1006,6 +1830,26 @@
               endId="Package\DimStatusPim\Full Outer Join.Inputs[Merge Join Right Input]"
               name="OLE DB Source Output"
               startId="Package\DimStatusPim\TgtStatus.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DimStatusPim.Paths[Union All Output 1]"
+              endId="Package\DimStatusPim\DimStatus.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\DimStatusPim\CombineInsert.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\DimStatusPim.Paths[Union All Output 11]"
+              endId="Package\DimStatusPim\VerwijderenDusUpdaten.Inputs[OLE DB Command Input]"
+              name="Union All Output 1"
+              startId="Package\DimStatusPim\CombineUpdate.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\DimStatusPim.Paths[Updates]"
+              endId="Package\DimStatusPim\Multicast.Inputs[Multicast Input 1]"
+              name="Updates"
+              startId="Package\DimStatusPim\Conditional Split.Outputs[Updates]" />
+            <path
+              refId="Package\DimStatusPim.Paths[Verwijderde Regels]"
+              endId="Package\DimStatusPim\CombineUpdate.Inputs[Union All Input 1]"
+              name="Verwijderde Regels"
+              startId="Package\DimStatusPim\Conditional Split.Outputs[Verwijderde Regels]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1034,11 +1878,11 @@
     design-time-name="Package\DimStatusPim">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="128,41.6"
           Id="Package\DimStatusPim\DimStatus"
-          TopLeft="75.8142828143373,500.041176281833" />
+          TopLeft="92.5285705162556,717.464705893077" />
         <NodeLayout
           Size="148,41.6"
           Id="Package\DimStatusPim\Full Outer Join"
@@ -1054,7 +1898,7 @@
         <NodeLayout
           Size="203.2,41.6"
           Id="Package\DimStatusPim\Checksum Transformation"
-          TopLeft="5.50000000000003,107.1" />
+          TopLeft="5.50000000000009,107.1" />
         <NodeLayout
           Size="124.8,41.6"
           Id="Package\DimStatusPim\TgtStatus"
@@ -1065,26 +1909,26 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="23.3333333333333,60"
+              EndConnector="23.3333333333334,59.9999999999999"
               Start="0,0"
-              End="23.3333333333333,52.5">
+              End="23.3333333333334,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.6149732620321" />
+                    End="0,31.614973262032" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.6149732620321"
-                    Point2="0,35.6149732620321"
-                    Point3="4,35.6149732620321" />
+                    Point1="0,31.614973262032"
+                    Point2="0,35.614973262032"
+                    Point3="4,35.614973262032" />
                   <mssgle:LineSegment
-                    End="19.3333333333333,35.6149732620321" />
+                    End="19.3333333333334,35.614973262032" />
                   <mssgle:CubicBezierSegment
-                    Point1="19.3333333333333,35.6149732620321"
-                    Point2="23.3333333333333,35.6149732620321"
-                    Point3="23.3333333333333,39.6149732620321" />
+                    Point1="19.3333333333334,35.614973262032"
+                    Point2="23.3333333333334,35.614973262032"
+                    Point3="23.3333333333334,39.614973262032" />
                   <mssgle:LineSegment
-                    End="23.3333333333333,52.5" />
+                    End="23.3333333333334,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1099,56 +1943,20 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,59.9999999999999"
               Start="0,0"
-              End="0,52.5">
+              End="0,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DimStatusPim.Paths[Nieuwe Regels]"
-          TopLeft="332.1,453.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-192.285717185663,46.5411762818334"
-              Start="0,0"
-              End="-192.285717185663,39.0411762818334">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.2705881409167" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.2705881409167"
-                    Point2="0,23.2705881409167"
-                    Point3="-4,23.2705881409167" />
-                  <mssgle:LineSegment
-                    End="-188.285717185663,23.2705881409167" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-188.285717185663,23.2705881409167"
-                    Point2="-192.285717185663,23.2705881409167"
-                    Point3="-192.285717185663,27.2705881409167" />
-                  <mssgle:LineSegment
-                    End="-192.285717185663,39.0411762818334" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-128.990436717831,28.2705881409167,65.69515625,11.6630859375"
-              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
@@ -1183,26 +1991,26 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="201.666666666667,60"
+              EndConnector="201.666666666667,59.9999999999999"
               Start="0,0"
-              End="201.666666666667,52.5">
+              End="201.666666666667,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.6149732620321" />
+                    End="0,31.614973262032" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.6149732620321"
-                    Point2="0,35.6149732620321"
-                    Point3="4,35.6149732620321" />
+                    Point1="0,31.614973262032"
+                    Point2="0,35.614973262032"
+                    Point3="4,35.614973262032" />
                   <mssgle:LineSegment
-                    End="197.666666666667,35.6149732620321" />
+                    End="197.666666666667,35.614973262032" />
                   <mssgle:CubicBezierSegment
-                    Point1="197.666666666667,35.6149732620321"
-                    Point2="201.666666666667,35.6149732620321"
-                    Point3="201.666666666667,39.6149732620321" />
+                    Point1="197.666666666667,35.614973262032"
+                    Point2="201.666666666667,35.614973262032"
+                    Point3="201.666666666667,39.614973262032" />
                   <mssgle:LineSegment
-                    End="201.666666666667,52.5" />
+                    End="201.666666666667,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1214,6 +2022,206 @@
         <EdgeLayout
           Id="Package\DimStatusPim.Paths[Derived Column Output]"
           TopLeft="332.1,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\DimStatusPim\VerwijderenDusUpdaten"
+          TopLeft="425.157144012743,716.699999999999" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\DimStatusPim\Multicast"
+          TopLeft="264.871428461951,616.735295200842" />
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Updates]"
+          TopLeft="328.885714230975,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,163.235295200843"
+              Start="0,0"
+              End="0,155.735295200843">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,155.735295200843" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-18.5465234375,72.0629601004214,37.093046875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\DimStatusPim\CombineInsert"
+          TopLeft="81.442855987257,615.099999999999" />
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Nieuwe Regels]"
+          TopLeft="295.1,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-139.257144012743,161.6"
+              Start="0,0"
+              End="-139.257144012743,154.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.6773109243697" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51.6773109243697"
+                    Point2="0,55.6773109243697"
+                    Point3="-4,55.6773109243697" />
+                  <mssgle:LineSegment
+                    End="-135.257144012743,55.6773109243697" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-135.257144012743,55.6773109243697"
+                    Point2="-139.257144012743,55.6773109243697"
+                    Point3="-139.257144012743,59.6773109243697" />
+                  <mssgle:LineSegment
+                    End="-139.257144012743,154.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-102.476150131372,60.6773109243697,65.69515625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Union All Output 1]"
+          TopLeft="156.185713251756,656.699999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.7647058930776"
+              Start="0,0"
+              End="0,53.2647058930776">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.2647058930776" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Multicast Output 1]"
+          TopLeft="264.871428461951,636.717647600421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-34.6285724746938,0"
+              Start="0,0"
+              End="-27.1285724746938,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-27.1285724746938,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\DimStatusPim\CombineUpdate"
+          TopLeft="448.500001021794,615.099999999999" />
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Verwijderde Regels]"
+          TopLeft="369.1,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="156.600001021794,161.6"
+              Start="0,0"
+              End="156.600001021794,154.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.6773109243697" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51.6773109243697"
+                    Point2="0,55.6773109243697"
+                    Point3="4,55.6773109243697" />
+                  <mssgle:LineSegment
+                    End="152.600001021794,55.6773109243697" />
+                  <mssgle:CubicBezierSegment
+                    Point1="152.600001021794,55.6773109243697"
+                    Point2="156.600001021794,55.6773109243697"
+                    Point3="156.600001021794,59.6773109243697" />
+                  <mssgle:LineSegment
+                    End="156.600001021794,154.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="35.034238792147,60.6773109243697,86.5315234375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Multicast Output 2]"
+          TopLeft="386.471428461951,636.717647600421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="62.0285725598433,0"
+              Start="0,0"
+              End="54.5285725598433,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="54.5285725598433,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DimStatusPim.Paths[Union All Output 11]"
+          TopLeft="523.828572517269,656.699999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
