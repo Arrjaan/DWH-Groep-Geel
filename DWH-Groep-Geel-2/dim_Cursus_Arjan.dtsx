@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Cursus_Arjan"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{1426DB84-D74A-4163-97AE-61CCF2F4CFE6}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{6E4D4886-6700-4156-B0B0-FCA993FF3178}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -454,9 +454,9 @@
                       dataType="dbTimeStamp"
                       name="ValidFrom" />
                     <externalMetadataColumn
-                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidTill]"
+                      refId="Package\Inladen Dim_Cursus\Insert nieuwe rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
                       dataType="dbTimeStamp"
-                      name="ValidTill" />
+                      name="ValidUntil" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1371,12 +1371,12 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidTill]"
+                      refId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidUntil]"
                       dataType="date"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidTill]"
-                      name="ValidTill"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidUntil]"
+                      name="ValidUntil"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -1590,10 +1590,10 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[ValidTill]"
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 1].Columns[ValidUntil]"
                       cachedDataType="date"
-                      cachedName="ValidTill"
-                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidTill]">
+                      cachedName="ValidUntil"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidUntil]">
                       <properties>
                         <property
                           containsID="true"
@@ -1768,10 +1768,10 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[ValidTill]"
+                      refId="Package\Inladen Dim_Cursus\Union All.Inputs[Union All Input 2].Columns[ValidUntil]"
                       cachedDataType="date"
-                      cachedName="ValidTill"
-                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidTill]">
+                      cachedName="ValidUntil"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidUntil]">
                       <properties>
                         <property
                           containsID="true"
@@ -2049,10 +2049,10 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[ValidTill]"
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 1].Columns[ValidUntil]"
                       cachedDataType="date"
-                      cachedName="ValidTill"
-                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidTill]">
+                      cachedName="ValidUntil"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidUntil]">
                       <properties>
                         <property
                           containsID="true"
@@ -2240,10 +2240,10 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[ValidTill]"
+                      refId="Package\Inladen Dim_Cursus\Union All 1.Inputs[Union All Input 2].Columns[ValidUntil]"
                       cachedDataType="date"
-                      cachedName="ValidTill"
-                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidTill]">
+                      cachedName="ValidUntil"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen ValidDates.Outputs[Derived Column Output].Columns[ValidUntil]">
                       <properties>
                         <property
                           containsID="true"
@@ -2361,7 +2361,7 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE dim_Cursus SET CurrentFlag = 0, ValidTill = ? WHERE DimKey = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE dim_Cursus SET CurrentFlag = 0, ValidUntil = ? WHERE DimKey = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2387,13 +2387,13 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                       refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].Columns[DimKey]"
                       cachedDataType="i4"
                       cachedName="DimKey"
-                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
                       lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[DimKey]" />
                     <inputColumn
                       refId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].Columns[ValidTill]"
                       cachedDataType="date"
                       cachedName="ValidTill"
-                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      externalMetadataColumnId="Package\Inladen Dim_Cursus\Update CurrentFlag.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
                       lineageId="Package\Inladen Dim_Cursus\Union All.Outputs[Union All Output 1].Columns[ValidTill]" />
                   </inputColumns>
                   <externalMetadataColumns

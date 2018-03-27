@@ -12,5 +12,5 @@ CREATE TABLE DWH.[dbo].[dim_Cursus](
 	[Checksum] [int] NOT NULL,
 	[CurrentFlag] [bit] NOT NULL DEFAULT 1,
 	[ValidFrom] [datetime] NOT NULL,
-	[ValidTill] [datetime] NOT NULL DEFAULT '9999-12-31'
+	[ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31'
 )
