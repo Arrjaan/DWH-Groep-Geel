@@ -1,0 +1,2363 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/27/2018 11:01:20 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WS720"
+  DTS:CreatorName="WS720\User"
+  DTS:DTSID="{C7894E6E-B72C-41CE-975C-130A82A73411}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.92"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="FctDeelnamePim"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{19CEF841-8824-4235-85A0-CC0066B44479}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FctSalesLines"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D2BBE9B4-D977-4B94-86FB-92C184E8796E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FctSalesLines"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FctSalesLines\Checksum Transformation"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Checksum Transformation; Konesans Ltd; Copyright © 2016 Konesans Ltd; http://www.konesans.com"
+              description="Checksum Transformation for SQL Server Integration Services 2016"
+              name="Checksum Transformation"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The Checksum Transformation algorithm used to produce the resulting checksum value."
+                  name="ChecksumAlgorithm"
+                  typeConverter="Konesans.Dts.Pipeline.ChecksumTransform.ChecksumTransform+ChecksumAlgorithm, Konesans.Dts.Pipeline.ChecksumTransform, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b2ab4a111192992b">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Konesans.ChecksumTransformation</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\Checksum Transformation.Inputs[ChecksumInput]"
+                  errorRowDisposition="FailComponent"
+                  name="ChecksumInput">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Checksum Transformation.Inputs[ChecksumInput].Columns[Bijzonderheden]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="Bijzonderheden"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[Bijzonderheden]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\Checksum Transformation.Outputs[ChecksumOutput]"
+                  exclusionGroup="1"
+                  name="ChecksumOutput"
+                  synchronousInputId="Package\FctSalesLines\Checksum Transformation.Inputs[ChecksumInput]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      name="Checksum">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Checksum transformation result column indicator."
+                          name="Checksum">Checksum</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\Cursus"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Cursus"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select CursusId, TrainerId From Cursus Order by CursusId</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FctSalesLines\Cursus.Connections[OleDbConnection]"
+                  connectionManagerID="{239E7B8E-978E-4C8C-B4E8-322E7E209251}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS720_SQLEXPRESS.Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      name="CursusId"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].Columns[TrainerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].ExternalColumns[TrainerId]"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].Columns[TrainerId]"
+                      name="TrainerId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      dataType="i4"
+                      name="CursusId" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].ExternalColumns[TrainerId]"
+                      dataType="i4"
+                      name="TrainerId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      name="CursusId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[TrainerId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[TrainerId]"
+                      name="TrainerId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\Deelname"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Deelname"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select DeelnameId, CursusId, Bijzonderheden From Deelname Order By CursusId</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FctSalesLines\Deelname.Connections[OleDbConnection]"
+                  connectionManagerID="{239E7B8E-978E-4C8C-B4E8-322E7E209251}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS720_SQLEXPRESS.Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].ExternalColumns[DeelnameId]"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[DeelnameId]"
+                      name="DeelnameId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].ExternalColumns[Bijzonderheden]"
+                      length="400"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      name="CursusId"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].ExternalColumns[DeelnameId]"
+                      dataType="i4"
+                      name="DeelnameId" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].ExternalColumns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      name="Bijzonderheden" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      dataType="i4"
+                      name="CursusId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      name="CursusId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[DeelnameId]"
+                      name="DeelnameId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\FctDeelname"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="FctDeelname"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select * From FctDeelname Order By DeelnameId</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FctSalesLines\FctDeelname.Connections[OleDbConnection]"
+                  connectionManagerID="{9AD0BB4A-9347-45CB-9841-3049A0537C30}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS720_SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[DeelnameId]"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[DeelnameId]"
+                      name="DeelnameId"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      name="CursusId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CursistId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[CursistId]"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CursistId]"
+                      name="CursistId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[Bijzonderheden]"
+                      length="400"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="16"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      name="ValidUntil"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CurrentFlag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[CurrentFlag]"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CurrentFlag]"
+                      name="CurrentFlag"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[DeelnameId]"
+                      dataType="i4"
+                      name="DeelnameId" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      dataType="i4"
+                      name="CursusId" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[CursistId]"
+                      dataType="i4"
+                      name="CursistId" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      name="Bijzonderheden" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].ExternalColumns[CurrentFlag]"
+                      dataType="bool"
+                      name="CurrentFlag" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[DeelnameId]"
+                      name="DeelnameId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      name="CursusId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[CursistId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[CursistId]"
+                      name="CursistId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[CurrentFlag]"
+                      dataType="bool"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[CurrentFlag]"
+                      name="CurrentFlag" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\FullOuterJoin"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="FullOuterJoin"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[DeelnameId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[CursusId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[Bijzonderheden]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="Bijzonderheden"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[Bijzonderheden]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\FctSalesLines\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[CurrentFlag]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="CurrentFlag"
+                      lineageId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output].Columns[CurrentFlag]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[DeelnameId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CursusId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[CursistId]"
+                      cachedDataType="i4"
+                      cachedName="CursistId"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[CursistId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_CursusId]"
+                      name="Src_CursusId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[CursusId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_DeelnameId]"
+                      name="Src_DeelnameId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[DeelnameId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[Bijzonderheden]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_PersoonId]"
+                      name="Src_PersoonId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[PersoonId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_Checksum]"
+                      name="Src_Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[ValidFrom]"
+                      dataType="date"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[ValidFrom]"
+                      name="ValidFrom">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[ValidFrom]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[CurrentFlag]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[CurrentFlag]"
+                      name="CurrentFlag">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input].Columns[CurrentFlag]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_DeelnameId]"
+                      name="Tgt_DeelnameId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[DeelnameId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_CursusId]"
+                      name="Tgt_CursusId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[CursusId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_CursistId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_CursistId]"
+                      name="Tgt_CursistId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[CursistId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Tgt_Checksum]"
+                      name="Tgt_Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\LeftOuter"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="LeftOuter"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[TrainerId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[CursusId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[DeelnameId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input].Columns[Bijzonderheden]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="Bijzonderheden"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[Bijzonderheden]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Right Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[CursusId]"
+                      name="CursusId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input].Columns[CursusId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[DeelnameId]"
+                      name="DeelnameId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input].Columns[DeelnameId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input].Columns[Bijzonderheden]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuter.Inputs[Merge Join Right Input].Columns[PersoonId]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\LeftOuterJoin"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="LeftOuterJoin"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[CursusId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[DeelnameId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input].Columns[Bijzonderheden]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="Bijzonderheden"
+                      lineageId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output].Columns[Bijzonderheden]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Right Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].Columns[CursusId]" />
+                    <inputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Right Input].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output].Columns[TrainerId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[DeelnameId]"
+                      name="DeelnameId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input].Columns[DeelnameId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input].Columns[Bijzonderheden]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[CursusId]"
+                      name="CursusId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input].Columns[CursusId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[TrainerId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[TrainerId]"
+                      name="TrainerId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Right Input].Columns[TrainerId]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimStatus]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimStatus]) [refTable]
+where [refTable].[DeelnameId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DeelnameId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DimKey" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Status" dataType="DT_STR" length="16" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Checksum" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ValidFrom" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ValidUntil" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CurrentFlag" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_DeelnameId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FctSalesLines\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{9AD0BB4A-9347-45CB-9841-3049A0537C30}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS720_SQLEXPRESS.DWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Lookup.Inputs[Lookup Input].Columns[Src_DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="Src_DeelnameId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output].Columns[Src_DeelnameId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">DeelnameId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\FctSalesLines\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Lookup.Outputs[Lookup Match Output].Columns[DimKey_Status]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\FctSalesLines\Lookup.Outputs[Lookup Match Output].Columns[DimKey_Status]"
+                      name="DimKey_Status"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DimKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FctSalesLines\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\FctSalesLines\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FctSalesLines\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\FctSalesLines\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\Persoon"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Persoon"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select PersoonId From Persoon Order by PersoonId</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FctSalesLines\Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="{239E7B8E-978E-4C8C-B4E8-322E7E209251}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS720_SQLEXPRESS.Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      lineageId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      dataType="i4"
+                      name="PersoonId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      name="PersoonId" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\Sort DeelnameId"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort DeelnameId"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\Sort DeelnameId.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Inputs[Sort Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[CursusId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Inputs[Sort Input].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[DeelnameId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Inputs[Sort Input].Columns[Bijzonderheden]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="Bijzonderheden"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[Bijzonderheden]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Inputs[Sort Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[PersoonId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[CursusId]"
+                      name="CursusId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[CursusId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[DeelnameId]"
+                      name="DeelnameId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[DeelnameId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[Bijzonderheden]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output].Columns[PersoonId]"
+                      name="PersoonId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output].Columns[PersoonId]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\Sort TrainerId"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort TrainerId"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\Sort TrainerId.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Inputs[Sort Input].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[CursusId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Inputs[Sort Input].Columns[TrainerId]"
+                      cachedDataType="i4"
+                      cachedName="TrainerId"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[TrainerId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Inputs[Sort Input].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[DeelnameId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Inputs[Sort Input].Columns[Bijzonderheden]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="400"
+                      cachedName="Bijzonderheden"
+                      lineageId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[Bijzonderheden]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[CursusId]"
+                      name="CursusId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[CursusId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[TrainerId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[TrainerId]"
+                      name="TrainerId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[TrainerId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[DeelnameId]"
+                      name="DeelnameId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[DeelnameId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[Bijzonderheden]"
+                      codePage="1252"
+                      dataType="str"
+                      length="400"
+                      lineageId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output].Columns[Bijzonderheden]"
+                      name="Bijzonderheden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output].Columns[Bijzonderheden]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FctSalesLines\ValidFrCurrentFl"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="ValidFrCurrentFl"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\FctSalesLines\ValidFrCurrentFl.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\FctSalesLines\ValidFrCurrentFl.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output].Columns[ValidFrom]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output].Columns[CurrentFlag]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output].Columns[CurrentFlag]"
+                      name="CurrentFlag"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"1"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"1"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\FctSalesLines\ValidFrCurrentFl.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FctSalesLines.Paths[ChecksumOutput]"
+              endId="Package\FctSalesLines\ValidFrCurrentFl.Inputs[Derived Column Input]"
+              name="ChecksumOutput"
+              startId="Package\FctSalesLines\Checksum Transformation.Outputs[ChecksumOutput]" />
+            <path
+              refId="Package\FctSalesLines.Paths[Derived Column Output]"
+              endId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Left Input]"
+              name="Derived Column Output"
+              startId="Package\FctSalesLines\ValidFrCurrentFl.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[Merge Join Output]"
+              endId="Package\FctSalesLines\Sort TrainerId.Inputs[Sort Input]"
+              name="Merge Join Output"
+              startId="Package\FctSalesLines\LeftOuterJoin.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[Merge Join Output1]"
+              endId="Package\FctSalesLines\Sort DeelnameId.Inputs[Sort Input]"
+              name="Merge Join Output"
+              startId="Package\FctSalesLines\LeftOuter.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[Merge Join Output2]"
+              endId="Package\FctSalesLines\Lookup.Inputs[Lookup Input]"
+              name="Merge Join Output"
+              startId="Package\FctSalesLines\FullOuterJoin.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[OLE DB Source Output]"
+              endId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Left Input]"
+              name="OLE DB Source Output"
+              startId="Package\FctSalesLines\Deelname.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[OLE DB Source Output1]"
+              endId="Package\FctSalesLines\LeftOuterJoin.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\FctSalesLines\Cursus.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[OLE DB Source Output2]"
+              endId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\FctSalesLines\Persoon.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[OLE DB Source Output3]"
+              endId="Package\FctSalesLines\FullOuterJoin.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\FctSalesLines\FctDeelname.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[Sort Output]"
+              endId="Package\FctSalesLines\LeftOuter.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\FctSalesLines\Sort TrainerId.Outputs[Sort Output]" />
+            <path
+              refId="Package\FctSalesLines.Paths[Sort Output1]"
+              endId="Package\FctSalesLines\Checksum Transformation.Inputs[ChecksumInput]"
+              name="Sort Output"
+              startId="Package\FctSalesLines\Sort DeelnameId.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\FctSalesLines"
+          TopLeft="73.7142869696325,49.5529418714319" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FctSalesLines">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\FctSalesLines\Sort TrainerId"
+          TopLeft="236.1,208.7" />
+        <NodeLayout
+          Size="127.2,41.6"
+          Id="Package\FctSalesLines\Deelname"
+          TopLeft="65.3,5.49999999999995" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\FctSalesLines\FctDeelname"
+          TopLeft="531.214294667147,589.154903021815" />
+        <NodeLayout
+          Size="117.6,41.6"
+          Id="Package\FctSalesLines\Persoon"
+          TopLeft="58.1,208.7" />
+        <NodeLayout
+          Size="112,41.6"
+          Id="Package\FctSalesLines\Cursus"
+          TopLeft="252.9,5.49999999999995" />
+        <NodeLayout
+          Size="143.2,41.6"
+          Id="Package\FctSalesLines\LeftOuterJoin"
+          TopLeft="237.3,107.1" />
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[OLE DB Source Output]"
+          TopLeft="128.9,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="157.466666666667,59.9999999999999"
+              Start="0,0"
+              End="157.466666666667,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.6022099447513" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.6022099447513"
+                    Point2="0,35.6022099447513"
+                    Point3="4,35.6022099447513" />
+                  <mssgle:LineSegment
+                    End="153.466666666667,35.6022099447513" />
+                  <mssgle:CubicBezierSegment
+                    Point1="153.466666666667,35.6022099447513"
+                    Point2="157.466666666667,35.6022099447513"
+                    Point3="157.466666666667,39.6022099447513" />
+                  <mssgle:LineSegment
+                    End="157.466666666667,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[OLE DB Source Output1]"
+          TopLeft="308.9,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.5333333333333,59.9999999999999"
+              Start="0,0"
+              End="22.5333333333333,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.6022099447513" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.6022099447513"
+                    Point2="0,35.6022099447513"
+                    Point3="4,35.6022099447513" />
+                  <mssgle:LineSegment
+                    End="18.5333333333333,35.6022099447513" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5333333333333,35.6022099447513"
+                    Point2="22.5333333333333,35.6022099447513"
+                    Point3="22.5333333333333,39.6022099447513" />
+                  <mssgle:LineSegment
+                    End="22.5333333333333,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[Merge Join Output]"
+          TopLeft="308.9,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="124.8,41.6"
+          Id="Package\FctSalesLines\LeftOuter"
+          TopLeft="246.5,310.3" />
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[Sort Output]"
+          TopLeft="308.9,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.4666666666666,59.9999999999999"
+              Start="0,0"
+              End="19.4666666666666,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5443037974683" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5443037974683"
+                    Point2="0,35.5443037974683"
+                    Point3="4,35.5443037974683" />
+                  <mssgle:LineSegment
+                    End="15.4666666666666,35.5443037974683" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.4666666666666,35.5443037974683"
+                    Point2="19.4666666666666,35.5443037974683"
+                    Point3="19.4666666666666,39.5443037974683" />
+                  <mssgle:LineSegment
+                    End="19.4666666666666,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[OLE DB Source Output2]"
+          TopLeft="116.9,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="172.533333333333,59.9999999999999"
+              Start="0,0"
+              End="172.533333333333,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5443037974683" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5443037974683"
+                    Point2="0,35.5443037974683"
+                    Point3="4,35.5443037974683" />
+                  <mssgle:LineSegment
+                    End="168.533333333333,35.5443037974683" />
+                  <mssgle:CubicBezierSegment
+                    Point1="168.533333333333,35.5443037974683"
+                    Point2="172.533333333333,35.5443037974683"
+                    Point3="172.533333333333,39.5443037974683" />
+                  <mssgle:LineSegment
+                    End="172.533333333333,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\FctSalesLines\Sort DeelnameId"
+          TopLeft="229.3,411.9" />
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[Merge Join Output1]"
+          TopLeft="308.9,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\FctSalesLines\Checksum Transformation"
+          TopLeft="207.3,513.5" />
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[Sort Output1]"
+          TopLeft="308.9,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\FctSalesLines\ValidFrCurrentFl"
+          TopLeft="232.380956338376,591.372557313385" />
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[ChecksumOutput]"
+          TopLeft="309.440478169188,555.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.2725573133849"
+              Start="0,0"
+              End="0,28.7725573133849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.7725573133849" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="141.6,41.6"
+          Id="Package\FctSalesLines\FullOuterJoin"
+          TopLeft="355.428577481484,679.058833052955" />
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[Derived Column Output]"
+          TopLeft="309.980956338376,632.972557313385">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.9809544764408,46.0862757395707"
+              Start="0,0"
+              End="93.9809544764408,38.5862757395707">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.342807170628" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.342807170628"
+                    Point2="0,27.342807170628"
+                    Point3="4,27.342807170628" />
+                  <mssgle:LineSegment
+                    End="89.9809544764408,27.342807170628" />
+                  <mssgle:CubicBezierSegment
+                    Point1="89.9809544764408,27.342807170628"
+                    Point2="93.9809544764408,27.342807170628"
+                    Point3="93.9809544764408,31.342807170628" />
+                  <mssgle:LineSegment
+                    End="93.9809544764408,38.5862757395707" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[OLE DB Source Output3]"
+          TopLeft="601.614294667147,630.754903021815">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-153.119050518996,48.30393003114"
+              Start="0,0"
+              End="-153.119050518996,40.80393003114">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.658532789425" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.658532789425"
+                    Point2="0,28.658532789425"
+                    Point3="-4,28.658532789425" />
+                  <mssgle:LineSegment
+                    End="-149.119050518996,28.658532789425" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-149.119050518996,28.658532789425"
+                    Point2="-153.119050518996,28.658532789425"
+                    Point3="-153.119050518996,32.658532789425" />
+                  <mssgle:LineSegment
+                    End="-153.119050518996,40.80393003114" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="114.4,41.6"
+          Id="Package\FctSalesLines\Lookup"
+          TopLeft="362.285720455403,761.03530479088" />
+        <EdgeLayout
+          Id="Package\FctSalesLines.Paths[Merge Join Output2]"
+          TopLeft="422.857148968444,720.658833052955">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.3764717379244"
+              Start="0,0"
+              End="0,32.8764717379244">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.8764717379244" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FctSalesLines\Deelname">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FctSalesLines\FctDeelname">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FctSalesLines\Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FctSalesLines\Cursus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FctSalesLines\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStatus]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

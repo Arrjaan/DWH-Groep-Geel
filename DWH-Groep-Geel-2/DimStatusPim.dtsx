@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="DimStatusPim"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{E4BBA29F-139C-4DDF-B99A-9095610A60C0}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{DD58E0D8-68AE-4C58-959F-CD736F8CBE67}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -2225,14 +2225,14 @@ Set CurrentFlag = 0, ValidUntil = ?
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,52.4999999999999">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.4999999999999" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
