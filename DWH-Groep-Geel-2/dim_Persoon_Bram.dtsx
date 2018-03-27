@@ -11,11 +11,21 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Persoon_Bram"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{2AEA9834-D7FB-42A9-A354-9737F09DC9BF}">
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{142AC0CC-ABB7-48B3-A000-5FF84F3B1F20}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[WS726\SQLEXPRESS.Cursus]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A9A08921-0562-4ADD-825C-39C8CFC8FCE6}"
+      DTS:ObjectName="WS726\SQLEXPRESS.Cursus">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=WS726\SQLEXPRESS;Initial Catalog=Cursus;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
       DTS:CreationName="OLEDB"
@@ -42,7 +52,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{CE9ABA4C-5805-4EC1-A5F8-1FD33909AA1E}"
-          SQLTask:SqlStatementSource="drop table  [DWH].dbo.[dim_Persoon]&#xA;create table [DWH].dbo.[dim_Persoon](&#xA;[PersoonID]  [int] NOT NULL,&#xA;[Dim_Key] [bigint] IDENTITY(1,1) NOT NULL ,&#xA;[Voornaam] [nvarchar](50) NULL ,&#xA;[Tussenvoegsel] [nvarchar](50) NULL,&#xA;[Achternaam] [nvarchar](50) NULL,&#xA;[IsTrainer] [bit] NOT NULL,&#xA;[IsCursist] [bit] NOT NULL,&#xA;[Checksum] [int] NOT NULL,&#xA;[Currentflag] [bit] NOT NULL,&#xA;[ValidFrom] [datetime] NOT NULL,&#xA;[ValidUntil]  [datetime] NOT NULL)&#xA;&#xA;truncate table [dim_Persoon]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="drop table  [DWH].dbo.[dim_Persoon]&#xA;create table [DWH].dbo.[dim_Persoon](&#xA;[PersoonId]  [int] NOT NULL,&#xA;[DimKey] [bigint] IDENTITY(1,1) NOT NULL ,&#xA;[Voornaam] [varchar](50) NULL ,&#xA;[Tussenvoegsel] [varchar](50) NULL,&#xA;[Achternaam] [varchar](50) NULL,&#xA;[IsTrainer] [bit] NOT NULL,&#xA;[IsCursist] [bit] NOT NULL,&#xA;[Checksum] [int] NOT NULL,&#xA;[Currentflag] [bit] NOT NULL default 1,&#xA;[ValidFrom] [datetime] NOT NULL,&#xA;[ValidUntil]  [datetime] NOT NULL)&#xA;&#xA;truncate table [dim_Persoon]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -59,6 +69,101 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\dim_Persoon\Add date"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\Add date.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\Add date.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\dim_Persoon\Add date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidFrom]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidUntil]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidUntil]"
+                      name="ValidUntil"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Add date.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\dim_Persoon\Add date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Add date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Add date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\dim_Persoon\Checksum Transformation"
               componentClassID="Microsoft.ManagedComponentHost"
@@ -84,63 +189,43 @@
                   name="ChecksumInput">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[PersoonID]"
-                      cachedDataType="i4"
-                      cachedName="PersoonID"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersoonID]" />
-                    <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Dim_Key]"
-                      cachedDataType="i8"
-                      cachedName="Dim_Key"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dim_Key]" />
-                    <inputColumn
                       refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Voornaam]"
-                      cachedDataType="wstr"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
                       cachedLength="50"
                       cachedName="Voornaam"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Voornaam]" />
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]" />
                     <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Tussenvoegsel]"
-                      cachedDataType="wstr"
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Tussenvoegsel"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]" />
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]" />
                     <inputColumn
                       refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Achternaam]"
-                      cachedDataType="wstr"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
                       cachedLength="50"
                       cachedName="Achternaam"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Achternaam]" />
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]" />
                     <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[IsTrainer]"
-                      cachedDataType="bool"
-                      cachedName="IsTrainer"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTrainer]" />
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[MailAdres]" />
                     <inputColumn
                       refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[IsCursist]"
                       cachedDataType="bool"
                       cachedName="IsCursist"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCursist]" />
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]" />
                     <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Checksum]"
-                      cachedDataType="i4"
-                      cachedName="Checksum"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Checksum]" />
-                    <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[Currentflag]"
+                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[IsTrainer]"
                       cachedDataType="bool"
-                      cachedName="Currentflag"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]" />
-                    <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[ValidFrom]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="ValidFrom"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
-                    <inputColumn
-                      refId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput].Columns[ValidUntil]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="ValidUntil"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidUntil]" />
+                      cachedName="IsTrainer"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -170,11 +255,1750 @@
               </outputs>
             </component>
             <component
-              refId="Package\dim_Persoon\OLE DB Source"
+              refId="Package\dim_Persoon\Combine insert"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Combine insert"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[tgt_PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_PersoonId"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Voornaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Tussenvoegsels]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Achternaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[MailAdres]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsCursist]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsTrainer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[tgt_PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_PersoonId"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Voornaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Tussenvoegsels]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Achternaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[MailAdres]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsCursist]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsTrainer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[PersoonId]"
+                      name="PersoonId" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_PersoonId]"
+                      name="tgt_PersoonId" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Voornaam]"
+                      name="Voornaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Achternaam]"
+                      name="Achternaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[MailAdres]"
+                      name="MailAdres" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsCursist]"
+                      name="IsCursist" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsTrainer]"
+                      name="IsTrainer" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      name="tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_DimKey]"
+                      dataType="i8"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[tgt_DimKey]"
+                      name="tgt_DimKey" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      dataType="date"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      dataType="date"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\combine update"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="combine update"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[tgt_PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_PersoonId"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Voornaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Tussenvoegsels]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Achternaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[MailAdres]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsCursist]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsTrainer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 1].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[tgt_PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_PersoonId"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_PersoonId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Voornaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Tussenvoegsels]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Achternaam]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[MailAdres]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsCursist]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsTrainer]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_DimKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidFrom]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidFrom]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dim_Persoon\combine update.Inputs[Union All Input 2].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      lineageId="Package\dim_Persoon\Add date.Outputs[Derived Column Output].Columns[ValidUntil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidUntil]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Persoon\combine update.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[PersoonId]"
+                      name="PersoonId" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_PersoonId]"
+                      name="tgt_PersoonId" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Voornaam]"
+                      name="Voornaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Achternaam]"
+                      name="Achternaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[MailAdres]"
+                      name="MailAdres" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsCursist]"
+                      name="IsCursist" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[IsTrainer]"
+                      name="IsTrainer" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_Checksum]"
+                      name="tgt_Checksum" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_DimKey]"
+                      dataType="i8"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_DimKey]"
+                      name="tgt_DimKey" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      dataType="date"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      dataType="date"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_Checksum"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="tgt_PersoonId"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\Conditional Split.Outputs[Verwijderde Regels]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Verwijderde Regels"
+                  synchronousInputId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(PersoonId)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Conditional Split.Outputs[Toegevoegde]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Toegevoegde"
+                  synchronousInputId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(tgt_PersoonId)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Conditional Split.Outputs[Gewijzigde]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Gewijzigde"
+                  synchronousInputId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]} != #{Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">Checksum != tgt_Checksum</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[MailAdres]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[PersoonId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonId]"
+                      name="tgt_PersoonId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input].Columns[PersoonId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]"
+                      name="Voornaam">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Voornaam]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Tussenvoegsels]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]"
+                      name="Achternaam">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Achternaam]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]"
+                      name="MailAdres">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[MailAdres]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]"
+                      name="IsCursist">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[IsCursist]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]"
+                      name="IsTrainer">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[IsTrainer]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[Checksum]"
+                      name="Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]"
+                      name="tgt_Checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]"
+                      dataType="i8"
+                      lineageId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]"
+                      name="tgt_DimKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\dim_Persoon\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\dim_Persoon\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\dim_Persoon\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE dim_Persoon
+SET [ValidUntil] = ?, [CurrentFlag] = 0
+WHERE
+CurrentFlag=1 AND DimKey= ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Persoon\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[ValidUntil]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\dim_Persoon\combine update.Outputs[Union All Output 1].Columns[tgt_DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i8"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dim_Persoon\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dim_Persoon]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Persoon\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PersoonId]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Voornaam]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Achternaam]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Achternaam]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCursist]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsTrainer]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[IsTrainer]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
+                      cachedDataType="date"
+                      cachedName="ValidFrom"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ValidUntil]"
+                      cachedDataType="date"
+                      cachedName="ValidUntil"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[ValidUntil]" />
+                    <inputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tussenvoegsel]"
+                      lineageId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1].Columns[Tussenvoegsels]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PersoonId]"
+                      dataType="i4"
+                      name="PersoonId" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DimKey]"
+                      dataType="i8"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tussenvoegsel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tussenvoegsel" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCursist]"
+                      dataType="bool"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Currentflag]"
+                      dataType="bool"
+                      name="Currentflag" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntil" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\ophalen bron Persoon"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="OLE DB Source"
+              name="ophalen bron Persoon"
               usesDispositions="true"
               version="7">
               <properties>
@@ -185,7 +2009,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[dim_Persoon]</property>
+                  name="OpenRowset">[dbo].[Persoon]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -219,7 +2043,247 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\dim_Persoon\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\dim_Persoon\ophalen bron Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[WS726\SQLEXPRESS.Cursus]"
+                  connectionManagerRefId="Package.ConnectionManagers[WS726\SQLEXPRESS.Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      length="50"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      name="Voornaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
+                      length="50"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      length="50"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      name="Achternaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[MailAdres]"
+                      length="128"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[MailAdres]"
+                      name="MailAdres"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      name="IsCursist"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      name="IsTrainer"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      dataType="i4"
+                      name="PersoonId" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tussenvoegsels" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="MailAdres" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      dataType="bool"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      name="PersoonId" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      name="Voornaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      name="Achternaam" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[MailAdres]"
+                      name="MailAdres" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      name="IsCursist" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      name="IsTrainer" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\dim_Persoon\ophalen target dimPersoon"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ophalen target dimPersoon"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dim_Persoon]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select DimKey, PersoonId, Checksum from dbo.dim_Persoon where CurrentFlag = 1 ORDER BY PersoonId</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\dim_Persoon\ophalen target dimPersoon.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
                   connectionManagerRefId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
                   description="The OLE DB runtime connection used to access the database."
@@ -227,236 +2291,85 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output]"
+                  isSorted="true"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersoonID]"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[Checksum]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersoonID]"
-                      name="PersoonID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dim_Key]"
-                      dataType="i8"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Dim_Key]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Dim_Key]"
-                      name="Dim_Key"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Voornaam]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
-                      length="50"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Voornaam]"
-                      name="Voornaam"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsel]"
-                      length="50"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]"
-                      name="Tussenvoegsel"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Achternaam]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
-                      length="50"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Achternaam]"
-                      name="Achternaam"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTrainer]"
-                      dataType="bool"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTrainer]"
-                      name="IsTrainer"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCursist]"
-                      dataType="bool"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCursist]"
-                      name="IsCursist"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Checksum]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[Checksum]"
                       name="Checksum"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]"
-                      dataType="bool"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      dataType="i8"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]"
-                      name="Currentflag"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      name="DimKey"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
-                      dataType="dbTimeStamp"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
-                      name="ValidFrom"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidUntil]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidUntil]"
-                      name="ValidUntil"
+                      externalMetadataColumnId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      sortKeyPosition="1"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
-                      dataType="i4"
-                      name="PersoonID" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Dim_Key]"
-                      dataType="i8"
-                      name="Dim_Key" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
-                      dataType="wstr"
-                      length="50"
-                      name="Voornaam" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsel]"
-                      dataType="wstr"
-                      length="50"
-                      name="Tussenvoegsel" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
-                      dataType="wstr"
-                      length="50"
-                      name="Achternaam" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
-                      dataType="bool"
-                      name="IsTrainer" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
-                      dataType="bool"
-                      name="IsCursist" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
                       dataType="i4"
                       name="Checksum" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
-                      dataType="bool"
-                      name="Currentflag" />
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      dataType="i8"
+                      name="DimKey" />
                     <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
-                      dataType="dbTimeStamp"
-                      name="ValidFrom" />
-                    <externalMetadataColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
-                      dataType="dbTimeStamp"
-                      name="ValidUntil" />
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      dataType="i4"
+                      name="PersoonId" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
-                      dataType="i4"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
-                      name="PersoonID" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Dim_Key]"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[DimKey]"
                       dataType="i8"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Dim_Key]"
-                      name="Dim_Key" />
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      name="DimKey" />
                     <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
-                      name="Voornaam" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsel]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsel]"
-                      name="Tussenvoegsel" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
-                      name="Achternaam" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
-                      dataType="bool"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
-                      name="IsTrainer" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
-                      dataType="bool"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
-                      name="IsCursist" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
                       dataType="i4"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      name="PersoonId" />
+                    <outputColumn
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[Checksum]"
                       name="Checksum" />
                     <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
-                      dataType="bool"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
-                      name="Currentflag" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
-                      name="ValidFrom" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
-                      name="ValidUntil" />
-                    <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -467,10 +2380,65 @@
           </components>
           <paths>
             <path
+              refId="Package\dim_Persoon.Paths[ChecksumOutput]"
+              endId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Left Input]"
+              name="ChecksumOutput"
+              startId="Package\dim_Persoon\Checksum Transformation.Outputs[ChecksumOutput]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Derived Column Output]"
+              endId="Package\dim_Persoon\Conditional Split.Inputs[Conditional Split Input]"
+              name="Derived Column Output"
+              startId="Package\dim_Persoon\Add date.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Gewijzigde]"
+              endId="Package\dim_Persoon\Multicast.Inputs[Multicast Input 1]"
+              name="Gewijzigde"
+              startId="Package\dim_Persoon\Conditional Split.Outputs[Gewijzigde]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Merge Join Output]"
+              endId="Package\dim_Persoon\Add date.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\dim_Persoon\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Multicast Output 1]"
+              endId="Package\dim_Persoon\combine update.Inputs[Union All Input 2]"
+              name="Multicast Output 1"
+              startId="Package\dim_Persoon\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Multicast Output 2]"
+              endId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 2]"
+              name="Multicast Output 2"
+              startId="Package\dim_Persoon\Multicast.Outputs[Multicast Output 2]" />
+            <path
               refId="Package\dim_Persoon.Paths[OLE DB Source Output]"
               endId="Package\dim_Persoon\Checksum Transformation.Inputs[ChecksumInput]"
               name="OLE DB Source Output"
-              startId="Package\dim_Persoon\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\dim_Persoon\ophalen bron Persoon.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\dim_Persoon.Paths[OLE DB Source Output1]"
+              endId="Package\dim_Persoon\Merge Join.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\dim_Persoon\ophalen target dimPersoon.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Toegevoegde]"
+              endId="Package\dim_Persoon\Combine insert.Inputs[Union All Input 1]"
+              name="Toegevoegde"
+              startId="Package\dim_Persoon\Conditional Split.Outputs[Toegevoegde]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Union All Output 1]"
+              endId="Package\dim_Persoon\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Union All Output 1"
+              startId="Package\dim_Persoon\combine update.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Union All Output 11]"
+              endId="Package\dim_Persoon\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\dim_Persoon\Combine insert.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\dim_Persoon.Paths[Verwijderde Regels]"
+              endId="Package\dim_Persoon\combine update.Inputs[Union All Input 1]"
+              name="Verwijderde Regels"
+              startId="Package\dim_Persoon\Conditional Split.Outputs[Verwijderde Regels]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -547,41 +2515,361 @@
     design-time-name="Package\dim_Persoon">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="151.2,41.6"
-          Id="Package\dim_Persoon\OLE DB Source"
-          TopLeft="176.000002997262,79.5294128800759" />
+          Size="207.2,41.6"
+          Id="Package\dim_Persoon\ophalen target dimPersoon"
+          TopLeft="5.50000000000003,107.1" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\dim_Persoon\ophalen bron Persoon"
+          TopLeft="283.5,5.49999999999995" />
         <NodeLayout
           Size="203.2,41.6"
           Id="Package\dim_Persoon\Checksum Transformation"
-          TopLeft="274.857147537932,163.952943475849" />
+          TopLeft="273.5,107.1" />
         <EdgeLayout
           Id="Package\dim_Persoon.Paths[OLE DB Source Output]"
-          TopLeft="251.600002997262,121.129412880076">
+          TopLeft="375.1,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="124.85714454067,42.8235305957728"
+              EndConnector="0,60"
               Start="0,0"
-              End="124.85714454067,35.3235305957728">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.4117652978864" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,17.4117652978864"
-                    Point2="0,21.4117652978864"
-                    Point3="4,21.4117652978864" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="131.2,41.6"
+          Id="Package\dim_Persoon\Merge Join"
+          TopLeft="309.5,208.7" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[ChecksumOutput]"
+          TopLeft="375.1,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5333333333334,60"
+              Start="0,0"
+              End="20.5333333333334,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="120.85714454067,21.4117652978864" />
+                    End="0,31.566265060241" />
                   <mssgle:CubicBezierSegment
-                    Point1="120.85714454067,21.4117652978864"
-                    Point2="124.85714454067,21.4117652978864"
-                    Point3="124.85714454067,25.4117652978864" />
+                    Point1="0,31.566265060241"
+                    Point2="0,35.566265060241"
+                    Point3="4,35.566265060241" />
                   <mssgle:LineSegment
-                    End="124.85714454067,35.3235305957728" />
+                    End="16.5333333333334,35.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5333333333334,35.566265060241"
+                    Point2="20.5333333333334,35.566265060241"
+                    Point3="20.5333333333334,39.566265060241" />
+                  <mssgle:LineSegment
+                    End="20.5333333333334,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="122.4,41.6"
+          Id="Package\dim_Persoon\Add date"
+          TopLeft="313.9,309.620261428375" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Merge Join Output]"
+          TopLeft="375.1,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.3202614283753"
+              Start="0,0"
+              End="0,51.8202614283753">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.8202614283753" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\dim_Persoon\Conditional Split"
+          TopLeft="301.587306723303,395.189546268292" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Derived Column Output]"
+          TopLeft="377.343653361651,351.220261428375">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.9692848399163"
+              Start="0,0"
+              End="0,36.4692848399163">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.4692848399163" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\dim_Persoon\Multicast"
+          TopLeft="325.079370615434,505.673206751734" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[OLE DB Source Output1]"
+          TopLeft="109.1,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="245.466666666667,60"
+              Start="0,0"
+              End="245.466666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.566265060241"
+                    Point2="0,35.566265060241"
+                    Point3="4,35.566265060241" />
+                  <mssgle:LineSegment
+                    End="241.466666666667,35.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="241.466666666667,35.566265060241"
+                    Point2="245.466666666667,35.566265060241"
+                    Point3="245.466666666667,39.566265060241" />
+                  <mssgle:LineSegment
+                    End="245.466666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\dim_Persoon\combine update"
+          TopLeft="549.920644285728,507.052290192571" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\dim_Persoon\Combine insert"
+          TopLeft="93.3333349227906,505.882354800126" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Gewijzigde]"
+          TopLeft="382.733338669368,436.789546268292">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.8836604834427"
+              Start="0,0"
+              End="0,61.3836604834427">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.3836604834427" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-24.4638671875,24.8602872729713,48.927734375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Verwijderde Regels]"
+          TopLeft="416.587306723303,436.789546268292">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="210.933337562425,70.2627439242791"
+              Start="0,0"
+              End="210.933337562425,62.7627439242791">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2081722764323" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2081722764323"
+                    Point2="0,24.2081722764323"
+                    Point3="4,24.2081722764323" />
+                  <mssgle:LineSegment
+                    End="206.933337562425,24.2081722764323" />
+                  <mssgle:CubicBezierSegment
+                    Point1="206.933337562425,24.2081722764323"
+                    Point2="210.933337562425,24.2081722764323"
+                    Point3="210.933337562425,28.2081722764323" />
+                  <mssgle:LineSegment
+                    End="210.933337562425,62.7627439242791" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="62.2009070624625,29.2081722764323,86.5315234375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Toegevoegde]"
+          TopLeft="342.587306723303,436.789546268292">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-174.053971800512,69.0928085318347"
+              Start="0,0"
+              End="-174.053971800512,61.5928085318347">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.8050852924809" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.8050852924809"
+                    Point2="0,23.8050852924809"
+                    Point3="-4,23.8050852924809" />
+                  <mssgle:LineSegment
+                    End="-170.053971800512,23.8050852924809" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-170.053971800512,23.8050852924809"
+                    Point2="-174.053971800512,23.8050852924809"
+                    Point3="-174.053971800512,27.8050852924809" />
+                  <mssgle:LineSegment
+                    End="-174.053971800512,61.5928085318347" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-117.554427306506,28.8050852924809,61.0548828125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Multicast Output 1]"
+          TopLeft="446.679370615434,527.162748472153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="103.241273670294,0"
+              Start="0,0"
+              End="95.7412736702939,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="95.7412736702939,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Multicast Output 2]"
+          TopLeft="325.079370615434,526.57778077593">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-81.3460356926433,0"
+              Start="0,0"
+              End="-73.8460356926433,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-73.8460356926433,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\dim_Persoon\OLE DB Command"
+          TopLeft="538.571437743246,590.588239551828" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Union All Output 1]"
+          TopLeft="624.646041014487,548.652290192571">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.9359493592572"
+              Start="0,0"
+              End="0,34.4359493592572">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.4359493592572" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="172,41.6"
+          Id="Package\dim_Persoon\OLE DB Destination"
+          TopLeft="87.8571443533413,596.529415250237" />
+        <EdgeLayout
+          Id="Package\dim_Persoon.Paths[Union All Output 11]"
+          TopLeft="171.195239638066,547.482354800126">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.0470604501106"
+              Start="0,0"
+              End="0,41.5470604501106">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5470604501106" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -594,7 +2882,33 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\dim_Persoon\OLE DB Source">
+    design-time-name="Package\dim_Persoon\ophalen target dimPersoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\dim_Persoon\ophalen bron Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\dim_Persoon\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
