@@ -1,0 +1,2089 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/26/2018 9:29:24 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WS724"
+  DTS:CreatorName="WS724\User"
+  DTS:DTSID="{4C22108A-455C-471A-BDC4-EB8BC09D9BC3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.92"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Dim_Persoon_Wyke"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{4607A4E9-AA76-4A58-9DB3-C7608FED458E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8D62D3A8-1A6A-4F13-B6C7-1C0146C86D50}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Checksum Transformation"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Checksum Transformation; Konesans Ltd; Copyright © 2014 Konesans Ltd; http://www.konesans.com"
+              description="Checksum Transformation for SQL Server Integration Services 2014"
+              name="Checksum Transformation"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The Checksum Transformation algorithm used to produce the resulting checksum value."
+                  name="ChecksumAlgorithm"
+                  typeConverter="Konesans.Dts.Pipeline.ChecksumTransform.ChecksumTransform+ChecksumAlgorithm, Konesans.Dts.Pipeline.ChecksumTransform, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b2ab4a111192992b">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Konesans.ChecksumTransformation</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput]"
+                  errorRowDisposition="FailComponent"
+                  name="ChecksumInput">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[Mailadres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="Mailadres"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Mailadres]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Checksum Transformation.Outputs[ChecksumOutput]"
+                  exclusionGroup="1"
+                  name="ChecksumOutput"
+                  synchronousInputId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]"
+                      name="Checksum">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Checksum transformation result column indicator."
+                          name="Checksum">Checksum</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[src_checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_checksum"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[src_checksum]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_checksum]"
+                      cachedDataType="i4"
+                      cachedName="tgt_checksum"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_checksum]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Nieuwe regels]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Nieuwe regels"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(tgt_DimKey)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Verwijderde regels]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Verwijderde regels"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(PersoonId)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Gewijzigde regels]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Gewijzigde regels"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[src_checksum]} != #{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_checksum]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">src_checksum != tgt_checksum</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Gewijzigde regels"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Gewijzigde regels"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE Dim_Persoon SET
+ValidUntill = ?,
+CurrentFlag = 0
+WHERE DimKey = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Gewijzigde regels.Connections[OleDbConnection]"
+                  connectionManagerID="{16E61059-7440-4F64-9C2A-F63E0CB2F2F0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].Columns[Tijdstempel]"
+                      cachedDataType="date"
+                      cachedName="Tijdstempel"
+                      externalMetadataColumnId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Output].Columns[Tijdstempel]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      externalMetadataColumnId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i8"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PersoonID]"
+                      cachedDataType="i4"
+                      cachedName="PersoonID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[PersoonID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Mailadres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="Mailadres"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Mailadres]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\Data Flow Task\Checksum Transformation.Outputs[ChecksumOutput].Columns[Checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[PersoonID]"
+                      cachedDataType="i4"
+                      cachedName="PersoonID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[PersoonID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PersoonID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]"
+                      name="Voornaam">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Voornaam]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Tussenvoegsels]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]"
+                      name="Achternaam">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Achternaam]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]"
+                      name="MailAdres">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Mailadres]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]"
+                      name="IsCursist">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[IsCursist]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]"
+                      name="IsTrainer">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[IsTrainer]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[src_checksum]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[src_checksum]"
+                      name="src_checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_checksum]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_checksum]"
+                      name="tgt_checksum">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]"
+                      name="tgt_DimKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Nieuwe regels Persoon"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Nieuwe regels Persoon"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Persoon]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Nieuwe regels Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[PersoonID]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Voornaam]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Tussenvoegsels]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Achternaam]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Mailadres]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[IsCursist]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[IsTrainer]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[Tijdstempel]"
+                      cachedDataType="date"
+                      cachedName="Tijdstempel"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Output].Columns[Tijdstempel]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].Columns[src_checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_checksum"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[src_checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Dimkey]"
+                      dataType="i8"
+                      name="Dimkey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[PersoonID]"
+                      dataType="i4"
+                      name="PersoonID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tussenvoegsels" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Mailadres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="Mailadres" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[IsCursist]"
+                      dataType="bool"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntill]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntill" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input].ExternalColumns[CurrentFlag]"
+                      dataType="bool"
+                      name="CurrentFlag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Nieuwe regels Persoon.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Nieuwe regels Persoon.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels Persoon.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Nieuwe regels Persoon.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Source Persoon"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source Persoon"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Persoon]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+[PersoonID], 
+[Voornaam],
+[Tussenvoegsels],
+[Achternaam],
+[Mailadres],
+[IsCursist],
+[IsTrainer]
+FROM dbo.Persoon 
+ORDER BY [PersoonID]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Source Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="{16E61059-7440-4F64-9C2A-F63E0CB2F2F0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Cursus]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      name="Voornaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      name="Achternaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      name="IsCursist"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      name="IsTrainer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[PersoonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[PersoonID]"
+                      name="PersoonID"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Mailadres]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Mailadres]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].Columns[Mailadres]"
+                      name="Mailadres"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tussenvoegsels" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      dataType="bool"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
+                      dataType="i4"
+                      name="PersoonID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output].ExternalColumns[Mailadres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="Mailadres" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
+                      name="PersoonID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      name="Voornaam" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsels]"
+                      name="Tussenvoegsels" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      name="Achternaam" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Mailadres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[Mailadres]"
+                      name="Mailadres" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      name="IsCursist" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      name="IsTrainer" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Target Persoon"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Target Persoon"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Persoon]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [DimKey], [PersoonID], [Checksum] FROM Dim_Persoon ORDER BY [PersoonID]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Target Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[PersoonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[PersoonID]"
+                      name="PersoonID"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      name="DimKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
+                      dataType="i4"
+                      name="PersoonID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      dataType="i8"
+                      name="DimKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
+                      name="PersoonID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Tijdstempel"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Tijdstempel"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Tijdstempel.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Tijdstempel.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Output].Columns[Tijdstempel]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Output].Columns[Tijdstempel]"
+                      name="Tijdstempel"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Tijdstempel.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Verwijderde regels Persoon"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Verwijderde regels Persoon"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DELETE FROM [Dim_Persoon] 
+WHERE [Dimkey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Verwijderde regels Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Verwijderde regels Persoon.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Verwijderde regels Persoon.Inputs[OLE DB Command Input].Columns[tgt_DimKey]"
+                      cachedDataType="i8"
+                      cachedName="tgt_DimKey"
+                      externalMetadataColumnId="Package\Data Flow Task\Verwijderde regels Persoon.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Verwijderde regels Persoon.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i8"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Verwijderde regels Persoon.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Data Flow Task\Verwijderde regels Persoon.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Verwijderde regels Persoon.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Data Flow Task\Verwijderde regels Persoon.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Verwijderde regels Persoon.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Verwijderde regels Persoon.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Verwijderde regels Persoon.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Verwijderde regels Persoon.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Voeg gewijzigde regels toe"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Voeg gewijzigde regels toe"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Persoon]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Connections[OleDbConnection]"
+                  connectionManagerID="{34F6D01B-978D-48F1-A375-E18A2F428DD1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[PersoonID]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Voornaam]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[Tussenvoegsels]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsels"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Tussenvoegsels]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Tussenvoegsels]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Achternaam]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Achternaam]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[MailAdres]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="MailAdres"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Mailadres]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[MailAdres]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[IsCursist]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[IsTrainer]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[IsTrainer]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[Tijdstempel]"
+                      cachedDataType="date"
+                      cachedName="Tijdstempel"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Output].Columns[Tijdstempel]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].Columns[src_checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_checksum"
+                      externalMetadataColumnId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[src_checksum]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Dimkey]"
+                      dataType="i8"
+                      name="Dimkey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[PersoonID]"
+                      dataType="i4"
+                      name="PersoonID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Tussenvoegsels]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tussenvoegsels" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Mailadres]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="Mailadres" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[IsCursist]"
+                      dataType="bool"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntill]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntill" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input].ExternalColumns[CurrentFlag]"
+                      dataType="bool"
+                      name="CurrentFlag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Voeg gewijzigde regels toe.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Voeg gewijzigde regels toe.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Voeg gewijzigde regels toe.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[ChecksumOutput]"
+              endId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input]"
+              name="ChecksumOutput"
+              startId="Package\Data Flow Task\Checksum Transformation.Outputs[ChecksumOutput]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Tijdstempel.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Gewijzigde regels]"
+              endId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]"
+              name="Gewijzigde regels"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[Gewijzigde regels]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Merge Join Output]"
+              endId="Package\Data Flow Task\Tijdstempel.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Nieuwe regels]"
+              endId="Package\Data Flow Task\Nieuwe regels Persoon.Inputs[OLE DB Destination Input]"
+              name="Nieuwe regels"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[Nieuwe regels]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Command Output]"
+              endId="Package\Data Flow Task\Voeg gewijzigde regels toe.Inputs[OLE DB Destination Input]"
+              name="OLE DB Command Output"
+              startId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\Source Persoon.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+              endId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\Target Persoon.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Verwijderde regels]"
+              endId="Package\Data Flow Task\Verwijderde regels Persoon.Inputs[OLE DB Command Input]"
+              name="Verwijderde regels"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[Verwijderde regels]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Data Flow Task"
+          TopLeft="141,102" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Data Flow Task\Tijdstempel"
+          TopLeft="338,299" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Data Flow Task\Conditional Split"
+          TopLeft="329,389" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Data Flow Task\Target Persoon"
+          TopLeft="332,20" />
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Data Flow Task\Verwijderde regels Persoon"
+          TopLeft="329,549" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task\Source Persoon"
+          TopLeft="67,23" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Data Flow Task\Voeg gewijzigde regels toe"
+          TopLeft="534,636" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Data Flow Task\Nieuwe regels Persoon"
+          TopLeft="132,506" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Data Flow Task\Gewijzigde regels"
+          TopLeft="550,495" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Data Flow Task\Merge Join"
+          TopLeft="339,214" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Data Flow Task\Checksum Transformation"
+          TopLeft="37,132" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Merge Join Output]"
+          TopLeft="405.5,256">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Gewijzigde regels]"
+          TopLeft="446.25,431">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="186.75,64"
+              Start="0,0"
+              End="186.75,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0371134020619" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.0371134020619"
+                    Point2="0,22.0371134020619"
+                    Point3="4,22.0371134020619" />
+                  <mssgle:LineSegment
+                    End="182.75,22.0371134020619" />
+                  <mssgle:CubicBezierSegment
+                    Point1="182.75,22.0371134020619"
+                    Point2="186.75,22.0371134020619"
+                    Point3="186.75,26.0371134020619" />
+                  <mssgle:LineSegment
+                    End="186.75,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="54.10990234375,27.0371134020619,78.5301953125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="407,341">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ChecksumOutput]"
+          TopLeft="141,174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="264.5,40"
+              Start="0,0"
+              End="264.5,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="4,20" />
+                  <mssgle:LineSegment
+                    End="260.5,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="260.5,20"
+                    Point2="264.5,20"
+                    Point3="264.5,24" />
+                  <mssgle:LineSegment
+                    End="264.5,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Verwijderde regels]"
+          TopLeft="432.75,431">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,118"
+              Start="0,0"
+              End="0,110.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,110.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-41.96076171875,49.41845703125,83.9215234375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+          TopLeft="409.5,62">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.8333333333333,152"
+              Start="0,0"
+              End="16.8333333333333,144.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.1158989598811" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,86.1158989598811"
+                    Point2="0,90.1158989598811"
+                    Point3="4,90.1158989598811" />
+                  <mssgle:LineSegment
+                    End="12.8333333333333,90.1158989598811" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.8333333333333,90.1158989598811"
+                    Point2="16.8333333333333,90.1158989598811"
+                    Point3="16.8333333333333,94.1158989598811" />
+                  <mssgle:LineSegment
+                    End="16.8333333333333,144.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="143.5,65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Command Output]"
+          TopLeft="636,537">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,99"
+              Start="0,0"
+              End="0,91.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,91.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Nieuwe regels]"
+          TopLeft="408.5,431">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-180,75"
+              Start="0,0"
+              End="-180,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="-4,37.5" />
+                  <mssgle:LineSegment
+                    End="-176,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-176,37.5"
+                    Point2="-180,37.5"
+                    Point3="-180,41.5" />
+                  <mssgle:LineSegment
+                    End="-180,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-121.542578125,42.5,63.08515625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Target Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Source Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Voeg gewijzigde regels toe">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Nieuwe regels Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
