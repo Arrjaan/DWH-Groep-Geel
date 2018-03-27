@@ -1,12 +1,12 @@
 use Cursus
 
-select * from [Order] where OrderType = 'Kosten'
+select * from [Order] where OrderType = 'Opbrengsten'
 
 use DWH
 
-drop table [DWH].[dbo].[fct_Kosten]
+drop table [DWH].[dbo].[fct_Opbrengsten]
 
-CREATE TABLE [dbo].[fct_Kosten](
+CREATE TABLE [dbo].[fct_Opbrengsten](
 	[DimKey] [bigint] IDENTITY(1,1) NOT NULL,
 	[OrderNummer] [bigint] NULL,
 	[OrderBedrag_sum] [decimal](10,2) NOT NULL,
@@ -19,19 +19,19 @@ CREATE TABLE [dbo].[fct_Kosten](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[fct_Kosten] ADD  DEFAULT ('1900-01-01') FOR [ValidFrom]
+ALTER TABLE [dbo].[fct_Opbrengsten] ADD  DEFAULT ('1900-01-01') FOR [ValidFrom]
 GO
 
-ALTER TABLE [dbo].[fct_Kosten] ADD  DEFAULT ('9999-12-31') FOR [ValidUntil]
+ALTER TABLE [dbo].[fct_Opbrengsten] ADD  DEFAULT ('9999-12-31') FOR [ValidUntil]
 GO
 
-ALTER TABLE [dbo].[fct_Kosten] ADD  DEFAULT ((1)) FOR [CurrentFlag]
+ALTER TABLE [dbo].[fct_Opbrengsten] ADD  DEFAULT ((1)) FOR [CurrentFlag]
 GO
 
-ALTER TABLE [dbo].[fct_Kosten] ADD  DEFAULT ((0)) FOR [CheckSum]
+ALTER TABLE [dbo].[fct_Opbrengsten] ADD  DEFAULT ((0)) FOR [CheckSum]
 GO
 
-select * from [DWH].[dbo].[fct_Kosten]
+select * from [DWH].[dbo].[fct_Opbrengsten]
 
 
 -- test case updating and history: Add new
