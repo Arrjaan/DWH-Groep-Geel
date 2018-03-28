@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_JunkFinCat_Bram"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{C35A395A-D321-459A-A37F-8DB3BA4661E9}">
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{60F5570E-DE1D-4B31-ACD9-2328414F4E0A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -181,7 +181,7 @@
                   dataType="System.Int32"
                   description="The Checksum Transformation algorithm used to produce the resulting checksum value."
                   name="ChecksumAlgorithm"
-                  typeConverter="Konesans.Dts.Pipeline.ChecksumTransform.ChecksumTransform+ChecksumAlgorithm, Konesans.Dts.Pipeline.ChecksumTransform, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b2ab4a111192992b">2</property>
+                  typeConverter="Konesans.Dts.Pipeline.ChecksumTransform.ChecksumTransform+ChecksumAlgorithm, Konesans.Dts.Pipeline.ChecksumTransform, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b2ab4a111192992b">0</property>
                 <property
                   dataType="System.String"
                   name="UserComponentTypeName">Konesans.ChecksumTransformation</property>
@@ -252,21 +252,28 @@
                   name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_DimKey]"
-                      cachedDataType="wstr"
-                      cachedLength="164"
-                      cachedName="tgt_DimKey"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]" />
-                    <inputColumn
-                      refId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input].Columns[Checksum]"
+                      refId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input].Columns[src_Checksum]"
                       cachedDataType="i4"
-                      cachedName="Checksum"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[Checksum]" />
+                      cachedName="src_Checksum"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]" />
                     <inputColumn
                       refId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_Checksum]"
                       cachedDataType="i4"
                       cachedName="tgt_Checksum"
                       lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]" />
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input].Columns[src_SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="334"
+                      cachedName="src_SurgetKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_SurgetKey]" />
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="164"
+                      cachedName="tgt_SurgetKey"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -286,17 +293,45 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">[ISNULL](#{Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]})</property>
+                      name="Expression">[ISNULL](#{Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]})</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">ISNULL(tgt_DimKey)</property>
+                      name="FriendlyExpression">ISNULL(tgt_SurgetKey)</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
                       name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dimJunkFinCat\Conditional Split.Outputs[Verwijderde]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Verwijderde"
+                  synchronousInputId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_SurgetKey]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(src_SurgetKey)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
                   </properties>
                   <externalMetadataColumns />
                 </output>
@@ -314,17 +349,17 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[Checksum]} != #{Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]}</property>
+                      name="Expression">#{Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]} != #{Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">Checksum != tgt_Checksum</property>
+                      name="FriendlyExpression">src_Checksum != tgt_Checksum</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
-                      name="EvaluationOrder">1</property>
+                      name="EvaluationOrder">2</property>
                   </properties>
                   <externalMetadataColumns />
                 </output>
@@ -543,13 +578,13 @@
                   synchronousInputId="Package\dimJunkFinCat\Derived Column.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[DimKey]"
+                      refId="Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[SurgetKey]"
                       dataType="wstr"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
                       length="334"
-                      lineageId="Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[DimKey]"
-                      name="DimKey"
+                      lineageId="Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[SurgetKey]"
+                      name="SurgetKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -652,8 +687,8 @@
               <connections>
                 <connection
                   refId="Package\dimJunkFinCat\Invoegen rijen.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH 2]"
-                  connectionManagerRefId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH 2]"
+                  connectionManagerID="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[WS726\SQLEXPRESS.DWH]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -666,12 +701,6 @@
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[Checksum]"
-                      cachedDataType="i4"
-                      cachedName="Checksum"
-                      externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
-                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Checksum]" />
-                    <inputColumn
                       refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
                       cachedDataType="date"
                       cachedName="ValidFrom"
@@ -683,26 +712,43 @@
                       cachedName="ValidUntil"
                       externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
                       lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[ValidUntil]" />
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[Con_Omschrijving]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Con_Omschrijving"
+                      externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[Omschrijving]"
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Con_Omschrijving]" />
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[Con_OrderCategorie1]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="Con_OrderCategorie1"
+                      externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[OrderCategorie1]"
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Con_OrderCategorie1]" />
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[Con_OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="Con_OrderCategorie2"
+                      externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[OrderCategorie2]"
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Con_OrderCategorie2]" />
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[src_SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="334"
+                      cachedName="src_SurgetKey"
+                      externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[SurgetKey]"
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_SurgetKey]" />
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_Checksum]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[DimKey]"
-                      dataType="wstr"
-                      length="164"
-                      name="DimKey" />
-                    <externalMetadataColumn
-                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
-                      dataType="i4"
-                      name="Checksum" />
-                    <externalMetadataColumn
-                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
-                      dataType="dbDate"
-                      name="ValidFrom" />
-                    <externalMetadataColumn
-                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
-                      dataType="dbDate"
-                      name="ValidUntil" />
                     <externalMetadataColumn
                       refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[Omschrijving]"
                       dataType="wstr"
@@ -718,6 +764,27 @@
                       dataType="wstr"
                       length="32"
                       name="OrderCategorie2" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbDate"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[ValidUntil]"
+                      dataType="dbDate"
+                      name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[Currentflag]"
+                      dataType="bool"
+                      name="Currentflag" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[SurgetKey]"
+                      dataType="wstr"
+                      length="164"
+                      name="SurgetKey" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -779,12 +846,12 @@
                   name="Merge Join Left Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Left Input].Columns[DimKey]"
+                      refId="Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Left Input].Columns[SurgetKey]"
                       cachedDataType="wstr"
                       cachedLength="334"
-                      cachedName="DimKey"
+                      cachedName="SurgetKey"
                       cachedSortKeyPosition="1"
-                      lineageId="Package\dimJunkFinCat\Sort.Outputs[Sort Output].Columns[DimKey]" />
+                      lineageId="Package\dimJunkFinCat\Sort.Outputs[Sort Output].Columns[SurgetKey]" />
                     <inputColumn
                       refId="Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Left Input].Columns[Omschrijving]"
                       cachedCodepage="1252"
@@ -837,12 +904,12 @@
                   name="Merge Join Right Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]"
+                      refId="Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Right Input].Columns[SurgetKey]"
                       cachedDataType="wstr"
                       cachedLength="164"
-                      cachedName="DimKey"
+                      cachedName="SurgetKey"
                       cachedSortKeyPosition="1"
-                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimKey]" />
+                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgetKey]" />
                     <inputColumn
                       refId="Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Right Input].Columns[Omschrijving]"
                       cachedDataType="wstr"
@@ -876,21 +943,6 @@
                   isSorted="true"
                   name="Merge Join Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[DimKey]"
-                      dataType="wstr"
-                      length="334"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[DimKey]"
-                      name="DimKey"
-                      sortKeyPosition="1">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="The input column associated with this output column"
-                          name="InputColumnID">#{Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Left Input].Columns[DimKey]}</property>
-                      </properties>
-                    </outputColumn>
                     <outputColumn
                       refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[Omschrijving]"
                       codePage="1252"
@@ -978,10 +1030,25 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[Checksum]"
+                      refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_SurgetKey]"
+                      dataType="wstr"
+                      length="334"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_SurgetKey]"
+                      name="src_SurgetKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Left Input].Columns[SurgetKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]"
                       dataType="i4"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[Checksum]"
-                      name="Checksum">
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]"
+                      name="src_Checksum">
                       <properties>
                         <property
                           containsID="true"
@@ -1033,6 +1100,20 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
+                      refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]"
+                      dataType="wstr"
+                      length="164"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]"
+                      name="tgt_SurgetKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Right Input].Columns[SurgetKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
                       refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]"
                       dataType="i4"
                       lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]"
@@ -1043,20 +1124,6 @@
                           dataType="System.Int32"
                           description="The input column associated with this output column"
                           name="InputColumnID">#{Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]"
-                      dataType="wstr"
-                      length="164"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]"
-                      name="tgt_DimKey">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="The input column associated with this output column"
-                          name="InputColumnID">#{Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Right Input].Columns[DimKey]}</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -1079,13 +1146,6 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 1]"
-                  deleteOutputOnPathDetached="true"
-                  name="Multicast Output 1"
-                  synchronousInputId="Package\dimJunkFinCat\Multicast.Inputs[Multicast Input 1]">
-                  <externalMetadataColumns />
-                </output>
-                <output
                   refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 4]"
                   dangling="true"
                   deleteOutputOnPathDetached="true"
@@ -1097,6 +1157,14 @@
                   refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 2]"
                   deleteOutputOnPathDetached="true"
                   name="Multicast Output 2"
+                  synchronousInputId="Package\dimJunkFinCat\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 1]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
                   synchronousInputId="Package\dimJunkFinCat\Multicast.Inputs[Multicast Input 1]">
                   <externalMetadataColumns />
                 </output>
@@ -1136,13 +1204,14 @@
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
-       [DimKey]
+       [SurgetKey]
       ,[Omschrijving]
       ,[OrderCategorie1]
       ,[OrderCategorie2]
       ,[Checksum]
       ,[ValidFrom]
       ,[ValidUntil]
+      ,[Currentflag]
   FROM [DWH].[dbo].[dim_JunkFinCat]</property>
                 <property
                   dataType="System.String"
@@ -1180,17 +1249,6 @@
                   isSorted="true"
                   name="OLE DB Source Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimKey]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
-                      length="164"
-                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[DimKey]"
-                      name="DimKey"
-                      sortKeyPosition="1"
-                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[Omschrijving]"
                       dataType="wstr"
@@ -1248,14 +1306,29 @@
                       lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidUntil]"
                       name="ValidUntil"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
+                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[Currentflag]"
+                      name="Currentflag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgetKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SurgetKey]"
+                      length="164"
+                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgetKey]"
+                      name="SurgetKey"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
-                      dataType="wstr"
-                      length="164"
-                      name="DimKey" />
                     <externalMetadataColumn
                       refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Omschrijving]"
                       dataType="wstr"
@@ -1283,6 +1356,15 @@
                       refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
                       dataType="dbDate"
                       name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
+                      dataType="bool"
+                      name="Currentflag" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SurgetKey]"
+                      dataType="wstr"
+                      length="164"
+                      name="SurgetKey" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1291,11 +1373,11 @@
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SurgetKey]"
                       dataType="wstr"
                       length="164"
-                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DimKey]"
-                      name="DimKey" />
+                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SurgetKey]"
+                      name="SurgetKey" />
                     <outputColumn
                       refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Omschrijving]"
                       dataType="wstr"
@@ -1329,6 +1411,11 @@
                       dataType="dbDate"
                       lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
                       name="ValidUntil" />
+                    <outputColumn
+                      refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      dataType="bool"
+                      lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      name="Currentflag" />
                     <outputColumn
                       refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1638,11 +1725,11 @@
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Sort.Inputs[Sort Input].Columns[DimKey]"
+                      refId="Package\dimJunkFinCat\Sort.Inputs[Sort Input].Columns[SurgetKey]"
                       cachedDataType="wstr"
                       cachedLength="334"
-                      cachedName="DimKey"
-                      lineageId="Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[DimKey]">
+                      cachedName="SurgetKey"
+                      lineageId="Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[SurgetKey]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1767,18 +1854,18 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\dimJunkFinCat\Sort.Outputs[Sort Output].Columns[DimKey]"
+                      refId="Package\dimJunkFinCat\Sort.Outputs[Sort Output].Columns[SurgetKey]"
                       dataType="wstr"
                       length="334"
-                      lineageId="Package\dimJunkFinCat\Sort.Outputs[Sort Output].Columns[DimKey]"
-                      name="DimKey"
+                      lineageId="Package\dimJunkFinCat\Sort.Outputs[Sort Output].Columns[SurgetKey]"
+                      name="SurgetKey"
                       sortKeyPosition="1">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[DimKey]}</property>
+                          name="SortColumnId">#{Package\dimJunkFinCat\Derived Column.Outputs[Derived Column Output].Columns[SurgetKey]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1811,21 +1898,6 @@
                   refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1]"
                   name="Union All Input 1">
                   <inputColumns>
-                    <inputColumn
-                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[DimKey]"
-                      cachedDataType="wstr"
-                      cachedLength="334"
-                      cachedName="DimKey"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[DimKey]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[DimKey]}</property>
-                      </properties>
-                    </inputColumn>
                     <inputColumn
                       refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[Omschrijving]"
                       cachedCodepage="1252"
@@ -1913,16 +1985,31 @@
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[Checksum]"
-                      cachedDataType="i4"
-                      cachedName="Checksum"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[Checksum]">
+                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[src_SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="334"
+                      cachedName="src_SurgetKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_SurgetKey]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Checksum]}</property>
+                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_SurgetKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -1968,6 +2055,20 @@
                       </properties>
                     </inputColumn>
                     <inputColumn
+                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[tgt_SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="164"
+                      cachedName="tgt_SurgetKey"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_SurgetKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
                       refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[tgt_Checksum]"
                       cachedDataType="i4"
                       cachedName="tgt_Checksum"
@@ -1978,20 +2079,6 @@
                           dataType="System.Int32"
                           description="Output column lineage ID"
                           name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[tgt_DimKey]"
-                      cachedDataType="wstr"
-                      cachedLength="164"
-                      cachedName="tgt_DimKey"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_DimKey]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2028,21 +2115,6 @@
                   hasSideEffects="true"
                   name="Union All Input 2">
                   <inputColumns>
-                    <inputColumn
-                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[DimKey]"
-                      cachedDataType="wstr"
-                      cachedLength="334"
-                      cachedName="DimKey"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[DimKey]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[DimKey]}</property>
-                      </properties>
-                    </inputColumn>
                     <inputColumn
                       refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[Omschrijving]"
                       cachedCodepage="1252"
@@ -2130,16 +2202,31 @@
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[Checksum]"
-                      cachedDataType="i4"
-                      cachedName="Checksum"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[Checksum]">
+                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[src_SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="334"
+                      cachedName="src_SurgetKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_SurgetKey]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Checksum]}</property>
+                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_SurgetKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[src_Checksum]"
+                      cachedDataType="i4"
+                      cachedName="src_Checksum"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[src_Checksum]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_Checksum]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2185,6 +2272,20 @@
                       </properties>
                     </inputColumn>
                     <inputColumn
+                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[tgt_SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="164"
+                      cachedName="tgt_SurgetKey"
+                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_SurgetKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
                       refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[tgt_Checksum]"
                       cachedDataType="i4"
                       cachedName="tgt_Checksum"
@@ -2195,20 +2296,6 @@
                           dataType="System.Int32"
                           description="Output column lineage ID"
                           name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[tgt_DimKey]"
-                      cachedDataType="wstr"
-                      cachedLength="164"
-                      cachedName="tgt_DimKey"
-                      lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_DimKey]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_DimKey]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -2254,12 +2341,6 @@
                   name="Union All Output 1">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[DimKey]"
-                      dataType="wstr"
-                      length="334"
-                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[DimKey]"
-                      name="DimKey" />
-                    <outputColumn
                       refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Omschrijving]"
                       codePage="1252"
                       dataType="str"
@@ -2298,10 +2379,16 @@
                       lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Con_OrderCategorie2]"
                       name="Con_OrderCategorie2" />
                     <outputColumn
-                      refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Checksum]"
+                      refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_SurgetKey]"
+                      dataType="wstr"
+                      length="334"
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_SurgetKey]"
+                      name="src_SurgetKey" />
+                    <outputColumn
+                      refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_Checksum]"
                       dataType="i4"
-                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Checksum]"
-                      name="Checksum" />
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_Checksum]"
+                      name="src_Checksum" />
                     <outputColumn
                       refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_Omschrijving]"
                       dataType="wstr"
@@ -2321,16 +2408,16 @@
                       lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_OrderCategorie2]"
                       name="tgt_OrderCategorie2" />
                     <outputColumn
+                      refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_SurgetKey]"
+                      dataType="wstr"
+                      length="164"
+                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_SurgetKey]"
+                      name="tgt_SurgetKey" />
+                    <outputColumn
                       refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]"
                       dataType="i4"
                       lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_Checksum]"
                       name="tgt_Checksum" />
-                    <outputColumn
-                      refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_DimKey]"
-                      dataType="wstr"
-                      length="164"
-                      lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_DimKey]"
-                      name="tgt_DimKey" />
                     <outputColumn
                       refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[ValidFrom]"
                       dataType="date"
@@ -2379,10 +2466,10 @@
               name="Merge Join Output"
               startId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output]" />
             <path
-              refId="Package\dimJunkFinCat.Paths[Multicast Output 1]"
+              refId="Package\dimJunkFinCat.Paths[Multicast Output 2]"
               endId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2]"
-              name="Multicast Output 1"
-              startId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 1]" />
+              name="Multicast Output 2"
+              startId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 2]" />
             <path
               refId="Package\dimJunkFinCat.Paths[OLE DB Source Output]"
               endId="Package\dimJunkFinCat\Data Conversion.Inputs[Data Conversion Input]"
@@ -2425,7 +2512,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{B0ADB5CB-8125-4922-B774-FB73F8A286B6}"
-          SQLTask:SqlStatementSource="drop table [DWH].[dbo].[dim_JunkFinCat]&#xA;create table  [DWH].[dbo].[dim_JunkFinCat](&#xA;[DimKey] nvarchar(164),&#xA;[Omschrijving] nvarchar(100),&#xA;[OrderCategorie1] nvarchar(32),&#xA;[OrderCategorie2] nvarchar(32))&#xA;&#xA;truncate table [DWH].[dbo].[dim_JunkFinCat]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="drop table [DWH].[dbo].[dim_JunkFinCat]&#xA;create table  [DWH].[dbo].[dim_JunkFinCat](&#xA;[SurgetKey] nvarchar(164),&#xA;[Omschrijving] nvarchar(100),&#xA;[OrderCategorie1] nvarchar(32),&#xA;[OrderCategorie2] nvarchar(32),&#xA;[ValidFrom] date,&#xA;[ValidUntil] date,&#xA;[Currentflag] bit default 1,&#xA;[Checksum] int&#xA;)&#xA;&#xA;truncate table [DWH].[dbo].[dim_JunkFinCat]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -2452,13 +2539,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="164,41.6"
-          Id="Package\Execute SQL Task"
-          TopLeft="136.000002316066,50.7764713003561" />
-        <NodeLayout
           Size="148.8,41.6"
           Id="Package\dimJunkFinCat"
           TopLeft="144.571431033465,140.705884326288" />
+        <NodeLayout
+          Size="164,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="136.000002316066,50.7764713003561" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="218.485716674766,92.3764713003561">
@@ -2490,13 +2577,69 @@
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="142.4,41.6"
-          Id="Package\dimJunkFinCat\ophalen Bron"
-          TopLeft="113.142859069669,72.8000010209925" />
+          Size="148,41.6"
+          Id="Package\dimJunkFinCat\Invoegen rijen"
+          TopLeft="233.333337306976,891.143796241819" />
+        <NodeLayout
+          Size="99.2,41.6"
+          Id="Package\dimJunkFinCat\Sort"
+          TopLeft="345.714291601765,407.294121507955" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\dimJunkFinCat\Conditional Split"
+          TopLeft="447.063499676937,689.803927259874" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\dimJunkFinCat\Derived Column"
+          TopLeft="110.285716163869,225.741179636523" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\dimJunkFinCat\Multicast"
+          TopLeft="470.555563569069,800.287587743317" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\dimJunkFinCat\Checksum Transformation"
+          TopLeft="210.857146448019,316.188237619235" />
         <NodeLayout
           Size="156.8,41.6"
           Id="Package\dimJunkFinCat\Data Conversion"
           TopLeft="108.571430420389,150.447060170553" />
+        <NodeLayout
+          Size="151.2,41.6"
+          Id="Package\dimJunkFinCat\OLE DB Source"
+          TopLeft="537.142866290346,160.078433617589" />
+        <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\dimJunkFinCat\ophalen Bron"
+          TopLeft="113.142859069669,72.8000010209925" />
+        <NodeLayout
+          Size="122.4,41.6"
+          Id="Package\dimJunkFinCat\Add date"
+          TopLeft="463.809531708153,561.960788417715" />
+        <EdgeLayout
+          Id="Package\dimJunkFinCat.Paths[Toegevoegde]"
+          TopLeft="528.209531623003,731.403927259874">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.883660483443"
+              Start="0,0"
+              End="0,61.383660483443">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.383660483443" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-30.52744140625,24.8602872729715,61.0548828125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[OLE DB Source Output]"
           TopLeft="185.657144745029,114.400001020993">
@@ -2519,36 +2662,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\dimJunkFinCat\Derived Column"
-          TopLeft="110.285716163869,225.741179636523" />
-        <EdgeLayout
-          Id="Package\dimJunkFinCat.Paths[Data Conversion Output]"
-          TopLeft="187.228573292129,192.047060170553">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.6941194659698"
-              Start="0,0"
-              End="0,26.1941194659698">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.1941194659698" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="203.2,41.6"
-          Id="Package\dimJunkFinCat\Checksum Transformation"
-          TopLeft="210.857146448019,316.188237619235" />
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[Derived Column Output]"
           TopLeft="187.485716163869,267.341179636523">
@@ -2583,14 +2696,28 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="131.2,41.6"
-          Id="Package\dimJunkFinCat\Merge Join"
-          TopLeft="460.952388802353,474.541179344811" />
-        <NodeLayout
-          Size="99.2,41.6"
-          Id="Package\dimJunkFinCat\Sort"
-          TopLeft="345.714291601765,407.294121507955" />
+        <EdgeLayout
+          Id="Package\dimJunkFinCat.Paths[Data Conversion Output]"
+          TopLeft="187.228573292129,192.047060170553">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.6941194659698"
+              Start="0,0"
+              End="0,26.1941194659698">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.1941194659698" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[ChecksumOutput]"
           TopLeft="312.457146448019,357.788237619235">
@@ -2625,32 +2752,36 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="131.2,41.6"
+          Id="Package\dimJunkFinCat\Merge Join"
+          TopLeft="453.061232205383,471.596640444957" />
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[Sort Output]"
           TopLeft="395.314291601765,448.894121507955">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="110.704763867255,25.6470578368558"
+              EndConnector="123.346940603618,22.7025189370019"
               Start="0,0"
-              End="110.704763867255,18.1470578368558">
+              End="123.346940603618,15.2025189370019">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.2028342840157" />
+                    End="0,7.35125946850093" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,11.2028342840157"
-                    Point2="0,15.2028342840157"
-                    Point3="4,15.2028342840157" />
+                    Point1="0,7.35125946850093"
+                    Point2="0,11.3512594685009"
+                    Point3="4,11.3512594685009" />
                   <mssgle:LineSegment
-                    End="106.704763867255,15.2028342840157" />
+                    End="119.346940603618,11.3512594685009" />
                   <mssgle:CubicBezierSegment
-                    Point1="106.704763867255,15.2028342840157"
-                    Point2="110.704763867255,15.2028342840157"
-                    Point3="110.704763867255,19.2028342840157" />
+                    Point1="119.346940603618,11.3512594685009"
+                    Point2="123.346940603618,11.3512594685009"
+                    Point3="123.346940603618,15.3512594685009" />
                   <mssgle:LineSegment
-                    End="110.704763867255,18.1470578368558" />
+                    End="123.346940603618,15.2025189370019" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2659,62 +2790,32 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="122.4,41.6"
-          Id="Package\dimJunkFinCat\Add date"
-          TopLeft="463.809531708153,561.960788417715" />
-        <EdgeLayout
-          Id="Package\dimJunkFinCat.Paths[Merge Join Output]"
-          TopLeft="525.780960255253,516.141179344811">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,45.8196090729043"
-              Start="0,0"
-              End="0,38.3196090729043">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,38.3196090729043" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="151.2,41.6"
-          Id="Package\dimJunkFinCat\OLE DB Source"
-          TopLeft="537.142866290346,160.078433617589" />
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[OLE DB Source Output1]"
           TopLeft="612.742866290346,201.678433617589">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-65.657144154659,272.862745727222"
+              EndConnector="-73.54830075163,269.918206827368"
               Start="0,0"
-              End="-65.657144154659,265.362745727222">
+              End="-73.54830075163,262.418206827368">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,157.745145659992" />
+                    End="0,155.999708143452" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,157.745145659992"
-                    Point2="0,161.745145659992"
-                    Point3="-4,161.745145659992" />
+                    Point1="0,155.999708143452"
+                    Point2="0,159.999708143452"
+                    Point3="-4,159.999708143452" />
                   <mssgle:LineSegment
-                    End="-61.657144154659,161.745145659992" />
+                    End="-69.54830075163,159.999708143452" />
                   <mssgle:CubicBezierSegment
-                    Point1="-61.657144154659,161.745145659992"
-                    Point2="-65.657144154659,161.745145659992"
-                    Point3="-65.657144154659,165.745145659992" />
+                    Point1="-69.54830075163,159.999708143452"
+                    Point2="-73.54830075163,159.999708143452"
+                    Point3="-73.54830075163,163.999708143452" />
                   <mssgle:LineSegment
-                    End="-65.657144154659,265.362745727222" />
+                    End="-73.54830075163,262.418206827368" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2723,32 +2824,42 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\dimJunkFinCat\Conditional Split"
-          TopLeft="447.063499676937,689.803927259874" />
-        <NodeLayout
-          Size="121.6,41.6"
-          Id="Package\dimJunkFinCat\Multicast"
-          TopLeft="470.555563569069,800.287587743317" />
-        <NodeLayout
-          Size="148,41.6"
-          Id="Package\dimJunkFinCat\Invoegen rijen"
-          TopLeft="233.333337306976,891.143796241819" />
+        <EdgeLayout
+          Id="Package\dimJunkFinCat.Paths[Merge Join Output]"
+          TopLeft="521.835381956768,513.196640444957">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.7641479727581"
+              Start="0,0"
+              End="0,41.2641479727581">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.2641479727581" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[Derived Column Output1]"
           TopLeft="525.036515692545,603.560788417715">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,86.2431388421592"
+              EndConnector="0,86.2431388421589"
               Start="0,0"
-              End="0,78.7431388421592">
+              End="0,78.7431388421589">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,78.7431388421592" />
+                    End="0,78.7431388421589" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2757,84 +2868,60 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\dimJunkFinCat.Paths[Toegevoegde]"
-          TopLeft="528.209531623003,731.403927259874">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,68.883660483443"
-              Start="0,0"
-              End="0,61.383660483443">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,61.383660483443" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-30.52744140625,24.8602872729715,61.0548828125,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="121.6,41.6"
           Id="Package\dimJunkFinCat\Union All"
-          TopLeft="246.666670867375,808.000003403308" />
+          TopLeft="254.693881888431,801.008406597143" />
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[Gewijzigde]"
-          TopLeft="500.396833010271,731.403927259874">
+          TopLeft="500.39683301027,731.403927259874">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-192.930162142896,76.5960761434342"
+              EndConnector="-184.902951121839,69.6044793372693"
               Start="0,0"
-              End="-192.930162142896,69.0960761434342">
+              End="-184.902951121839,62.1044793372693">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.1050055404809" />
+                    End="0,24.2657784110738" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27.1050055404809"
-                    Point2="0,31.1050055404809"
-                    Point3="-4,31.1050055404809" />
+                    Point1="0,24.2657784110738"
+                    Point2="0,28.2657784110738"
+                    Point3="-4,28.2657784110738" />
                   <mssgle:LineSegment
-                    End="-188.930162142896,31.1050055404809" />
+                    End="-180.902951121839,28.2657784110738" />
                   <mssgle:CubicBezierSegment
-                    Point1="-188.930162142896,31.1050055404809"
-                    Point2="-192.930162142896,31.1050055404809"
-                    Point3="-192.930162142896,35.1050055404809" />
+                    Point1="-180.902951121839,28.2657784110738"
+                    Point2="-184.902951121839,28.2657784110738"
+                    Point3="-184.902951121839,32.2657784110738" />
                   <mssgle:LineSegment
-                    End="-192.930162142896,69.0960761434342" />
+                    End="-184.902951121839,62.1044793372693" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-120.928948258948,36.1050055404809,48.927734375,11.6630859375"
+              BoundingBox="-116.915342748419,33.2657784110738,48.927734375,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\dimJunkFinCat.Paths[Multicast Output 1]"
-          TopLeft="470.555563569069,824.943795573313">
+          Id="Package\dimJunkFinCat.Paths[Multicast Output 2]"
+          TopLeft="470.555563569069,821.44799717023">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-102.288892701694,0"
+              EndConnector="-94.2616816806377,0"
               Start="0,0"
-              End="-94.7888927016942,0">
+              End="-86.7616816806377,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-94.7888927016942,0" />
+                    End="-86.7616816806377,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2845,18 +2932,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[Union All Output 1]"
-          TopLeft="307.400004087176,849.600003403309">
+          TopLeft="315.493881888431,842.608406597143">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41.5437928385107"
+              EndConnector="-8.16054458145538,48.5353896446758"
               Start="0,0"
-              End="0,34.0437928385107">
+              End="-8.16054458145538,41.0353896446758">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.0437928385107" />
+                    End="0,20.2676948223379" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2676948223379"
+                    Point2="0,24.2676948223379"
+                    Point3="-4,24.2676948223379" />
+                  <mssgle:LineSegment
+                    End="-4.16054458145538,24.2676948223379" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.16054458145538,24.2676948223379"
+                    Point2="-8.16054458145538,24.2676948223379"
+                    Point3="-8.16054458145538,28.2676948223379" />
+                  <mssgle:LineSegment
+                    End="-8.16054458145538,41.0353896446758" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2868,14 +2967,6 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\dimJunkFinCat\ophalen Bron">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\dimJunkFinCat\OLE DB Source">
     <Properties>
@@ -2899,6 +2990,14 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\dimJunkFinCat\ophalen Bron">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
