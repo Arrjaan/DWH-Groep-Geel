@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Test Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="23"
-  DTS:VersionGUID="{2E4B68FF-5149-44F1-97B8-10B78B6C5A90}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{CB4F359C-CEAE-43CA-9F99-B2E5FFE1B9ED}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -78,7 +78,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
-          SQLTask:SqlStatementSource="SELECT * INTO tst_Cursus FROM dim_Cursus&#xA;SELECT * INTO tst_Order FROM dim_Order&#xA;SELECT * INTO tst_Persoon FROM dim_Persoon&#xA;SELECT * INTO tst_Status FROM dim_Status" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="SELECT * INTO tst_Cursus FROM dim_Cursus&#xA;SELECT * INTO tst_Order FROM dim_Order&#xA;SELECT * INTO tst_Persoon FROM dim_Persoon&#xA;SELECT * INTO tst_Status FROM dim_Status&#xA;SELECT * INTO tst_JunkFinCat FROM dim_JunkFinCat" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -761,6 +761,192 @@
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Test and Report\Schrijf naar dim_Cursus.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Test and Report\Schrijf naar dim_JunkFinCat"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Schrijf naar dim_JunkFinCat"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dim_JunkFinCat$dim_JunkFinCat</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidFrom"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[ValidUntil]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidUntil"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[ValidUntil]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[SurgetKey]"
+                      cachedDataType="wstr"
+                      cachedLength="334"
+                      cachedName="SurgetKey"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[SurgetKey]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[SurgetKey]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[Omschrijving]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Omschrijving"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[Omschrijving]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Omschrijving]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[OrderCategorie1]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie1]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[OrderCategorie1]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie2]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[OrderCategorie2]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].Columns[Currentflag]"
+                      cachedDataType="bool"
+                      cachedName="Currentflag"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[Currentflag]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Currentflag]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
+                      dataType="wstr"
+                      length="255"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="wstr"
+                      length="255"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
+                      dataType="wstr"
+                      length="255"
+                      name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[SurgetKey]"
+                      dataType="wstr"
+                      length="255"
+                      name="SurgetKey" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[Omschrijving]"
+                      dataType="wstr"
+                      length="255"
+                      name="Omschrijving" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie1]"
+                      dataType="wstr"
+                      length="255"
+                      name="OrderCategorie1" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="255"
+                      name="OrderCategorie2" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input].ExternalColumns[Currentflag]"
+                      dataType="wstr"
+                      length="255"
+                      name="Currentflag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1659,6 +1845,250 @@
               </outputs>
             </component>
             <component
+              refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Test wijzigingen dim_JunkFinCat"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from dbo.dim_JunkFinCat EXCEPT select * from tst_JunkFinCat</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Connections[OleDbConnection]"
+                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      name="ValidUntil"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[SurgetKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[SurgetKey]"
+                      length="334"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[SurgetKey]"
+                      name="SurgetKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Omschrijving]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[Omschrijving]"
+                      length="100"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Omschrijving]"
+                      name="Omschrijving"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[OrderCategorie1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie1]"
+                      length="32"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[OrderCategorie1]"
+                      name="OrderCategorie1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[OrderCategorie2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie2]"
+                      length="32"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[OrderCategorie2]"
+                      name="OrderCategorie2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Currentflag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].Columns[Currentflag]"
+                      name="Currentflag"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbDate"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      dataType="dbDate"
+                      name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[SurgetKey]"
+                      dataType="wstr"
+                      length="334"
+                      name="SurgetKey" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[Omschrijving]"
+                      dataType="wstr"
+                      length="100"
+                      name="Omschrijving" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie1]"
+                      dataType="wstr"
+                      length="32"
+                      name="OrderCategorie1" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      name="OrderCategorie2" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
+                      dataType="bool"
+                      name="Currentflag" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[SurgetKey]"
+                      dataType="wstr"
+                      length="334"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[SurgetKey]"
+                      name="SurgetKey" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[Omschrijving]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[Omschrijving]"
+                      name="Omschrijving" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[OrderCategorie1]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[OrderCategorie1]"
+                      name="OrderCategorie1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[OrderCategorie2]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[OrderCategorie2]"
+                      name="OrderCategorie2" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      dataType="bool"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      name="Currentflag" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      dataType="dbDate"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      dataType="dbDate"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Test and Report\Test wijzigingen dim_Order"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
@@ -1836,6 +2266,15 @@
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[CurrentFlag]"
                       name="CurrentFlag"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderId]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderId]"
+                      name="OrderId"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1896,6 +2335,10 @@
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[CurrentFlag]"
                       dataType="bool"
                       name="CurrentFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderId]"
+                      dataType="i4"
+                      name="OrderId" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1908,6 +2351,11 @@
                       dataType="i8"
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[DimKey]"
                       name="DimKey" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderId]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderId]"
+                      name="OrderId" />
                     <outputColumn
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderNummer]"
                       dataType="i8"
@@ -2550,6 +2998,11 @@
               endId="Package\Test and Report\Data Conversion 2.Inputs[Data Conversion Input]"
               name="OLE DB Source Output"
               startId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Test and Report.Paths[OLE DB Source Output4]"
+              endId="Package\Test and Report\Schrijf naar dim_JunkFinCat.Inputs[Excel Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Test and Report\Test wijzigingen dim_JunkFinCat.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2628,34 +3081,38 @@
         <NodeLayout
           Size="160.8,41.6"
           Id="Package\Alter Cursus data"
-          TopLeft="19.5,310.3" />
+          TopLeft="217.9,310.3" />
         <NodeLayout
           Size="169.6,41.6"
           Id="Package\Create temp tables"
-          TopLeft="15.1,208.7" />
+          TopLeft="213.5,208.7" />
+        <NodeLayout
+          Size="137.6,41.6"
+          Id="Package\Empty Excel"
+          TopLeft="5.5000000000001,411.9" />
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\Load Demensions"
-          TopLeft="18.3,107.1" />
+          TopLeft="216.7,107.1" />
         <NodeLayout
           Size="188.8,41.6"
           Id="Package\Load Dimensions again"
-          TopLeft="5.50000000000006,411.9" />
+          TopLeft="203.9,411.9" />
         <NodeLayout
           Size="130.4,41.6"
           Id="Package\Reset data"
-          TopLeft="34.7,5.49999999999995" />
+          TopLeft="233.1,5.49999999999995" />
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Reset data again"
-          TopLeft="252.3,615.099999999999" />
+          TopLeft="218.7,615.099999999999" />
         <NodeLayout
           Size="156,41.6"
           Id="Package\Test and Report"
-          TopLeft="253.9,513.5" />
+          TopLeft="220.3,513.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="99.9,47.1">
+          TopLeft="298.3,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2677,7 +3134,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="99.9,148.7">
+          TopLeft="298.3,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2699,18 +3156,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="99.9,250.3">
+          TopLeft="298.3,250.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,59.9999999999999"
               Start="0,0"
-              End="0,52.5">
+              End="0,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2721,7 +3178,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="99.9,351.9">
+          TopLeft="298.3,351.9">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2743,13 +3200,13 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="99.9000000000001,453.5">
+          TopLeft="298.3,453.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="207.333333333333,59.9999999999999"
+              EndConnector="24.6666666666667,59.9999999999999"
               Start="0,0"
-              End="207.333333333333,52.4999999999999">
+              End="24.6666666666667,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -2760,13 +3217,13 @@
                     Point2="0,35.6345177664974"
                     Point3="4,35.6345177664974" />
                   <mssgle:LineSegment
-                    End="203.333333333333,35.6345177664974" />
+                    End="20.6666666666667,35.6345177664974" />
                   <mssgle:CubicBezierSegment
-                    Point1="203.333333333333,35.6345177664974"
-                    Point2="207.333333333333,35.6345177664974"
-                    Point3="207.333333333333,39.6345177664974" />
+                    Point1="20.6666666666667,35.6345177664974"
+                    Point2="24.6666666666667,35.6345177664974"
+                    Point3="24.6666666666667,39.6345177664974" />
                   <mssgle:LineSegment
-                    End="207.333333333333,52.4999999999999" />
+                    End="24.6666666666667,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2777,7 +3234,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="331.9,555.1">
+          TopLeft="298.3,555.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2797,36 +3254,32 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="137.6,41.6"
-          Id="Package\Empty Excel"
-          TopLeft="298.28571936549,416.423530887485" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="367.08571936549,458.023530887485">
+          TopLeft="74.3000000000001,453.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-10.5190526988233,55.476469112515"
+              EndConnector="199.333333333333,59.9999999999999"
               Start="0,0"
-              End="-10.5190526988233,47.976469112515">
+              End="199.333333333333,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.9479537368744" />
+                    End="0,31.6345177664974" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28.9479537368744"
-                    Point2="0,32.9479537368744"
-                    Point3="-4,32.9479537368744" />
+                    Point1="0,31.6345177664974"
+                    Point2="0,35.6345177664974"
+                    Point3="4,35.6345177664974" />
                   <mssgle:LineSegment
-                    End="-6.51905269882332,32.9479537368744" />
+                    End="195.333333333333,35.6345177664974" />
                   <mssgle:CubicBezierSegment
-                    Point1="-6.51905269882332,32.9479537368744"
-                    Point2="-10.5190526988233,32.9479537368744"
-                    Point3="-10.5190526988233,36.9479537368744" />
+                    Point1="195.333333333333,35.6345177664974"
+                    Point2="199.333333333333,35.6345177664974"
+                    Point3="199.333333333333,39.6345177664974" />
                   <mssgle:LineSegment
-                    End="-10.5190526988233,47.976469112515" />
+                    End="199.333333333333,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2846,50 +3299,50 @@
         <NodeLayout
           Size="208.8,41.6"
           Id="Package\Test and Report\Test wijzigingen dim_Order"
-          TopLeft="257.9,5.50000000000007" />
+          TopLeft="5.50000000000009,5.50000000000007" />
         <NodeLayout
           Size="220,41.6"
           Id="Package\Test and Report\Test wijzigingen dim_Persoon"
-          TopLeft="527.3,5.49999999999995" />
+          TopLeft="274.9,5.50000000000007" />
         <NodeLayout
           Size="189.6,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Status"
-          TopLeft="819.5,208.7" />
+          TopLeft="567.1,208.7" />
         <NodeLayout
           Size="212,41.6"
           Id="Package\Test and Report\Test wijzigingen dim_Status"
-          TopLeft="808.3,5.49999999999995" />
+          TopLeft="555.9,5.50000000000007" />
         <NodeLayout
           Size="197.6,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Persoon"
-          TopLeft="538.5,208.7" />
+          TopLeft="286.1,208.7" />
         <NodeLayout
           Size="166.4,41.6"
           Id="Package\Test and Report\Data Conversion 2"
-          TopLeft="831.1,107.1" />
+          TopLeft="578.7,107.1" />
         <NodeLayout
           Size="166.4,41.6"
           Id="Package\Test and Report\Data Conversion 1"
-          TopLeft="554.1,107.1" />
+          TopLeft="301.7,107.1" />
         <NodeLayout
           Size="213.6,41.6"
           Id="Package\Test and Report\Test wijzigingen dim_Cursus"
-          TopLeft="5.49999999999996,107.1" />
+          TopLeft="806.1,107.1" />
         <NodeLayout
           Size="187.2,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Order"
-          TopLeft="268.7,208.7" />
+          TopLeft="16.3000000000001,208.7" />
         <NodeLayout
           Size="156.8,41.6"
           Id="Package\Test and Report\Data Conversion"
-          TopLeft="283.9,107.1" />
+          TopLeft="31.5000000000001,107.1" />
         <NodeLayout
           Size="192,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Cursus"
-          TopLeft="16.3,208.7" />
+          TopLeft="816.9,208.7" />
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output3]"
-          TopLeft="914.3,47.1">
+          TopLeft="661.9,47.1000000000001">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2911,7 +3364,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output2]"
-          TopLeft="637.3,47.1">
+          TopLeft="384.9,47.1000000000001">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2933,7 +3386,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output1]"
-          TopLeft="362.3,47.1000000000001">
+          TopLeft="109.9,47.1000000000001">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2955,18 +3408,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output]"
-          TopLeft="112.3,148.7">
+          TopLeft="912.9,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,60.0000000000001"
               Start="0,0"
-              End="0,52.5">
+              End="0,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2977,18 +3430,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[Data Conversion Output2]"
-          TopLeft="914.3,148.7">
+          TopLeft="661.9,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,60.0000000000001"
               Start="0,0"
-              End="0,52.5">
+              End="0,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2999,18 +3452,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[Data Conversion Output1]"
-          TopLeft="637.3,148.7">
+          TopLeft="384.9,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,60.0000000000001"
               Start="0,0"
-              End="0,52.5">
+              End="0,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3021,18 +3474,48 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[Data Conversion Output]"
-          TopLeft="362.3,148.7">
+          TopLeft="109.9,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,60.0000000000001"
               Start="0,0"
-              End="0,52.5">
+              End="0,52.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="233.6,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_JunkFinCat"
+          TopLeft="1080.1,107.1" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_JunkFinCat"
+          TopLeft="1091.3,208.7" />
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[OLE DB Source Output4]"
+          TopLeft="1196.9,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3117,6 +3600,27 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Test and Report\Schrijf naar dim_Cursus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Test wijzigingen dim_JunkFinCat">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_JunkFinCat">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

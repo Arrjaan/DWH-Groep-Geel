@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Load Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{61979F9E-0A10-499D-906D-BD90617E6E7A}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{B616E20A-04F5-45E9-BB92-30F6B5AFB502}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -31,6 +31,22 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
           SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Cursus'))&#xA;BEGIN&#xA;    CREATE TABLE DWH.[dbo].[dim_Cursus](&#xA; [DimKey] int IDENTITY(1,1) PRIMARY KEY,&#xA; [CursusId] [int] NOT NULL,&#xA; [TrainerId] [int] NOT NULL,&#xA; [StartDatum] [date] NOT NULL,&#xA; [MaxAantalDeelnemers] [tinyint] NOT NULL,&#xA; [MinAantalDeelnemers] [tinyint] NOT NULL,&#xA; [Omschrijving] [ntext] NULL,&#xA; [AantalDagen] [int] NOT NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [CurrentFlag] [bit] NOT NULL DEFAULT 1,&#xA; [ValidFrom] [datetime] NOT NULL,&#xA; [ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31'&#xA;)&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Table dim_JunkFinCat"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5aee7393-35ec-446b-81d2-7e6d471e8222}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Table dim_JunkFinCat"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
+          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_JunkFinCat'))&#xA;BEGIN&#xA;create table  [DWH].[dbo].[dim_JunkFinCat](&#xA;[SurgetKey] nvarchar(334),&#xA;[Omschrijving] nvarchar(100),&#xA;[OrderCategorie1] nvarchar(32),&#xA;[OrderCategorie2] nvarchar(32),&#xA;[ValidFrom] date,&#xA;[ValidUntil] date,&#xA;[Currentflag] bit default 1,&#xA;[Checksum] int&#xA;)&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -96,6 +112,23 @@
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
           <PackageName>dim_Cursus_Arjan.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\dim_JunkFinCat_Bram"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{cba40a5d-4339-4fd8-927d-c34864d90dd7}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="dim_JunkFinCat_Bram"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>dim_JunkFinCat_Bram.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -184,6 +217,14 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
       DTS:To="Package\dim_Order_EvertJan" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{8E6FC57F-674F-47D6-BB1D-BFD5D6E2872B}"
+      DTS:From="Package\Create Table dim_JunkFinCat"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\dim_JunkFinCat_Bram" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -200,61 +241,49 @@
         <NodeLayout
           Size="197.6,41.6"
           Id="Package\Create Table dim_Cursus"
-          TopLeft="11.2142858115994,19.0058811174542" />
+          TopLeft="5.49999999999996,5.50000000000007" />
         <NodeLayout
           Size="192.8,41.6"
           Id="Package\Create Table dim_Order"
-          TopLeft="242.071432600216,18.9117634017573" />
+          TopLeft="263.9,5.50000000000007" />
         <NodeLayout
           Size="204,41.6"
           Id="Package\Create Table dim_Persoon"
-          TopLeft="460.357150603314,15.9470575451438" />
+          TopLeft="517.3,5.50000000000007" />
         <NodeLayout
           Size="195.2,41.6"
           Id="Package\Create Table dim_Status"
-          TopLeft="672.928582794812,17.78235168853" />
+          TopLeft="781.7,5.49999999999995" />
         <NodeLayout
           Size="165.6,41.6"
           Id="Package\dim_Cursus_Arjan"
-          TopLeft="4.35714283768004,122.347060462265" />
+          TopLeft="21.5,107.1" />
         <NodeLayout
           Size="176,41.6"
           Id="Package\dim_Order_EvertJan"
-          TopLeft="230.15714283768,120.511766318879" />
+          TopLeft="272.3,107.1" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\dim_Persoon_Bram"
-          TopLeft="469.98571432464,121.123531033341" />
+          TopLeft="533.7,107.1" />
         <NodeLayout
           Size="156,41.6"
           Id="Package\dim_Status_Pim"
-          TopLeft="705.58571425652,132.747060608121" />
+          TopLeft="801.3,107.1" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="770.528582794812,59.38235168853">
+          TopLeft="879.3,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="13.0571314617079,73.3647089195912"
+              EndConnector="0,60"
               Start="0,0"
-              End="13.0571314617079,65.8647089195912">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.6823544597956" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.6823544597956"
-                    Point2="0,36.6823544597956"
-                    Point3="4,36.6823544597956" />
-                  <mssgle:LineSegment
-                    End="9.05713146170785,36.6823544597956" />
-                  <mssgle:CubicBezierSegment
-                    Point1="9.05713146170785,36.6823544597956"
-                    Point2="13.0571314617079,36.6823544597956"
-                    Point3="13.0571314617079,40.6823544597956" />
-                  <mssgle:LineSegment
-                    End="13.0571314617079,65.8647089195912" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -265,30 +294,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="110.014285811599,60.6058811174542">
+          TopLeft="104.3,47.1000000000001">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-22.8571429739194,61.741179344811"
+              EndConnector="0,60"
               Start="0,0"
-              End="-22.8571429739194,54.241179344811">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.8705896724055" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26.8705896724055"
-                    Point2="0,30.8705896724055"
-                    Point3="-4,30.8705896724055" />
-                  <mssgle:LineSegment
-                    End="-18.8571429739194,30.8705896724055" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-18.8571429739194,30.8705896724055"
-                    Point2="-22.8571429739194,30.8705896724055"
-                    Point3="-22.8571429739194,34.8705896724055" />
-                  <mssgle:LineSegment
-                    End="-22.8571429739194,54.241179344811" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -299,18 +316,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="558.971432463977,57.5470575451438">
+          TopLeft="619.3,47.1000000000001">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,63.5764734881971"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,56.0764734881971">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,56.0764734881971" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -321,30 +338,48 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="338.471432600216,60.5117634017573">
+          TopLeft="360.3,47.1000000000001">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-20.3142897625358,60.0000029171215"
+              EndConnector="0,60"
               Start="0,0"
-              End="-20.3142897625358,52.5000029171215">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.0000014585608" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26.0000014585608"
-                    Point2="0,30.0000014585608"
-                    Point3="-4,30.0000014585608" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\dim_JunkFinCat_Bram"
+          TopLeft="1053.9,107.1" />
+        <NodeLayout
+          Size="217.6,41.6"
+          Id="Package\Create Table dim_JunkFinCat"
+          TopLeft="1037.5,5.49999999999995" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1146.3,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="-16.3142897625358,30.0000014585608" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-16.3142897625358,30.0000014585608"
-                    Point2="-20.3142897625358,30.0000014585608"
-                    Point3="-20.3142897625358,34.0000014585608" />
-                  <mssgle:LineSegment
-                    End="-20.3142897625358,52.5000029171215" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
