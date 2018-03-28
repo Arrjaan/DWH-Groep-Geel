@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Cursus_Arjan"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{B4AD31DF-DD79-408A-941D-348D33ADEEBD}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{63A4BD2C-463A-433D-B9D2-8C50BA932293}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -91,6 +91,12 @@
                       cachedDataType="i4"
                       cachedName="AantalDagen"
                       lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[AantalDagen]" />
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput].Columns[str_Omschrijving]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="str_Omschrijving"
+                      lineageId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Output].Columns[str_Omschrijving]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -273,6 +279,82 @@
                       refId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Inladen Dim_Cursus\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Inladen Dim_Cursus\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Inladen Dim_Cursus\Data Conversion.Inputs[Data Conversion Input].Columns[Omschrijving]"
+                      cachedDataType="nText"
+                      cachedName="Omschrijving"
+                      lineageId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[Omschrijving]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Output].Columns[str_Omschrijving]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Output].Columns[str_Omschrijving]"
+                      name="str_Omschrijving"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output].Columns[Omschrijving]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Inladen Dim_Cursus\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2625,6 +2707,11 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
               name="ChecksumOutput"
               startId="Package\Inladen Dim_Cursus\Bereken Checksum.Outputs[ChecksumOutput]" />
             <path
+              refId="Package\Inladen Dim_Cursus.Paths[Data Conversion Output]"
+              endId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput]"
+              name="Data Conversion Output"
+              startId="Package\Inladen Dim_Cursus\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
               refId="Package\Inladen Dim_Cursus.Paths[Derived Column Output]"
               endId="Package\Inladen Dim_Cursus\Conditional Split.Inputs[Conditional Split Input]"
               name="Derived Column Output"
@@ -2636,7 +2723,7 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
               startId="Package\Inladen Dim_Cursus\Conditional Split.Outputs[Gewijzigde Regels]" />
             <path
               refId="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
-              endId="Package\Inladen Dim_Cursus\Bereken Checksum.Inputs[ChecksumInput]"
+              endId="Package\Inladen Dim_Cursus\Data Conversion.Inputs[Data Conversion Input]"
               name="Lookup Match Output"
               startId="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving.Outputs[Lookup Match Output]" />
             <path
@@ -2716,90 +2803,90 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
         <NodeLayout
           Size="121.6,41.6"
           Id="Package\Inladen Dim_Cursus\Union All"
-          TopLeft="358.9,717.5" />
+          TopLeft="399.7,819.099999999999" />
         <NodeLayout
           Size="121.6,41.6"
           Id="Package\Inladen Dim_Cursus\Multicast"
-          TopLeft="236.9,615.9" />
+          TopLeft="277.7,717.5" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Inladen Dim_Cursus\Update CurrentFlag"
-          TopLeft="334.1,819.099999999999" />
+          TopLeft="374.9,920.699999999999" />
         <NodeLayout
           Size="228,41.6"
           Id="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving"
-          TopLeft="183.7,107.1" />
+          TopLeft="5.5,107.1" />
         <NodeLayout
           Size="168.8,41.6"
           Id="Package\Inladen Dim_Cursus\Insert nieuwe rijen"
-          TopLeft="91.3000000000001,819.099999999999" />
+          TopLeft="132.1,920.699999999999" />
         <NodeLayout
           Size="184.8,41.6"
           Id="Package\Inladen Dim_Cursus\Toevoegen ValidDates"
-          TopLeft="205.3,412.7" />
+          TopLeft="246.1,514.3" />
         <NodeLayout
           Size="156,41.6"
           Id="Package\Inladen Dim_Cursus\Conditional Split"
-          TopLeft="219.7,514.3" />
+          TopLeft="260.5,615.9" />
         <NodeLayout
           Size="153.6,41.6"
           Id="Package\Inladen Dim_Cursus\Ophalen Cursus"
-          TopLeft="220.9,5.49999999999995" />
+          TopLeft="42.7,5.49999999999995" />
         <NodeLayout
           Size="146.4,41.6"
           Id="Package\Inladen Dim_Cursus\Ophalen DWH"
-          TopLeft="5.50000000000004,208.7" />
+          TopLeft="265.3,310.3" />
         <NodeLayout
           Size="131.2,41.6"
           Id="Package\Inladen Dim_Cursus\Union All 1"
-          TopLeft="110.1,717.5" />
+          TopLeft="150.9,819.099999999999" />
         <NodeLayout
           Size="131.2,42.4"
           Id="Package\Inladen Dim_Cursus\Merge Join"
-          TopLeft="232.1,310.3" />
+          TopLeft="272.9,411.9" />
         <NodeLayout
           Size="169.6,41.6"
           Id="Package\Inladen Dim_Cursus\Bereken Checksum"
-          TopLeft="212.9,208.7" />
+          TopLeft="34.7000000000001,310.3" />
         <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[Verwijderde Regels]"
-          TopLeft="334.7,555.9">
+          TopLeft="375.5,657.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="85.0000000000001,161.6"
+              EndConnector="66.0666666666667,161.6"
               Start="0,0"
-              End="85.0000000000001,154.1">
+              End="66.0666666666667,154.1">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,51.6773109243697" />
+                    End="0,65.9563212003333" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,51.6773109243697"
-                    Point2="0,55.6773109243697"
-                    Point3="4,55.6773109243697" />
+                    Point1="0,65.9563212003333"
+                    Point2="0,69.9563212003333"
+                    Point3="4,69.9563212003333" />
                   <mssgle:LineSegment
-                    End="81.0000000000001,55.6773109243697" />
+                    End="62.0666666666667,69.9563212003333" />
                   <mssgle:CubicBezierSegment
-                    Point1="81.0000000000001,55.6773109243697"
-                    Point2="85.0000000000001,55.6773109243697"
-                    Point3="85.0000000000001,59.6773109243697" />
+                    Point1="62.0666666666667,69.9563212003333"
+                    Point2="66.0666666666667,69.9563212003333"
+                    Point3="66.0666666666667,73.9563212003333" />
                   <mssgle:LineSegment
-                    End="85.0000000000001,154.1" />
+                    End="66.0666666666667,154.1" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-0.765761718749957,60.6773109243697,86.5315234375,11.6630859375"
+              BoundingBox="-10.2324283854166,74.9563212003333,86.5315234375,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[Union All Output 11]"
-          TopLeft="175.7,759.1">
+          TopLeft="216.5,860.699999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2821,7 +2908,7 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[Union All Output 1]"
-          TopLeft="419.7,759.1">
+          TopLeft="460.5,860.699999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2843,7 +2930,235 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output1]"
-          TopLeft="78.7,250.3">
+          TopLeft="338.5,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5333333333334,60"
+              Start="0,0"
+              End="20.5333333333334,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.566265060241"
+                    Point2="0,35.566265060241"
+                    Point3="4,35.566265060241" />
+                  <mssgle:LineSegment
+                    End="16.5333333333334,35.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5333333333334,35.566265060241"
+                    Point2="20.5333333333334,35.566265060241"
+                    Point3="20.5333333333334,39.566265060241" />
+                  <mssgle:LineSegment
+                    End="20.5333333333334,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output]"
+          TopLeft="119.5,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Nieuwe Regels]"
+          TopLeft="301.5,657.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-105.533333333333,161.6"
+              Start="0,0"
+              End="-105.533333333333,154.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.0488911810211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,66.0488911810211"
+                    Point2="0,70.0488911810211"
+                    Point3="-4,70.0488911810211" />
+                  <mssgle:LineSegment
+                    End="-101.533333333333,70.0488911810211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-101.533333333333,70.0488911810211"
+                    Point2="-105.533333333333,70.0488911810211"
+                    Point3="-105.533333333333,74.0488911810211" />
+                  <mssgle:LineSegment
+                    End="-105.533333333333,154.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-85.6142447916667,75.0488911810211,65.69515625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Multicast Output 2]"
+          TopLeft="319.566666666667,759.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-82.5333333333334,59.9999999999999"
+              Start="0,0"
+              End="-82.5333333333334,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.0349949451745" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.0349949451745"
+                    Point2="0,30.0349949451745"
+                    Point3="-4,30.0349949451745" />
+                  <mssgle:LineSegment
+                    End="-78.5333333333334,30.0349949451745" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-78.5333333333334,30.0349949451745"
+                    Point2="-82.5333333333334,30.0349949451745"
+                    Point3="-82.5333333333334,34.0349949451745" />
+                  <mssgle:LineSegment
+                    End="-82.5333333333334,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Multicast Output 1]"
+          TopLeft="357.433333333333,759.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="122,59.9999999999999"
+              Start="0,0"
+              End="122,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.9999999999999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.9999999999999"
+                    Point2="0,29.9999999999999"
+                    Point3="4,29.9999999999999" />
+                  <mssgle:LineSegment
+                    End="118,29.9999999999999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="118,29.9999999999999"
+                    Point2="122,29.9999999999999"
+                    Point3="122,33.9999999999999" />
+                  <mssgle:LineSegment
+                    End="122,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Merge Join Output]"
+          TopLeft="338.5,454.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Gewijzigde Regels]"
+          TopLeft="338.5,657.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-40.57009765625,20.4184570312499,81.1401953125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Derived Column Output]"
+          TopLeft="338.5,555.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[ChecksumOutput]"
+          TopLeft="119.5,351.9">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2875,157 +3190,13 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[OLE DB Source Output]"
-          TopLeft="297.7,47.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Nieuwe Regels]"
-          TopLeft="260.7,555.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-85,161.6"
-              Start="0,0"
-              End="-85,154.1">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,51.6773109243697" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,51.6773109243697"
-                    Point2="0,55.6773109243697"
-                    Point3="-4,55.6773109243697" />
-                  <mssgle:LineSegment
-                    End="-81,55.6773109243697" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-81,55.6773109243697"
-                    Point2="-85,55.6773109243697"
-                    Point3="-85,59.6773109243697" />
-                  <mssgle:LineSegment
-                    End="-85,154.1" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-75.347578125,60.6773109243697,65.69515625,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Multicast Output 2]"
-          TopLeft="278.766666666667,657.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-103.066666666667,59.9999999999999"
-              Start="0,0"
-              End="-103.066666666667,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.4675324675324" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.4675324675324"
-                    Point2="0,24.4675324675324"
-                    Point3="-4,24.4675324675324" />
-                  <mssgle:LineSegment
-                    End="-99.0666666666666,24.4675324675324" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-99.0666666666666,24.4675324675324"
-                    Point2="-103.066666666667,24.4675324675324"
-                    Point3="-103.066666666667,28.4675324675324" />
-                  <mssgle:LineSegment
-                    End="-103.066666666667,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Multicast Output 1]"
-          TopLeft="316.633333333333,657.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="103.066666666667,59.9999999999999"
-              Start="0,0"
-              End="103.066666666667,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.4675324675324" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.4675324675324"
-                    Point2="0,24.4675324675324"
-                    Point3="4,24.4675324675324" />
-                  <mssgle:LineSegment
-                    End="99.0666666666668,24.4675324675324" />
-                  <mssgle:CubicBezierSegment
-                    Point1="99.0666666666668,24.4675324675324"
-                    Point2="103.066666666667,24.4675324675324"
-                    Point3="103.066666666667,28.4675324675324" />
-                  <mssgle:LineSegment
-                    End="103.066666666667,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Merge Join Output]"
-          TopLeft="297.7,352.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Inladen Dim_Cursus\Data Conversion"
+          TopLeft="41.1,208.7" />
         <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
-          TopLeft="297.7,148.7">
+          TopLeft="119.5,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3048,8 +3219,8 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Gewijzigde Regels]"
-          TopLeft="297.7,555.9">
+          Id="Package\Inladen Dim_Cursus.Paths[Data Conversion Output]"
+          TopLeft="119.5,250.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3061,64 +3232,6 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-40.57009765625,20.4184570312499,81.1401953125,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Derived Column Output]"
-          TopLeft="297.7,454.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[ChecksumOutput]"
-          TopLeft="297.7,250.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="20.5333333333333,60"
-              Start="0,0"
-              End="20.5333333333333,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.566265060241" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.566265060241"
-                    Point2="0,35.566265060241"
-                    Point3="4,35.566265060241" />
-                  <mssgle:LineSegment
-                    End="16.5333333333333,35.566265060241" />
-                  <mssgle:CubicBezierSegment
-                    Point1="16.5333333333333,35.566265060241"
-                    Point2="20.5333333333333,35.566265060241"
-                    Point3="20.5333333333333,39.566265060241" />
-                  <mssgle:LineSegment
-                    End="20.5333333333333,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

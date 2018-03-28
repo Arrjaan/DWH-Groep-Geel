@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Test Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="21"
-  DTS:VersionGUID="{D29D9764-6E1F-443F-ABE0-20A6D3700BC9}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{2E4B68FF-5149-44F1-97B8-10B78B6C5A90}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -62,7 +62,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}"
-          SQLTask:SqlStatementSource="UPDATE Cursus SET MaxAantalDeelnemers = 4 WHERE CursusId = 1 &#xA;UPDATE CursusOmschrijving SET AantalDagen = 4 WHERE CursusOmschrijvingId = 2&#xA;UPDATE Persoon SET Voornaam = 'KenKen'  WHERE PersoonId = 1&#xA;UPDATE Resultaat SET Geslaagd = 0 WHERE ResultaatId = 1&#xA;UPDATE [Order] SET Omschrijving = 'LunchkostenKosten' WHERE OrderId = 0&#x9;&#xA;UPDATE Deelname SET Bijzonderheden = 'Testtesttest'  WHERE DeelnameId = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="UPDATE Cursus SET MaxAantalDeelnemers = 4 WHERE CursusId = 1 &#xA;UPDATE CursusOmschrijving SET AantalDagen = 4 WHERE CursusOmschrijvingId = 2&#xA;UPDATE Persoon SET Voornaam = 'KenKen'  WHERE PersoonId = 1&#xA;UPDATE Resultaat SET Geslaagd = 0 WHERE ResultaatId = 1&#xA;UPDATE [Order] SET Omschrijving = 'LunchkostenKosten' WHERE OrderId = 0&#x9;&#xA;UPDATE Deelname SET Status = 'Gereserveerdd'  WHERE DeelnameId = 0&#xA;&#xA;DELETE FROM Persoon WHERE PersoonId = 2&#xA;DELETE FROM Resultaat WHERE ResultaatId = 2&#xA;DELETE FROM [Order] WHERE OrderId = 1&#x9;&#xA;DELETE FROM Deelname WHERE DeelnameId = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2703,14 +2703,14 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,52.4999999999999">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.4999999999999" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
