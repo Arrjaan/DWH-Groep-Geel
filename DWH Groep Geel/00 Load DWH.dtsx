@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="00 Load DWH"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{5E9EF5EF-7460-4A0A-92A7-226B45AE77E7}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{71C864C3-7A3D-4BDB-8026-2466E805DD15}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -47,7 +47,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
-          <PackageName>01 Load Dimensions.dtsx</PackageName>
+          <PackageName>02 Load Facts.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
