@@ -7,7 +7,11 @@ use DWH
 drop table [DWH].[dbo].[fct_Kosten]
 
 CREATE TABLE [dbo].[fct_Kosten](
-	[DimKey] [bigint] IDENTITY(1,1) NOT NULL,
+	[SurgetKey] [bigint] IDENTITY(1,1) NOT NULL,
+	[OrderID] [int] NULL,
+	[DimKey_Order] [bigint] NOT NULL,
+	[DimKey_Cursus] [int] NOT NULL,
+	[DimKey_Persoon] [int] NOT NULL,-- JunkFinCat toevoegen!!
 	[OrderNummer] [bigint] NULL,
 	[OrderBedrag_sum] [decimal](10,2) NOT NULL,
 	[OrderBedrag_avg] [decimal](10,2) NOT NULL,
