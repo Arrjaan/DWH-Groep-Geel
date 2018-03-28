@@ -5,35 +5,18 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="WS724"
   DTS:CreatorName="WS724\User"
-  DTS:DTSID="{CBB40ADA-9B5F-43EE-98DD-59D0344E7CFD}"
+  DTS:DTSID="{877ACA11-A69C-4E4A-A7B7-52438F55A04C}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.92"
   DTS:LocaleID="2057"
-  DTS:ObjectName="Load Facts"
+  DTS:ObjectName="02 Load Facts"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{92451FD4-E416-4872-A5EA-EDE6C9AA8161}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{737916F0-1912-44F6-833F-36287A43B58F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
-    <DTS:Executable
-      DTS:refId="Package\Create Table dim_Order"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
-      DTS:DTSID="{7b0ce699-0a1b-4861-8738-3c0e16cdb9a5}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Create Table dim_Order"
-      DTS:ThreadHint="1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
-          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Order'))&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[dim_Order] (&#xA; [DimKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA; [OrderId] [int] NOT NULL,&#xA; [OrderNummer] [bigint] NOT NULL,&#xA; [OrderType] [varchar](32) NOT NULL,&#xA; [OrderOmschrijving] [varchar](100) NOT NULL,&#xA; [OrderCategorie1] [varchar](32) NULL,&#xA; [OrderCategorie2] [nvarchar](32) NULL,&#xA; [OrderDatum] [date] NOT NULL,&#xA; [OrderBedrag] [decimal](10,2) NOT NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [ValidFrom] [datetime] NOT NULL,&#xA; [ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31',&#xA; [CurrentFlag] [bit] NOT NULL DEFAULT 1&#xA;) &#xA;END&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Create Table dim_Persoon"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
@@ -61,12 +44,28 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_Status"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
           SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Status'))&#xA;BEGIN&#xA;   Create Table dim_Status (&#xA;[DimKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA;[DeelnameId] [int] NOT NULL,&#xA;[Status] varchar(16) NOT NULL,&#xA;[Checksum] [int] NOT NULL,&#xA;[ValidFrom] [datetime] NOT NULL default Getdate(),&#xA;[ValidUntil] [datetime] NOT NULL default '9999-12-31',&#xA;[CurrentFlag] [bit] NOT NULL default '1'&#xA;);&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Table fct_Deelname"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7b0ce699-0a1b-4861-8738-3c0e16cdb9a5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Table fct_Deelname"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
+          SQLTask:SqlStatementSource="IF (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'fct_Deelname'))&#xA;BEGIN&#xA;&#x9;DROP TABLE fct_Deelname&#xA;END&#xA;&#xA;Create Table fct_Deelname (&#xA;[FctKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA;[DeelnameId] int NOT NULL Primary Key,&#xA;[Bijzonderheden] varchar(400) NULL,&#xA;[DimKey_Status] int NOT NULL,&#xA;[DimKey_Persoon] int NOT NULL,&#xA;[DimKey_Cursus] int NOT NULL,&#xA;[Checksum] [int] NOT NULL,&#xA;[ValidFrom] [datetime] NOT NULL default Getdate(),&#xA;[ValidUntil] [datetime] NOT NULL default '9999-12-31',&#xA;[CurrentFlag] [bit] NOT NULL default '1'&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -77,7 +76,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table fct_Resultaten"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -86,26 +85,9 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\dim_Order_EvertJan"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
-      DTS:DTSID="{fa2863ac-cbdc-4cb6-960e-5c06163242ac}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="dim_Order_EvertJan"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <UseProjectReference>True</UseProjectReference>
-          <PackageName>dim_Order_EvertJan.dtsx</PackageName>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
       DTS:refId="Package\dim_Persoon_Bram"
       DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
       DTS:Description="Execute Package Task"
       DTS:Disabled="True"
       DTS:DTSID="{a840e15a-f36e-4568-9b52-e3001d318b64}"
@@ -124,6 +106,7 @@
     <DTS:Executable
       DTS:refId="Package\dim_Status_Pim"
       DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
       DTS:Description="Execute Package Task"
       DTS:Disabled="True"
       DTS:DTSID="{9ee386e7-7543-4870-bcc3-bae24848ef0a}"
@@ -140,8 +123,27 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\fct_Deelname_Pim"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{fa2863ac-cbdc-4cb6-960e-5c06163242ac}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="fct_Deelname_Pim"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>fct_Deelname_Pim.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\fct_Resultaten_Wyke"
       DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
       DTS:Description="Execute Package Task"
       DTS:DTSID="{91d3a014-a4e9-46df-a50a-67a7f10fa2b8}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
@@ -186,10 +188,10 @@
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{71a86655-c5ce-42df-9f74-01f24f77547a}"
-      DTS:From="Package\Create Table dim_Order"
+      DTS:From="Package\Create Table fct_Deelname"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\dim_Order_EvertJan" />
+      DTS:To="Package\fct_Deelname_Pim" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -204,14 +206,6 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="210.4,41.6"
-          Id="Package\Create Table fct_Resultaten"
-          TopLeft="66.8571429739194,63.0588235723104" />
-        <NodeLayout
-          Size="192.8,41.6"
-          Id="Package\Create Table dim_Order"
-          TopLeft="297.714289762536,62.9647058566135" />
-        <NodeLayout
           Size="204,41.6"
           Id="Package\Create Table dim_Persoon"
           TopLeft="516.000007765634,60" />
@@ -220,13 +214,13 @@
           Id="Package\Create Table dim_Status"
           TopLeft="728.571439957132,61.8352941433862" />
         <NodeLayout
-          Size="179.2,41.6"
-          Id="Package\fct_Resultaten_Wyke"
-          TopLeft="60,166.400002917121" />
+          Size="208,41.6"
+          Id="Package\Create Table fct_Deelname"
+          TopLeft="297.714289762536,62.9647058566135" />
         <NodeLayout
-          Size="176,41.6"
-          Id="Package\dim_Order_EvertJan"
-          TopLeft="285.8,164.564708773735" />
+          Size="210.4,41.6"
+          Id="Package\Create Table fct_Resultaten"
+          TopLeft="66.8571429739194,63.0588235723104" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\dim_Persoon_Bram"
@@ -235,6 +229,14 @@
           Size="156,41.6"
           Id="Package\dim_Status_Pim"
           TopLeft="761.22857141884,176.800003062977" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\fct_Deelname_Pim"
+          TopLeft="285.8,164.564708773735" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\fct_Resultaten_Wyke"
+          TopLeft="60,166.400002917121" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="826.171439957132,103.435294143386">
@@ -327,13 +329,13 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="394.114289762536,104.564705856614">
+          TopLeft="401.714289762536,104.564705856614">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-20.314289762536,60.0000029171215"
+              EndConnector="-31.914289762536,60.0000029171215"
               Start="0,0"
-              End="-20.314289762536,52.5000029171215">
+              End="-31.914289762536,52.5000029171215">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -344,13 +346,13 @@
                     Point2="0,30.0000014585607"
                     Point3="-4,30.0000014585607" />
                   <mssgle:LineSegment
-                    End="-16.314289762536,30.0000014585607" />
+                    End="-27.914289762536,30.0000014585607" />
                   <mssgle:CubicBezierSegment
-                    Point1="-16.314289762536,30.0000014585607"
-                    Point2="-20.314289762536,30.0000014585607"
-                    Point3="-20.314289762536,34.0000014585607" />
+                    Point1="-27.914289762536,30.0000014585607"
+                    Point2="-31.914289762536,30.0000014585607"
+                    Point3="-31.914289762536,34.0000014585607" />
                   <mssgle:LineSegment
-                    End="-20.314289762536,52.5000029171215" />
+                    End="-31.914289762536,52.5000029171215" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

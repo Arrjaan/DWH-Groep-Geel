@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="WS724"
   DTS:CreatorName="WS724\User"
-  DTS:DTSID="{DF7207F9-E767-49A1-9BD9-FDF15D959716}"
+  DTS:DTSID="{685BE918-AC7F-4A60-8EFF-8D6AB628DCE3}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.92"
   DTS:LocaleID="2057"
-  DTS:ObjectName="Load Dimensions"
+  DTS:ObjectName="01 Load Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{B616E20A-04F5-45E9-BB92-30F6B5AFB502}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{9A5B989C-A7AB-4C88-88DC-6424EA5BD61B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
