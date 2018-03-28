@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Load Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{507B92F4-F208-43AC-97B8-57C65C008AB1}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{61979F9E-0A10-499D-906D-BD90617E6E7A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -25,7 +25,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_Cursus"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -46,7 +46,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
-          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Order'))&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[dim_Order] (&#xA; [DimKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA; [OrderNummer] [bigint] NULL,&#xA; [OrderType] [varchar](32) NOT NULL,&#xA; [OrderOmschrijving] [varchar](100) NOT NULL,&#xA; [OrderCategorie1] [varchar](32) NULL,&#xA; [OrderCategorie2] [nvarchar](32) NULL,&#xA; [OrderDatum] [date] NOT NULL,&#xA; [OrderBedrag] [decimal](10,2) NOT NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [ValidFrom] [datetime] NOT NULL,&#xA; [ValidUntil] [datetime] NOT NULL,&#xA; [CurrentFlag] [bit] NOT NULL,&#xA;) &#xA;END&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Order'))&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[dim_Order] (&#xA; [DimKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA; [OrderId] [int] NOT NULL,&#xA; [OrderNummer] [bigint] NOT NULL,&#xA; [OrderType] [varchar](32) NOT NULL,&#xA; [OrderOmschrijving] [varchar](100) NOT NULL,&#xA; [OrderCategorie1] [varchar](32) NULL,&#xA; [OrderCategorie2] [nvarchar](32) NULL,&#xA; [OrderDatum] [date] NOT NULL,&#xA; [OrderBedrag] [decimal](10,2) NOT NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [ValidFrom] [datetime] NOT NULL,&#xA; [ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31',&#xA; [CurrentFlag] [bit] NOT NULL DEFAULT 1&#xA;) &#xA;END&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -57,7 +57,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_Persoon"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -74,7 +74,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_Status"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -198,6 +198,22 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Create Table dim_Cursus"
+          TopLeft="11.2142858115994,19.0058811174542" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\Create Table dim_Order"
+          TopLeft="242.071432600216,18.9117634017573" />
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\Create Table dim_Persoon"
+          TopLeft="460.357150603314,15.9470575451438" />
+        <NodeLayout
+          Size="195.2,41.6"
+          Id="Package\Create Table dim_Status"
+          TopLeft="672.928582794812,17.78235168853" />
+        <NodeLayout
           Size="165.6,41.6"
           Id="Package\dim_Cursus_Arjan"
           TopLeft="4.35714283768004,122.347060462265" />
@@ -213,10 +229,6 @@
           Size="156,41.6"
           Id="Package\dim_Status_Pim"
           TopLeft="705.58571425652,132.747060608121" />
-        <NodeLayout
-          Size="195.2,41.6"
-          Id="Package\Create Table dim_Status"
-          TopLeft="672.928582794812,17.78235168853" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="770.528582794812,59.38235168853">
@@ -251,10 +263,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="197.6,41.6"
-          Id="Package\Create Table dim_Cursus"
-          TopLeft="11.2142858115994,19.0058811174542" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="110.014285811599,60.6058811174542">
@@ -289,10 +297,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="204,41.6"
-          Id="Package\Create Table dim_Persoon"
-          TopLeft="460.357150603314,15.9470575451438" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="558.971432463977,57.5470575451438">
@@ -315,10 +319,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="192.8,41.6"
-          Id="Package\Create Table dim_Order"
-          TopLeft="242.071432600216,18.9117634017573" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="338.471432600216,60.5117634017573">

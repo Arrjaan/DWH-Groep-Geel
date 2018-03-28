@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Test Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{A8EFB770-9B47-4DC7-B358-7FF2155FD9A8}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{F9572EEC-F683-4328-943B-4024F403E41C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,7 +23,7 @@
       DTS:ObjectName="Excel Connection Manager">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\User\Desktop\TestResult.xls;Extended Properties=&quot;Excel 8.0;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\User\Desktop\TestResult.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -42,7 +42,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}"
-          SQLTask:SqlStatementSource="UPDATE Cursus SET MaxAantalDeelnemers = 4 WHERE CursusId = 1 &#xA;UPDATE CursusOmschrijving SET Omschrijving = 'SQLSQL' WHERE CursusOmschrijvingId = 2&#xA;UPDATE Persoon SET Voornaam = 'KenKen'  WHERE PersoonId = 1&#xA;UPDATE Resultaat SET Geslaagd = 0 WHERE ResultaatId = 1&#xA;UPDATE [Order] SET Omschrijving = 'LunchkostenKosten' WHERE OrderId = 0&#x9;&#xA;UPDATE Deelname SET Bijzonderheden = 'Testtesttest'  WHERE DeelnameId = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="UPDATE Cursus SET MaxAantalDeelnemers = 4 WHERE CursusId = 1 &#xA;UPDATE CursusOmschrijving SET AantalDagen = 4 WHERE CursusOmschrijvingId = 2&#xA;UPDATE Persoon SET Voornaam = 'KenKen'  WHERE PersoonId = 1&#xA;UPDATE Resultaat SET Geslaagd = 0 WHERE ResultaatId = 1&#xA;UPDATE [Order] SET Omschrijving = 'LunchkostenKosten' WHERE OrderId = 0&#x9;&#xA;UPDATE Deelname SET Bijzonderheden = 'Testtesttest'  WHERE DeelnameId = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -59,6 +59,22 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
           SQLTask:SqlStatementSource="SELECT * INTO tst_Cursus FROM dim_Cursus&#xA;SELECT * INTO tst_Order FROM dim_Order&#xA;SELECT * INTO tst_Persoon FROM dim_Persoon&#xA;SELECT * INTO tst_Status FROM dim_Status" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Empty Excel file"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3FA02C21-5827-4EAF-9F58-EF60700C2AD3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Empty Excel file"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5B067F5D-521E-43F0-A2AB-FCDCB503BB6E}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dim_Cursus&#xA;TRUNCATE TABLE dim_Order&#xA;TRUNCATE TABLE dim_Persoon&#xA;TRUNCATE TABLE dim_Status" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -112,8 +128,26 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Reset data again"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{ca94a6b6-1362-4a1a-9981-e9c3efc47b79}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Reset data again"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
+          SQLTask:SqlStatementSource="USE [master];&#xA;&#xA;DECLARE @kill varchar(8000) = '';  &#xA;SELECT @kill = @kill + 'kill ' + CONVERT(varchar(5), session_id) + ';'  &#xA;FROM sys.dm_exec_sessions&#xA;WHERE database_id  IN (db_id('DWH'),db_id('Sandbox'),db_id('Cursus'),db_id('AdventureWorks2014]'))&#xA;EXEC(@kill);&#xA;--GO&#xA;BEGIN TRY DROP DATABASE DWH END TRY BEGIN CATCH END CATCH&#xA;GO&#xA;CREATE DATABASE DWH&#xA;GO&#xA;--BEGIN TRY DROP DATABASE Sandbox END TRY BEGIN CATCH END CATCH&#xA;--GO&#xA;--CREATE DATABASE Sandbox&#xA;--GO&#xA;BEGIN TRY DROP DATABASE Cursus END TRY BEGIN CATCH END CATCH&#xA;GO&#xA;CREATE DATABASE Cursus&#xA;GO&#xA;USE Cursus&#xA;GO&#xA;CREATE TABLE [dbo].[Persoon](&#xA;    [PersoonId] [int] NOT NULL,&#xA;    [Voornaam] [varchar](50) NULL,&#xA;    [Tussenvoegsels] [varchar](50) NULL,&#xA;    [Achternaam] [varchar](50) NULL,&#xA;    [MailAdres] varchar(128) NULL, &#xA;    [IsCursist] [bit] NULL,&#xA;    [IsTrainer] [bit] NULL,&#xA; CONSTRAINT [PK_Persoon] PRIMARY KEY CLUSTERED &#xA;(&#xA;    [PersoonId] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;CREATE TABLE [dbo].[CursusOmschrijving](&#xA;    [CursusOmschrijvingId] [int] NOT NULL,&#xA;    [Omschrijving] [ntext] NULL,&#xA;    [AantalDagen] int NOT NULL&#xA; CONSTRAINT [PK_CursusOmschrijving] PRIMARY KEY CLUSTERED &#xA;(&#xA;    [CursusOmschrijvingId] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;CREATE TABLE [dbo].[Cursus](&#xA;    [CursusId] [int] NOT NULL,&#xA;    [CursusOmschrijvingId] [int] NOT NULL,&#xA;    [TrainerId] [int] NOT NULL,&#xA;    [StartDatum] [date] NOT NULL, &#xA;    [MaxAantalDeelnemers] [Tinyint] NOT NULL DEFAULT -1,&#xA;    [MinAantalDeelnemers] [Tinyint] NOT NULL DEFAULT -1&#xA; CONSTRAINT [PK_Cursus] PRIMARY KEY CLUSTERED &#xA;(&#xA;    [CursusId] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;CREATE TABLE [dbo].[Deelname](&#xA;    [DeelnameId] [int] IDENTITY(0,1) NOT NULL,&#xA;    [CursusId] [int] NOT NULL,&#xA;    [CursistId] [int] NOT NULL,&#xA;    [Bijzonderheden] varchar(400) NULL,&#xA;    [Status] varchar(16) NOT NULL&#xA; CONSTRAINT [PK_Deelname] PRIMARY KEY CLUSTERED &#xA;(&#xA;    [DeelnameId] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;CREATE TABLE [dbo].[Resultaat](&#xA;    [ResultaatId] [int] NOT NULL,&#xA;    [CursusId] [int] NOT NULL,&#xA;    [CursistId] [int] NOT NULL,&#xA;    [DeelnameId] [int] NOT NULL,&#xA;    [Datum] DATE NOT NULL,&#xA;    [Geslaagd] [bit] NOT NULL,&#xA; CONSTRAINT [PK_Resultaat] PRIMARY KEY CLUSTERED &#xA;(&#xA;    [ResultaatId] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;CREATE TABLE [dbo].[Order](&#xA;    [OrderId] [int] IDENTITY(0,1) NOT NULL,&#xA;    [OrderNummer] bigint null,&#xA;    [OrderType] varchar(32) NOT NULL, --&gt; InkoopOrder, VerkoopOrder&#xA;    [Omschrijving] varchar(100) NULL,&#xA;    [OrderCategorie1] varchar(32) NULL,&#xA;    [OrderCategorie2] nvarchar(32) NULL,&#xA;    [CursusId] [int] NULL,&#xA;    [DeelnameId] [int] NULL,&#xA;    [Datum] date NOT NULL,&#xA;    [Bedrag] DECIMAL(10,2) NOT NULL&#xA; CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED &#xA;(&#xA;    [OrderId] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;/*&#xA;CREATE TABLE [dbo].[Adres](&#xA;    [PersoonId] [int] NOT NULL,&#xA;    [Vanaf] date NOT NULL, &#xA;    [Tot] date NOT NULL, &#xA;    [Straatnaam] nvarchar(128),&#xA;    [Huisnummer] nvarchar(128),&#xA;    [Postcode] nvarchar(6),&#xA;    [Stad] nvarchar(128)&#xA; CONSTRAINT [PK_Adres] PRIMARY KEY CLUSTERED &#xA;(&#xA;    [PersoonId] ASC, [Vanaf] &#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;*/&#xA;--&gt; Vul tmp calender&#xA;DECLARE @DATUM DATE = '2000-01-01'&#xA;BEGIN TRY DROP TABLE #tmp END TRY BEGIN CATCH END CATCH&#xA;SELECT 1 as id, @DATUM AS Datum INTO #tmp&#xA;WHILE @DATUM &lt; '2019-01-01'&#xA;BEGIN&#xA;    SET @DATUM = DATEADD(DAY, 1, @DATUM)&#xA;    INSERT INTO #tmp&#xA;    SELECT MAX(id)+1, @DATUM from #tmp&#xA;END&#xA;INSERT INTO [dbo].[Persoon](&#xA;    [PersoonId]&#xA;    ,[Voornaam]&#xA;    ,[Tussenvoegsels]&#xA;    ,[Achternaam]&#xA;    ,[MailAdres]&#xA;    ,[IsCursist]&#xA;    ,[IsTrainer]&#xA;)&#xA;SELECT&#xA;    t1.[BusinessEntityID] AS [PersoonId]&#xA;    ,[Firstname] as [Voornaam]&#xA;    ,[MiddleName] AS [Tussenvoegsels]&#xA;    ,[LastName] AS [Achternaam]&#xA;    ,t2.[EmailAddress] AS [MailAdres]&#xA;    ,CASE WHEN t1.[BusinessEntityID]%5&lt;4 THEN 1 ELSE 0 END    AS [IsCursist]&#xA;    ,CASE WHEN t1.[BusinessEntityID]%20=19 THEN 1 ELSE 0 END    AS [IsTrainer]&#xA;FROM AdventureWorks2014.Person.Person t1 --19972&#xA;LEFT JOIN AdventureWorks2014.Person.EmailAddress t2 on t1.BusinessEntityID = t2.BusinessEntityID&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (1,'Agile workshop',1)--Wouter&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (2,'SQL',3)--Gerrie&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (3,'BI &amp; DWH Essentials',4)--Josip&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (4,'Data Vault modelleren',1)--Remco&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (5,'ETL/DWH Microsoft',8)--Rinaldo&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (6,'Requirement Analyse',2)--Alfred&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (7,'Data Quality',2)--Daan&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (8,'Visualisatie &amp; Reporting: Visualisatie',2)--Wouter&#xA;INSERT INTO [dbo].[CursusOmschrijving] VALUES (9,'Visualisatie &amp; Reporting: PowerBI',2)--Anne&#xA;&#xA;INSERT INTO [dbo].[Cursus](&#xA;    [CursusId]&#xA;    ,[CursusOmschrijvingId]&#xA;    ,[TrainerId]&#xA;    ,[StartDatum]&#xA;    ,[MaxAantalDeelnemers]&#xA;    ,[MinAantalDeelnemers]&#xA;)&#xA;SELECT&#xA;    ROW_NUMBER() OVER (ORDER BY (SELECT 1)) AS [CursusId]&#xA;    ,Cursus.CursusOmschrijvingId&#xA;    ,0 AS [TrainerId]&#xA;    ,DATEADD(DAY, Cursus.offset, startPeriode.Datum) AS [StartDatum]&#xA;    ,0 as [MaxAantalDeelnemers]&#xA;    ,0 as [MinAantalDeelnemers]&#xA;FROM&#xA;(&#xA;SELECT * FROM #tmp&#xA;WHERE DATEPART(MONTH, Datum) IN (3, 9)&#xA;AND DATEPART(DAY, Datum) IN (1)&#xA;) startPeriode&#xA;LEFT JOIN &#xA;(&#xA;SELECT&#xA;    t1.CursusOmschrijvingId, t1.AantalDagen, ISNULL(SUM(t2.AantalDagen),0) AS Offset&#xA;FROM [dbo].[CursusOmschrijving] t1&#xA;LEFT JOIN [dbo].[CursusOmschrijving] t2 on t1.CursusOmschrijvingId &gt; t2.CursusOmschrijvingId&#xA;GROUP BY t1.CursusOmschrijvingId, t1.AantalDagen&#xA;) Cursus on 1=1&#xA;&#xA;UPDATE [dbo].[Cursus] SET&#xA;    TrainerId = t2.PersoonId,&#xA;    MaxAantalDeelnemers = 2+(DATEPART(YEAR,t1.startdatum)-2000)/2,&#xA;    MinAantalDeelnemers = 0+(DATEPART(YEAR,t1.startdatum)-2000)/3&#xA;FROM [dbo].[Cursus] t1&#xA;INNER JOIN (SELECT ROW_NUMBER() OVER (ORDER BY PersoonId) as nr, PersoonId FROM (SELECT TOP 20 PersoonId FROM Persoon WHERE IsTrainer = 1 AND (PersoonId/10)%10 = 9 ORDER BY Achternaam) tbl) t2 &#xA;    on t1.CursusId%20 = t2.nr-1&#xA;&#xA;&#xA;-- Gereserveerd&#xA;INSERT INTO Deelname (&#xA;     [CursusId]&#xA;    ,[CursistId]&#xA;    ,[Bijzonderheden]&#xA;    ,[Status]&#xA;)&#xA;SELECT&#xA;     t1.CursusId AS [CursusId]&#xA;    ,t2.PersoonId AS [CursistId]&#xA;    ,NULL AS [Bijzonderheden]&#xA;    ,'Gereserveerd' AS [Status]&#xA;FROM Cursus t1&#xA;LEFT JOIN Persoon t2 on t2.IsCursist = 1 AND t2.PersoonId%10000=1&#xA;WHERE t1.StartDatum &gt; '2018-04-01'&#xA;UNION&#xA;SELECT&#xA;     t1.CursusId AS [CursusId]&#xA;    ,t2.PersoonId AS [CursistId]&#xA;    ,NULL AS [Bijzonderheden]&#xA;    ,'Deelgenomen' AS [Status]&#xA;FROM Cursus t1&#xA;INNER JOIN Persoon t2 on t2.IsCursist = 1 AND t2.PersoonId%10002 &lt;(0+(CEILING(CAST(DATEPART(YEAR,t1.StartDatum) AS DECIMAL(10,2))-2000)/3.5))&#xA;WHERE t1.StartDatum &lt; '2018-04-01'&#xA;UNION&#xA;SELECT&#xA;     t1.CursusId AS [CursusId]&#xA;    ,t2.PersoonId AS [CursistId]&#xA;    ,NULL AS [Bijzonderheden]&#xA;    ,'Geannuleerd' AS [Status]&#xA;FROM Cursus t1&#xA;INNER JOIN Persoon t2 on t2.IsCursist = 1 AND t2.PersoonId%10001 &lt;(0+(CEILING(CAST(DATEPART(YEAR,t1.StartDatum) AS DECIMAL(10,2))-2000)/8))&#xA;WHERE t1.StartDatum &lt; '2018-04-01'&#xA;&#xA;SELECT COUNT(*), [Status] FROM Deelname GROUP BY [Status]--2259&#xA;DELETE FROM Deelname WHERE [Status] = 'Deelgenomen' AND DeelnameId%100 &lt; 33&#xA;SELECT COUNT(*), [Status] FROM Deelname GROUP BY [Status]--2259&#xA;&#xA;&#xA;--&gt; extra diversiteit toevoegen!&#xA;&#xA;UPDATE Deelname SET CursistId = tbl.PersoonId&#xA;FROM Deelname&#xA;INNER JOIN Cursus on Deelname.CursusId = Cursus.CursusId&#xA;INNER JOIN &#xA;(SELECT ROW_NUMBER() OVER (ORDER BY Tussenvoegsels,MailAdres) AS RownNr, PersoonId FROM Persoon WHERE IsCursist = 1) tbl&#xA;ON Deelname.DeelnameId = tbl.RownNr&#xA;&#xA;&#xA;SELECT t2.CursusId, t2.StartDatum, t2.MinAantalDeelnemers, t2.MaxAantalDeelnemers, t1.Status, COUNT(Cursistid) FROM Deelname t1&#xA;LEFT JOIN Cursus t2 on t1.CursusId = t2.CursusId&#xA;WHERE Status = 'Deelgenomen'&#xA;GROUP BY t2.CursusId, t2.StartDatum, t2.MinAantalDeelnemers, t2.MaxAantalDeelnemers, t1.Status&#xA;ORDER BY 5,2,6 DESC&#xA;&#xA;--SELECT t2.CursusId, t2.StartDatum, t2.MinAantalDeelnemers, t2.MaxAantalDeelnemers, t1.Status, COUNT(Cursistid) FROM Deelname t1&#xA;--LEFT JOIN Cursus t2 on t1.CursusId = t2.CursusId&#xA;--WHERE Status = 'Geannuleerd'&#xA;--GROUP BY t2.CursusId, t2.StartDatum, t2.MinAantalDeelnemers, t2.MaxAantalDeelnemers, t1.Status&#xA;--ORDER BY 5,2,6 DESC&#xA;&#xA;--SELECT t2.CursusId, t2.StartDatum, t2.MinAantalDeelnemers, t2.MaxAantalDeelnemers, t1.Status, COUNT(Cursistid) FROM Deelname t1&#xA;--LEFT JOIN Cursus t2 on t1.CursusId = t2.CursusId&#xA;--WHERE Status = 'Gereserveerd'&#xA;--GROUP BY t2.CursusId, t2.StartDatum, t2.MinAantalDeelnemers, t2.MaxAantalDeelnemers, t1.Status&#xA;--ORDER BY 5,2,6 DESC&#xA;&#xA;INSERT INTO [Cursus].[dbo].[Resultaat] (&#xA;    [ResultaatId]&#xA;    ,[CursusId]&#xA;    ,[CursistId]&#xA;    ,[DeelnameId]&#xA;    ,[Datum]&#xA;    ,[Geslaagd]&#xA;)&#xA;SELECT &#xA;     ROW_NUMBER() OVER(ORDER BY t1.[DeelnameId]) [ResultaatId]&#xA;    ,t1.[CursusId]&#xA;    ,t1.[CursistId]&#xA;    ,t1.[DeelnameId]&#xA;    ,DATEADD(DAY, t3.AantalDagen, t2.StartDatum)&#xA;    ,CASE WHEN [DeelnameId]%100&gt;95 THEN 0 ELSE 1 END AS [Geslaagd]&#xA;FROM&#xA;    Deelname t1&#xA;LEFT JOIN Cursus t2 on t1.CursusId = t2.CursusId&#xA;LEFT JOIN CursusOmschrijving t3 on t2.CursusOmschrijvingId = t3.CursusOmschrijvingId&#xA;WHERE Status = 'Deelgenomen'&#xA;&#xA;&#xA;INSERT INTO [dbo].[Order] (&#xA;     [OrderType]&#xA;    ,[Omschrijving]&#xA;    ,[OrderCategorie1]&#xA;    ,[OrderCategorie2]&#xA;    ,[CursusId]&#xA;    ,[DeelnameId]&#xA;    ,[Datum]&#xA;    ,[Bedrag]&#xA;)&#xA;SELECT&#xA;    'Kosten' AS [OrderType]&#xA;    ,'Lunchkosten'[Omschrijving]&#xA;    , 'Cursussen' AS [OrderCategorie1]&#xA;    , 'KVL Academy' AS [OrderCategorie2]&#xA;    ,t1.[CursusId]&#xA;    ,NULL AS [DeelnameId]&#xA;    ,DATEADD(DAY, t3.AantalDagen, t1.StartDatum)&#xA;    ,COUNT(DISTINCT t2.CursistID) * 7.50 * t3.AantalDagen AS [Bedrag]&#xA;FROM&#xA;    Cursus t1&#xA;INNER JOIN Deelname t2 on t1.CursusId = t2.CursusId AND t2.Status = 'Deelgenomen'&#xA;INNER JOIN CursusOmschrijving t3 on t1.CursusOmschrijvingId = t3.AantalDagen&#xA;GROUP BY t1.[CursusId], t3.AantalDagen,t1.StartDatum&#xA;UNION ALL&#xA;SELECT&#xA;    'Kosten' AS [OrderType]&#xA;    ,'Huur laptop'[Omschrijving]&#xA;    , 'Cursussen' AS [OrderCategorie1]&#xA;    , 'KVL Academy' AS [OrderCategorie2]&#xA;    ,t1.[CursusId]&#xA;    ,NULL AS [DeelnameId]&#xA;    ,DATEADD(DAY, t3.AantalDagen, t1.StartDatum)&#xA;    ,COUNT(DISTINCT t2.CursistID) * 750/12 * t3.AantalDagen AS [Bedrag]&#xA;FROM&#xA;    Cursus t1&#xA;INNER JOIN Deelname t2 on t1.CursusId = t2.CursusId AND t2.Status = 'Deelgenomen'&#xA;INNER JOIN CursusOmschrijving t3 on t1.CursusOmschrijvingId = t3.AantalDagen&#xA;GROUP BY t1.[CursusId], t3.AantalDagen,t1.StartDatum&#xA;UNION ALL&#xA;SELECT&#xA;    'Kosten' AS [OrderType]&#xA;    ,'Trainer'[Omschrijving]&#xA;    , 'Cursussen' AS [OrderCategorie1]&#xA;    , 'KVL Academy' AS [OrderCategorie2]&#xA;    ,t1.[CursusId]&#xA;    ,NULL AS [DeelnameId]&#xA;    ,DATEADD(DAY, t3.AantalDagen, t1.StartDatum)&#xA;    ,800 * t3.AantalDagen AS [Bedrag]&#xA;FROM&#xA;    Cursus t1&#xA;INNER JOIN CursusOmschrijving t3 on t1.CursusOmschrijvingId = t3.AantalDagen&#xA;GROUP BY t1.[CursusId], t3.AantalDagen,t1.StartDatum&#xA;UNION ALL&#xA;SELECT&#xA;    'Kosten' AS [OrderType]&#xA;    ,'Overig'[Omschrijving]&#xA;    ,'Cursussen' AS [OrderCategorie1]&#xA;    ,'KVL Academy' AS [OrderCategorie2]&#xA;    ,t1.[CursusId]&#xA;    ,NULL AS [DeelnameId]&#xA;    ,DATEADD(DAY, t3.AantalDagen, t1.StartDatum)&#xA;    ,CAST(t1.CursusId%100 * (1/rand())*(1/rand()) AS DECIMAL(10,2)) AS [Bedrag]&#xA;FROM&#xA;    Cursus t1&#xA;INNER JOIN CursusOmschrijving t3 on t1.CursusOmschrijvingId = t3.AantalDagen&#xA;WHERE t1.CursusId%11=0&#xA;UNION ALL&#xA;SELECT&#xA;    'Opbrengsten' AS [OrderType]&#xA;    ,'Deelnames'[Omschrijving]&#xA;    ,'Cursussen' AS [OrderCategorie1]&#xA;    ,'KVL Academy' AS [OrderCategorie2]&#xA;    ,t1.[CursusId]&#xA;    ,t2.[DeelnameId] AS [DeelnameId]&#xA;    ,DATEADD(DAY, t3.AantalDagen, t1.StartDatum)&#xA;    ,(399 + t1.CursusId%100 + t2.CursistId%100) * t3.AantalDagen AS [Bedrag]&#xA;FROM&#xA;    Cursus t1&#xA;INNER JOIN Deelname t2 on t1.CursusId = t2.CursusId AND t2.Status = 'Deelgenomen'&#xA;INNER JOIN CursusOmschrijving t3 on t1.CursusOmschrijvingId = t3.AantalDagen&#xA;&#xA;&#xA;&#xA;&#xA;UPDATE [Order] SET [OrderNummer] = t2.[OrderNummer]&#xA;FROM [Order] t1&#xA;INNER JOIN (&#xA;SELECT OrderId,&#xA;DATEPART(YEAR,Datum)*10000 + ROW_NUMBER() OVER (PARTITION BY DATEPART(YEAR,Datum) ORDER BY Datum) AS [OrderNummer]&#xA;FROM [Order]&#xA;WHERE OrderType = 'Opbrengsten'&#xA;UNION ALL&#xA;SELECT OrderId,&#xA;DATEPART(YEAR,Datum)*10000 + ROW_NUMBER() OVER (PARTITION BY DATEPART(YEAR,Datum) ORDER BY Datum) AS [OrderNummer]&#xA;FROM [Order]&#xA;WHERE OrderType = 'Kosten'&#xA;) t2 on t1.OrderId = t2.OrderId&#xA;&#xA;&#xA;--ALTER TABLE Adres&#xA;--ADD CONSTRAINT Adres_Persoon&#xA;--FOREIGN KEY ([PersoonId]) &#xA;--REFERENCES Persoon([PersoonId])&#xA;&#xA;ALTER TABLE Cursus &#xA;ADD CONSTRAINT Cursus_CursusOmschrijving&#xA;FOREIGN KEY ([CursusOmschrijvingId]) &#xA;REFERENCES CursusOmschrijving([CursusOmschrijvingId])&#xA;&#xA;ALTER TABLE Cursus&#xA;ADD CONSTRAINT Cursus_Persoon_Trainer&#xA;FOREIGN KEY ([TrainerId]) &#xA;REFERENCES Persoon([PersoonId])&#xA;&#xA;ALTER TABLE Deelname &#xA;ADD CONSTRAINT Deelname_Cursus&#xA;FOREIGN KEY ([CursusId]) &#xA;REFERENCES Cursus([CursusId])&#xA;&#xA;ALTER TABLE Deelname &#xA;ADD CONSTRAINT Deelname_Persoon_Cursist&#xA;FOREIGN KEY ([CursistId]) &#xA;REFERENCES Persoon(PersoonId)&#xA;&#xA;ALTER TABLE [Order] &#xA;ADD CONSTRAINT Order_Cursus&#xA;FOREIGN KEY ([CursusId]) &#xA;REFERENCES Cursus([CursusId])&#xA;&#xA;ALTER TABLE [Order] &#xA;ADD CONSTRAINT Order_Deelname&#xA;FOREIGN KEY ([DeelnameId]) &#xA;REFERENCES Deelname([DeelnameId])&#xA;&#xA;ALTER TABLE [Resultaat] &#xA;ADD CONSTRAINT Resultaat_Persoon_Cursist&#xA;FOREIGN KEY ([CursistId]) &#xA;REFERENCES Persoon(PersoonId)&#xA;&#xA;ALTER TABLE [Resultaat] &#xA;ADD CONSTRAINT Resultaat_Cursus&#xA;FOREIGN KEY ([CursusId]) &#xA;REFERENCES Cursus([CursusId])&#xA;&#xA;ALTER TABLE [Resultaat] &#xA;ADD CONSTRAINT Resultaat_Deelname&#xA;FOREIGN KEY ([DeelnameId]) &#xA;REFERENCES [Deelname]([DeelnameId])" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Test and Report"
       DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{4D1E527E-78D1-49A5-87C6-BD41F1462789}"
       DTS:ExecutableType="Microsoft.Pipeline"
@@ -125,6 +159,379 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\Test and Report\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input].Columns[OrderType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderType"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderType]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input].Columns[OrderOmschrijving]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OrderOmschrijving"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input].Columns[OrderCategorie1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="OrderCategorie1"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie1]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input].Columns[OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="OrderCategorie2"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie2]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="32"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderType]"
+                      name="Copy of OrderType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderType]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderOmschrijving]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderOmschrijving]"
+                      name="Copy of OrderOmschrijving"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="32"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie1]"
+                      name="Copy of OrderCategorie1"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie1]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="32"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie2]"
+                      name="Copy of OrderCategorie2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie2]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Test and Report\Data Conversion 1"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Test and Report\Data Conversion 1.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Inputs[Data Conversion Input].Columns[Voornaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Voornaam"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Inputs[Data Conversion Input].Columns[Tussenvoegsel]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Tussenvoegsel"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Inputs[Data Conversion Input].Columns[Achternaam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Achternaam"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Test and Report\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Voornaam]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Voornaam]"
+                      name="Copy of Voornaam"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Tussenvoegsel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Tussenvoegsel]"
+                      name="Copy of Tussenvoegsel"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Achternaam]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Achternaam]"
+                      name="Copy of Achternaam"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Test and Report\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Test and Report\Data Conversion 2"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 2"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Test and Report\Data Conversion 2.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Test and Report\Data Conversion 2.Inputs[Data Conversion Input].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="Status"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[Status]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Test and Report\Data Conversion 2.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Output].Columns[Copy of Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="16"
+                      lineageId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Output].Columns[Copy of Status]"
+                      name="Copy of Status"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[Status]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Test and Report\Data Conversion 2.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\Test and Report\Schrijf naar dim_Cursus"
               componentClassID="Microsoft.ExcelDestination"
@@ -140,7 +547,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">dim_Cursus$</property>
+                  name="OpenRowset">dim_Cursus</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -259,47 +666,58 @@
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[DimKey]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="DimKey" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[MaxAantalDeelnemers]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="MaxAantalDeelnemers" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[CursusId]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="CursusId" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[TrainerId]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="TrainerId" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[StartDatum]"
-                      dataType="date"
+                      dataType="wstr"
+                      length="255"
                       name="StartDatum" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[MinAantalDeelnemers]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="MinAantalDeelnemers" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[AantalDagen]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="AantalDagen" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="Checksum" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[CurrentFlag]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="CurrentFlag" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
-                      dataType="date"
+                      dataType="wstr"
+                      length="255"
                       name="ValidFrom" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
-                      dataType="date"
+                      dataType="wstr"
+                      length="255"
                       name="ValidUntil" />
                   </externalMetadataColumns>
                 </input>
@@ -344,7 +762,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">dim_Order$</property>
+                  name="OpenRowset">dim_Order</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -405,37 +823,6 @@
                       externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderNummer]"
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderNummer]" />
                     <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[OrderType]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="32"
-                      cachedName="OrderType"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderType]"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderType]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[OrderOmschrijving]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="OrderOmschrijving"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderOmschrijving]"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[OrderCategorie1]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="32"
-                      cachedName="OrderCategorie1"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie1]"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie1]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[OrderCategorie2]"
-                      cachedDataType="wstr"
-                      cachedLength="32"
-                      cachedName="OrderCategorie2"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie2]"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie2]" />
-                    <inputColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[OrderDatum]"
                       cachedDataType="dbDate"
                       cachedName="OrderDatum"
@@ -473,56 +860,96 @@
                       cachedName="CurrentFlag"
                       externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[CurrentFlag]"
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[CurrentFlag]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Copy of OrderType]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="Copy of OrderType"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderType]"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderType]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Copy of OrderOmschrijving]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Copy of OrderOmschrijving"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderOmschrijving]"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderOmschrijving]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Copy of OrderCategorie1]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="Copy of OrderCategorie1"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie1]"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie1]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Copy of OrderCategorie2]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="Copy of OrderCategorie2"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie2]"
+                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie2]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[DimKey]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="DimKey" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderNummer]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="OrderNummer" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderType]"
-                      dataType="nText"
+                      dataType="wstr"
+                      length="255"
                       name="OrderType" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderOmschrijving]"
-                      dataType="nText"
+                      dataType="wstr"
+                      length="255"
                       name="OrderOmschrijving" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie1]"
-                      dataType="nText"
+                      dataType="wstr"
+                      length="255"
                       name="OrderCategorie1" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie2]"
-                      dataType="nText"
+                      dataType="wstr"
+                      length="255"
                       name="OrderCategorie2" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderDatum]"
-                      dataType="date"
+                      dataType="wstr"
+                      length="255"
                       name="OrderDatum" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderBedrag]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="OrderBedrag" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="Checksum" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
-                      dataType="date"
+                      dataType="wstr"
+                      length="255"
                       name="ValidFrom" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
-                      dataType="date"
+                      dataType="wstr"
+                      length="255"
                       name="ValidUntil" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[CurrentFlag]"
-                      dataType="r8"
+                      dataType="wstr"
+                      length="255"
                       name="CurrentFlag" />
                   </externalMetadataColumns>
                 </input>
@@ -545,6 +972,378 @@
                       refId="Package\Test and Report\Schrijf naar dim_Order.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Test and Report\Schrijf naar dim_Order.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Test and Report\Schrijf naar dim_Persoon"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Schrijf naar dim_Persoon"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dim_Persoon</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from dbo.dim_Persoon EXCEPT select * from tst_Persoon</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test and Report\Schrijf naar dim_Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[PersoonId]"
+                      cachedDataType="i4"
+                      cachedName="PersoonId"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[PersoonId]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[DimKey]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[DimKey]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[IsTrainer]"
+                      cachedDataType="bool"
+                      cachedName="IsTrainer"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[IsTrainer]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[IsCursist]"
+                      cachedDataType="bool"
+                      cachedName="IsCursist"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[IsCursist]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[Currentflag]"
+                      cachedDataType="bool"
+                      cachedName="Currentflag"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Currentflag]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Currentflag]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidFrom"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[ValidUntil]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidUntil"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[ValidUntil]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[Copy of Voornaam]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of Voornaam"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Voornaam]"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Voornaam]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[Copy of Tussenvoegsel]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of Tussenvoegsel"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Tussenvoegsel]"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Tussenvoegsel]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].Columns[Copy of Achternaam]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of Achternaam"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Achternaam]"
+                      lineageId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Achternaam]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[PersoonId]"
+                      dataType="r8"
+                      name="PersoonId" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[DimKey]"
+                      dataType="r8"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Voornaam]"
+                      dataType="nText"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Tussenvoegsel]"
+                      dataType="nText"
+                      name="Tussenvoegsel" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Achternaam]"
+                      dataType="nText"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[IsTrainer]"
+                      dataType="r8"
+                      name="IsTrainer" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[IsCursist]"
+                      dataType="r8"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
+                      dataType="r8"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[Currentflag]"
+                      dataType="r8"
+                      name="Currentflag" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="date"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
+                      dataType="date"
+                      name="ValidUntil" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Schrijf naar dim_Persoon.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Schrijf naar dim_Persoon.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Persoon.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Schrijf naar dim_Persoon.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Test and Report\Schrijf naar dim_Status"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Schrijf naar dim_Status"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dim_Status</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test and Report\Schrijf naar dim_Status.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].Columns[DimKey]"
+                      cachedDataType="i8"
+                      cachedName="DimKey"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[DimKey]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[DimKey]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].Columns[DeelnameId]"
+                      cachedDataType="i4"
+                      cachedName="DeelnameId"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[DeelnameId]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[DeelnameId]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidFrom"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].Columns[ValidUntil]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ValidUntil"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[ValidUntil]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].Columns[CurrentFlag]"
+                      cachedDataType="bool"
+                      cachedName="CurrentFlag"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[CurrentFlag]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[CurrentFlag]" />
+                    <inputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].Columns[Copy of Status]"
+                      cachedDataType="wstr"
+                      cachedLength="16"
+                      cachedName="Copy of Status"
+                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Output].Columns[Copy of Status]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[DimKey]"
+                      dataType="r8"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[DeelnameId]"
+                      dataType="r8"
+                      name="DeelnameId" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[Status]"
+                      dataType="nText"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[Checksum]"
+                      dataType="r8"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="date"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[ValidUntil]"
+                      dataType="date"
+                      name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input].ExternalColumns[CurrentFlag]"
+                      dataType="r8"
+                      name="CurrentFlag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Schrijf naar dim_Status.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Schrijf naar dim_Status.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Schrijf naar dim_Status.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Schrijf naar dim_Status.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1169,8 +1968,547 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Test and Report\Test wijzigingen dim_Persoon"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Test wijzigingen dim_Persoon"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from dbo.dim_Persoon EXCEPT select * from tst_Persoon</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test and Report\Test wijzigingen dim_Persoon.Connections[OleDbConnection]"
+                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[PersoonId]"
+                      name="PersoonId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      name="DimKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      length="50"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Voornaam]"
+                      name="Voornaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsel]"
+                      length="50"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Tussenvoegsel]"
+                      name="Tussenvoegsel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      length="50"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Achternaam]"
+                      name="Achternaam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[IsTrainer]"
+                      name="IsTrainer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[IsCursist]"
+                      name="IsCursist"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Currentflag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[Currentflag]"
+                      name="Currentflag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      name="ValidUntil"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[PersoonId]"
+                      dataType="i4"
+                      name="PersoonId" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      dataType="i8"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Voornaam" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Tussenvoegsel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tussenvoegsel" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Achternaam" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsTrainer]"
+                      dataType="bool"
+                      name="IsTrainer" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[IsCursist]"
+                      dataType="bool"
+                      name="IsCursist" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[Currentflag]"
+                      dataType="bool"
+                      name="Currentflag" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntil" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[PersoonId]"
+                      name="PersoonId" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      dataType="i8"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Voornaam]"
+                      name="Voornaam" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Tussenvoegsel]"
+                      name="Tussenvoegsel" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Achternaam]"
+                      name="Achternaam" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      dataType="bool"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[IsTrainer]"
+                      name="IsTrainer" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      dataType="bool"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[IsCursist]"
+                      name="IsCursist" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      dataType="bool"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[Currentflag]"
+                      name="Currentflag" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Test and Report\Test wijzigingen dim_Status"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Test wijzigingen dim_Status"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from dbo.dim_Status EXCEPT select * from tst_Status</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Test and Report\Test wijzigingen dim_Status.Connections[OleDbConnection]"
+                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[DimKey]"
+                      name="DimKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[DeelnameId]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[DeelnameId]"
+                      name="DeelnameId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="16"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[Checksum]"
+                      name="Checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[ValidUntil]"
+                      name="ValidUntil"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[CurrentFlag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[CurrentFlag]"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].Columns[CurrentFlag]"
+                      name="CurrentFlag"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[DimKey]"
+                      dataType="i8"
+                      name="DimKey" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[DeelnameId]"
+                      dataType="i4"
+                      name="DeelnameId" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
+                      dataType="i4"
+                      name="Checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      name="ValidUntil" />
+                    <externalMetadataColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output].ExternalColumns[CurrentFlag]"
+                      dataType="bool"
+                      name="CurrentFlag" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      dataType="i8"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[DimKey]"
+                      name="DimKey" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[DeelnameId]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[DeelnameId]"
+                      name="DeelnameId" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[Checksum]"
+                      name="Checksum" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      name="ValidFrom" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ValidUntil]"
+                      name="ValidUntil" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[CurrentFlag]"
+                      dataType="bool"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[CurrentFlag]"
+                      name="CurrentFlag" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Test and Report.Paths[Data Conversion Output]"
+              endId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Test and Report.Paths[Data Conversion Output1]"
+              endId="Package\Test and Report\Schrijf naar dim_Persoon.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Test and Report\Data Conversion 1.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Test and Report.Paths[Data Conversion Output2]"
+              endId="Package\Test and Report\Schrijf naar dim_Status.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Test and Report\Data Conversion 2.Outputs[Data Conversion Output]" />
             <path
               refId="Package\Test and Report.Paths[OLE DB Source Output]"
               endId="Package\Test and Report\Schrijf naar dim_Cursus.Inputs[Excel Destination Input]"
@@ -1178,9 +2516,19 @@
               startId="Package\Test and Report\Test wijzigingen dim_Cursus.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\Test and Report.Paths[OLE DB Source Output1]"
-              endId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input]"
+              endId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input]"
               name="OLE DB Source Output"
               startId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Test and Report.Paths[OLE DB Source Output2]"
+              endId="Package\Test and Report\Data Conversion 1.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Test and Report\Test wijzigingen dim_Persoon.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Test and Report.Paths[OLE DB Source Output3]"
+              endId="Package\Test and Report\Data Conversion 2.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Test and Report\Test wijzigingen dim_Status.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1227,6 +2575,22 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\Test and Report" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{9D8DAD38-2FA8-4A9F-ADF7-34EEA7B8AF52}"
+      DTS:From="Package\Test and Report"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Reset data again" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{03CD3484-B86E-4E7E-8580-4C772FEBDADB}"
+      DTS:From="Package\Empty Excel file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Test and Report" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1245,13 +2609,25 @@
           Id="Package\Alter Cursus data"
           TopLeft="19.5,310.3" />
         <NodeLayout
-          Size="130.4,41.6"
-          Id="Package\Reset data"
-          TopLeft="34.7,5.49999999999995" />
+          Size="169.6,41.6"
+          Id="Package\Create temp tables"
+          TopLeft="15.1,208.7" />
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\Load Demensions"
           TopLeft="18.3,107.1" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Load Dimensions again"
+          TopLeft="5.50000000000006,411.9" />
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\Reset data"
+          TopLeft="34.7,5.49999999999995" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Test and Report"
+          TopLeft="253.9,513.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="99.9,47.1">
@@ -1274,36 +2650,20 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="169.6,41.6"
-          Id="Package\Create temp tables"
-          TopLeft="29.9,208.7" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="99.9,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="14.8,59.9999999999999"
+              EndConnector="0,59.9999999999999"
               Start="0,0"
-              End="14.8,52.4999999999999">
+              End="0,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.9999999999999" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.9999999999999"
-                    Point2="0,29.9999999999999"
-                    Point3="4,29.9999999999999" />
-                  <mssgle:LineSegment
-                    End="10.8,29.9999999999999" />
-                  <mssgle:CubicBezierSegment
-                    Point1="10.8,29.9999999999999"
-                    Point2="14.8,29.9999999999999"
-                    Point3="14.8,33.9999999999999" />
-                  <mssgle:LineSegment
-                    End="14.8,52.4999999999999" />
+                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1314,30 +2674,74 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="114.7,250.3">
+          TopLeft="99.9,250.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-14.8,59.9999999999999"
+              EndConnector="0,59.9999999999999"
               Start="0,0"
-              End="-14.8,52.4999999999999">
+              End="0,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26"
-                    Point2="0,30"
-                    Point3="-4,30" />
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="99.9,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="-10.8,30" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-10.8,30"
-                    Point2="-14.8,30"
-                    Point3="-14.8,34" />
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="99.9000000000001,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="207.333333333333,59.9999999999999"
+              Start="0,0"
+              End="207.333333333333,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="-14.8,52.4999999999999" />
+                    End="0,31.6345177664974" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.6345177664974"
+                    Point2="0,35.6345177664974"
+                    Point3="4,35.6345177664974" />
+                  <mssgle:LineSegment
+                    End="203.333333333333,35.6345177664974" />
+                  <mssgle:CubicBezierSegment
+                    Point1="203.333333333333,35.6345177664974"
+                    Point2="207.333333333333,35.6345177664974"
+                    Point3="207.333333333333,39.6345177664974" />
+                  <mssgle:LineSegment
+                    End="207.333333333333,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1347,12 +2751,12 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="188.8,41.6"
-          Id="Package\Load Dimensions again"
-          TopLeft="5.50000000000006,411.9" />
+          Size="159.2,41.6"
+          Id="Package\Reset data again"
+          TopLeft="252.3,615.099999999999" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="99.9000000000001,351.9">
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="331.9,555.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1373,35 +2777,35 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="156,41.6"
-          Id="Package\Test and Report"
-          TopLeft="32.1857144608791,478.629411275659" />
+          Size="154.4,41.6"
+          Id="Package\Empty Excel file"
+          TopLeft="254.7,411.9" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="99.9000000000001,453.5">
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="331.9,453.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="10.285714460879,25.1294112756589"
+              EndConnector="24.6666666666667,59.9999999999999"
               Start="0,0"
-              End="10.285714460879,17.6294112756589">
+              End="24.6666666666667,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.56470563782946" />
+                    End="0,31.6345177664974" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.56470563782946"
-                    Point2="0,12.5647056378295"
-                    Point3="4,12.5647056378295" />
+                    Point1="0,31.6345177664974"
+                    Point2="0,35.6345177664974"
+                    Point3="4,35.6345177664974" />
                   <mssgle:LineSegment
-                    End="6.28571446087899,12.5647056378295" />
+                    End="20.6666666666667,35.6345177664974" />
                   <mssgle:CubicBezierSegment
-                    Point1="6.28571446087899,12.5647056378295"
-                    Point2="10.285714460879,12.5647056378295"
-                    Point3="10.285714460879,16.5647056378295" />
+                    Point1="20.6666666666667,35.6345177664974"
+                    Point2="24.6666666666667,35.6345177664974"
+                    Point3="24.6666666666667,39.6345177664974" />
                   <mssgle:LineSegment
-                    End="10.285714460879,17.6294112756589" />
+                    End="24.6666666666667,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1417,22 +2821,22 @@
     design-time-name="Package\Test and Report">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="213.6,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Cursus"
-          TopLeft="5.50000000000001,5.50000000000007" />
-        <NodeLayout
-          Size="208.8,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Order"
-          TopLeft="279.9,5.50000000000007" />
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="192,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Cursus"
-          TopLeft="16.3,107.1" />
+          TopLeft="16.3,208.7" />
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Cursus"
+          TopLeft="5.49999999999996,107.1" />
+        <NodeLayout
+          Size="208.8,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Order"
+          TopLeft="257.9,5.50000000000007" />
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output]"
-          TopLeft="112.3,47.1000000000001">
+          TopLeft="112.3,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1455,10 +2859,148 @@
         <NodeLayout
           Size="187.2,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Order"
-          TopLeft="290.7,107.1" />
+          TopLeft="268.7,208.7" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Test and Report\Data Conversion"
+          TopLeft="283.9,107.1" />
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output1]"
-          TopLeft="384.3,47.1000000000001">
+          TopLeft="362.3,47.1000000000001">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[Data Conversion Output]"
+          TopLeft="362.3,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Persoon"
+          TopLeft="527.3,5.49999999999995" />
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_Persoon"
+          TopLeft="538.5,208.7" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Test and Report\Data Conversion 1"
+          TopLeft="554.1,107.1" />
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[OLE DB Source Output2]"
+          TopLeft="637.3,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[Data Conversion Output1]"
+          TopLeft="637.3,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="212,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Status"
+          TopLeft="808.3,5.49999999999995" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Test and Report\Data Conversion 2"
+          TopLeft="831.1,107.1" />
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[OLE DB Source Output3]"
+          TopLeft="914.3,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_Status"
+          TopLeft="819.5,208.7" />
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[Data Conversion Output2]"
+          TopLeft="914.3,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1482,6 +3024,19 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_Cursus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Test and Report\Test wijzigingen dim_Cursus">
     <Properties>
       <Property>
@@ -1498,7 +3053,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Cursus">
+    design-time-name="Package\Test and Report\Schrijf naar dim_Order">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1511,7 +3066,36 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Order">
+    design-time-name="Package\Test and Report\Test wijzigingen dim_Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Test wijzigingen dim_Status">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_Status">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
