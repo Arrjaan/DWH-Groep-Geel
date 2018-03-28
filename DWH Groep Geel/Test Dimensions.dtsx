@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Test Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{F9572EEC-F683-4328-943B-4024F403E41C}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{D29D9764-6E1F-443F-ABE0-20A6D3700BC9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -24,6 +24,26 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\User\Desktop\TestResult.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TestResult.xls]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{DEAC6D08-C039-45D9-A22F-82099437107D}"
+      DTS:ObjectName="TestResult.xls">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\User\Desktop\TestResult.xls" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TestResult_Template.xls]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{E1815B18-996F-4EF3-B32E-18471BF15C94}"
+      DTS:ObjectName="TestResult_Template.xls">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\User\Desktop\TestResult_Template.xls" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -62,19 +82,20 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Empty Excel file"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{3FA02C21-5827-4EAF-9F58-EF60700C2AD3}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:refId="Package\Empty Excel"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{4C48B018-3895-4D0C-963B-A67C74EC3F52}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Empty Excel file"
+      DTS:ObjectName="Empty Excel"
       DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{5B067F5D-521E-43F0-A2AB-FCDCB503BB6E}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE dim_Cursus&#xA;TRUNCATE TABLE dim_Order&#xA;TRUNCATE TABLE dim_Persoon&#xA;TRUNCATE TABLE dim_Status" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+        <FileSystemData
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="{E1815B18-996F-4EF3-B32E-18471BF15C94}"
+          TaskDestinationPath="{DEAC6D08-C039-45D9-A22F-82099437107D}" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2586,8 +2607,8 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
       DTS:CreationName=""
-      DTS:DTSID="{03CD3484-B86E-4E7E-8580-4C772FEBDADB}"
-      DTS:From="Package\Empty Excel file"
+      DTS:DTSID="{AC67DD14-62B7-46AD-B59D-93B8E6555775}"
+      DTS:From="Package\Empty Excel"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 6"
       DTS:To="Package\Test and Report" />
@@ -2624,6 +2645,10 @@
           Size="130.4,41.6"
           Id="Package\Reset data"
           TopLeft="34.7,5.49999999999995" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Reset data again"
+          TopLeft="252.3,615.099999999999" />
         <NodeLayout
           Size="156,41.6"
           Id="Package\Test and Report"
@@ -2750,10 +2775,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="159.2,41.6"
-          Id="Package\Reset data again"
-          TopLeft="252.3,615.099999999999" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
           TopLeft="331.9,555.1">
@@ -2777,35 +2798,35 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\Empty Excel file"
-          TopLeft="254.7,411.9" />
+          Size="137.6,41.6"
+          Id="Package\Empty Excel"
+          TopLeft="298.28571936549,416.423530887485" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="331.9,453.5">
+          TopLeft="367.08571936549,458.023530887485">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="24.6666666666667,59.9999999999999"
+              EndConnector="-10.5190526988233,55.476469112515"
               Start="0,0"
-              End="24.6666666666667,52.4999999999999">
+              End="-10.5190526988233,47.976469112515">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.6345177664974" />
+                    End="0,28.9479537368744" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.6345177664974"
-                    Point2="0,35.6345177664974"
-                    Point3="4,35.6345177664974" />
+                    Point1="0,28.9479537368744"
+                    Point2="0,32.9479537368744"
+                    Point3="-4,32.9479537368744" />
                   <mssgle:LineSegment
-                    End="20.6666666666667,35.6345177664974" />
+                    End="-6.51905269882332,32.9479537368744" />
                   <mssgle:CubicBezierSegment
-                    Point1="20.6666666666667,35.6345177664974"
-                    Point2="24.6666666666667,35.6345177664974"
-                    Point3="24.6666666666667,39.6345177664974" />
+                    Point1="-6.51905269882332,32.9479537368744"
+                    Point2="-10.5190526988233,32.9479537368744"
+                    Point3="-10.5190526988233,36.9479537368744" />
                   <mssgle:LineSegment
-                    End="24.6666666666667,52.4999999999999" />
+                    End="-10.5190526988233,47.976469112515" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2823,39 +2844,37 @@
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="192,41.6"
-          Id="Package\Test and Report\Schrijf naar dim_Cursus"
-          TopLeft="16.3,208.7" />
+          Size="208.8,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Order"
+          TopLeft="257.9,5.50000000000007" />
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Persoon"
+          TopLeft="527.3,5.49999999999995" />
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_Status"
+          TopLeft="819.5,208.7" />
+        <NodeLayout
+          Size="212,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Status"
+          TopLeft="808.3,5.49999999999995" />
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_Persoon"
+          TopLeft="538.5,208.7" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Test and Report\Data Conversion 2"
+          TopLeft="831.1,107.1" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Test and Report\Data Conversion 1"
+          TopLeft="554.1,107.1" />
         <NodeLayout
           Size="213.6,41.6"
           Id="Package\Test and Report\Test wijzigingen dim_Cursus"
           TopLeft="5.49999999999996,107.1" />
-        <NodeLayout
-          Size="208.8,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Order"
-          TopLeft="257.9,5.50000000000007" />
-        <EdgeLayout
-          Id="Package\Test and Report.Paths[OLE DB Source Output]"
-          TopLeft="112.3,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="187.2,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Order"
@@ -2864,6 +2883,54 @@
           Size="156.8,41.6"
           Id="Package\Test and Report\Data Conversion"
           TopLeft="283.9,107.1" />
+        <NodeLayout
+          Size="192,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_Cursus"
+          TopLeft="16.3,208.7" />
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[OLE DB Source Output3]"
+          TopLeft="914.3,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[OLE DB Source Output2]"
+          TopLeft="637.3,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output1]"
           TopLeft="362.3,47.1000000000001">
@@ -2887,8 +2954,8 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Test and Report.Paths[Data Conversion Output]"
-          TopLeft="362.3,148.7">
+          Id="Package\Test and Report.Paths[OLE DB Source Output]"
+          TopLeft="112.3,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2908,32 +2975,20 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="220,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Persoon"
-          TopLeft="527.3,5.49999999999995" />
-        <NodeLayout
-          Size="197.6,41.6"
-          Id="Package\Test and Report\Schrijf naar dim_Persoon"
-          TopLeft="538.5,208.7" />
-        <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\Test and Report\Data Conversion 1"
-          TopLeft="554.1,107.1" />
         <EdgeLayout
-          Id="Package\Test and Report.Paths[OLE DB Source Output2]"
-          TopLeft="637.3,47.1">
+          Id="Package\Test and Report.Paths[Data Conversion Output2]"
+          TopLeft="914.3,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,52.5000000000001">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5000000000001" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2964,43 +3019,9 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="212,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Status"
-          TopLeft="808.3,5.49999999999995" />
-        <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\Test and Report\Data Conversion 2"
-          TopLeft="831.1,107.1" />
         <EdgeLayout
-          Id="Package\Test and Report.Paths[OLE DB Source Output3]"
-          TopLeft="914.3,47.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="189.6,41.6"
-          Id="Package\Test and Report\Schrijf naar dim_Status"
-          TopLeft="819.5,208.7" />
-        <EdgeLayout
-          Id="Package\Test and Report.Paths[Data Conversion Output2]"
-          TopLeft="914.3,148.7">
+          Id="Package\Test and Report.Paths[Data Conversion Output]"
+          TopLeft="362.3,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3024,44 +3045,10 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Cursus">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Test wijzigingen dim_Cursus">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Test and Report\Test wijzigingen dim_Order">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Order">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -3074,7 +3061,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Persoon">
+    design-time-name="Package\Test and Report\Schrijf naar dim_Status">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3095,7 +3082,41 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Status">
+    design-time-name="Package\Test and Report\Schrijf naar dim_Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Test wijzigingen dim_Cursus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_Order">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_Cursus">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
