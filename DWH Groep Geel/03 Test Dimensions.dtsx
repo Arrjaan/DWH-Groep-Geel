@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="03 Test Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{61D7B1BB-B2A9-46C0-A596-55BB465B341C}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{23113C7F-D98A-4527-875A-EE01A879992C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -62,7 +62,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{DB9CD9FA-447E-45C9-B04F-A71A7465588B}"
-          SQLTask:SqlStatementSource="UPDATE Cursus SET MaxAantalDeelnemers = 4 WHERE CursusId = 1 &#xA;UPDATE CursusOmschrijving SET AantalDagen = 4 WHERE CursusOmschrijvingId = 2&#xA;UPDATE Persoon SET Voornaam = 'KenKen'  WHERE PersoonId = 1&#xA;UPDATE Resultaat SET Geslaagd = 0 WHERE ResultaatId = 1&#xA;UPDATE [Order] SET Omschrijving = 'LunchkostenKosten' WHERE OrderId = 0&#x9;&#xA;UPDATE Deelname SET Status = 'Gereserveerdd'  WHERE DeelnameId = 0&#xA;&#xA;DELETE FROM Persoon WHERE PersoonId = 2&#xA;DELETE FROM Resultaat WHERE ResultaatId = 2&#xA;DELETE FROM [Order] WHERE OrderId = 1&#x9;&#xA;DELETE FROM Deelname WHERE DeelnameId = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="UPDATE Cursus SET MaxAantalDeelnemers = 4 WHERE CursusId = 1 &#xA;UPDATE CursusOmschrijving SET AantalDagen = 4 WHERE CursusOmschrijvingId = 2&#xA;UPDATE Persoon SET Voornaam = 'KenKen'  WHERE PersoonId = 1&#xA;UPDATE Resultaat SET Geslaagd = 0 WHERE ResultaatId = 1&#xA;UPDATE [Order] SET Omschrijving = 'LunchkostenKosten' WHERE OrderId = 0&#x9;&#xA;UPDATE [Order] SET OrderType= 'Opbrengsten' WHERE OrderId = 0&#x9;&#xA;UPDATE Deelname SET Status = 'Gereserveerdd'  WHERE DeelnameId = 0&#xA;&#xA;DELETE FROM Persoon WHERE PersoonId = 2&#xA;DELETE FROM Resultaat WHERE ResultaatId = 2&#xA;DELETE FROM [Order] WHERE OrderId = 1&#x9;&#xA;DELETE FROM Deelname WHERE DeelnameId = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -99,36 +99,36 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Load DWH"
+      DTS:refId="Package\Load Dimensions"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
       DTS:DTSID="{1C834917-9026-4DE2-B96D-27FA6B4CAC58}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Load DWH"
+      DTS:ObjectName="Load Dimensions"
       DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
-          <PackageName>00 Load DWH.dtsx</PackageName>
+          <PackageName>01 Load Dimensions.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Load DWH again"
+      DTS:refId="Package\Load Dimensions again"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
       DTS:DTSID="{719289CD-3983-48F4-B5B0-DEDA79E05391}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Load DWH again"
+      DTS:ObjectName="Load Dimensions again"
       DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
-          <PackageName>00 Load DWH.dtsx</PackageName>
+          <PackageName>01 Load Dimensions.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -152,6 +152,7 @@
       DTS:refId="Package\Reset data again"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{ca94a6b6-1362-4a1a-9981-e9c3efc47b79}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -198,26 +199,6 @@
                       cachedLength="32"
                       cachedName="OrderType"
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderType]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input].Columns[OrderOmschrijving]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="OrderOmschrijving"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input].Columns[OrderCategorie1]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="32"
-                      cachedName="OrderCategorie1"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie1]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Data Conversion.Inputs[Data Conversion Input].Columns[OrderCategorie2]"
-                      cachedDataType="wstr"
-                      cachedLength="32"
-                      cachedName="OrderCategorie2"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie2]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -244,69 +225,6 @@
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderType]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderOmschrijving]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="100"
-                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderOmschrijving]"
-                      name="Copy of OrderOmschrijving"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie1]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="32"
-                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie1]"
-                      name="Copy of OrderCategorie1"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie1]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie2]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="32"
-                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie2]"
-                      name="Copy of OrderCategorie2"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie2]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -1035,14 +953,6 @@
                       externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderDatum]"
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderDatum]" />
                     <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[OrderBedrag]"
-                      cachedDataType="numeric"
-                      cachedName="OrderBedrag"
-                      cachedPrecision="10"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderBedrag]"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderBedrag]" />
-                    <inputColumn
                       refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Checksum]"
                       cachedDataType="i4"
                       cachedName="Checksum"
@@ -1073,27 +983,6 @@
                       cachedName="Copy of OrderType"
                       externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderType]"
                       lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderType]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Copy of OrderOmschrijving]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="Copy of OrderOmschrijving"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderOmschrijving]"
-                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderOmschrijving]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Copy of OrderCategorie1]"
-                      cachedDataType="wstr"
-                      cachedLength="32"
-                      cachedName="Copy of OrderCategorie1"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie1]"
-                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie1]" />
-                    <inputColumn
-                      refId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].Columns[Copy of OrderCategorie2]"
-                      cachedDataType="wstr"
-                      cachedLength="32"
-                      cachedName="Copy of OrderCategorie2"
-                      externalMetadataColumnId="Package\Test and Report\Schrijf naar dim_Order.Inputs[Excel Destination Input].ExternalColumns[OrderCategorie2]"
-                      lineageId="Package\Test and Report\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OrderCategorie2]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2178,38 +2067,6 @@
                       name="OrderType"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderOmschrijving]"
-                      length="100"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderOmschrijving]"
-                      name="OrderOmschrijving"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie1]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie1]"
-                      length="32"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie1]"
-                      name="OrderCategorie1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie2]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie2]"
-                      length="32"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderCategorie2]"
-                      name="OrderCategorie2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderDatum]"
                       dataType="dbDate"
                       errorOrTruncationOperation="Conversion"
@@ -2217,17 +2074,6 @@
                       externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderDatum]"
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderDatum]"
                       name="OrderDatum"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderBedrag]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderBedrag]"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[OrderBedrag]"
-                      name="OrderBedrag"
-                      precision="10"
-                      scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].Columns[Checksum]"
@@ -2292,32 +2138,9 @@
                       length="32"
                       name="OrderType" />
                     <externalMetadataColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderOmschrijving]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      name="OrderOmschrijving" />
-                    <externalMetadataColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="32"
-                      name="OrderCategorie1" />
-                    <externalMetadataColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderCategorie2]"
-                      dataType="wstr"
-                      length="32"
-                      name="OrderCategorie2" />
-                    <externalMetadataColumn
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderDatum]"
                       dataType="dbDate"
                       name="OrderDatum" />
-                    <externalMetadataColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[OrderBedrag]"
-                      dataType="numeric"
-                      name="OrderBedrag"
-                      precision="10"
-                      scale="2" />
                     <externalMetadataColumn
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Output].ExternalColumns[Checksum]"
                       dataType="i4"
@@ -2368,37 +2191,10 @@
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderType]"
                       name="OrderType" />
                     <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderOmschrijving]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderOmschrijving]"
-                      name="OrderOmschrijving" />
-                    <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderCategorie1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="32"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderCategorie1]"
-                      name="OrderCategorie1" />
-                    <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderCategorie2]"
-                      dataType="wstr"
-                      length="32"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderCategorie2]"
-                      name="OrderCategorie2" />
-                    <outputColumn
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderDatum]"
                       dataType="dbDate"
                       lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderDatum]"
                       name="OrderDatum" />
-                    <outputColumn
-                      refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderBedrag]"
-                      dataType="numeric"
-                      lineageId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[OrderBedrag]"
-                      name="OrderBedrag"
-                      precision="10"
-                      scale="2" />
                     <outputColumn
                       refId="Package\Test and Report\Test wijzigingen dim_Order.Outputs[OLE DB Source Error Output].Columns[Checksum]"
                       dataType="i4"
@@ -3015,12 +2811,12 @@
       DTS:From="Package\Reset data"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Load DWH" />
+      DTS:To="Package\Load Dimensions" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
       DTS:DTSID="{28871788-2D4D-421B-ACE6-74A077002C5E}"
-      DTS:From="Package\Load DWH"
+      DTS:From="Package\Load Dimensions"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Create temp tables" />
@@ -3039,12 +2835,12 @@
       DTS:From="Package\Alter Cursus data"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Load DWH again" />
+      DTS:To="Package\Load Dimensions again" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
       DTS:DTSID="{396F74EC-1362-4F3F-BE35-21399CDEF356}"
-      DTS:From="Package\Load DWH again"
+      DTS:From="Package\Load Dimensions again"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\Test and Report" />
@@ -3091,11 +2887,11 @@
           TopLeft="5.5000000000001,411.9" />
         <NodeLayout
           Size="129.6,41.6"
-          Id="Package\Load DWH"
+          Id="Package\Load Dimensions"
           TopLeft="218.5,107.1" />
         <NodeLayout
           Size="159.2,41.6"
-          Id="Package\Load DWH again"
+          Id="Package\Load Dimensions again"
           TopLeft="203.7,411.9" />
         <NodeLayout
           Size="130.4,41.6"
@@ -3296,33 +3092,9 @@
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="220,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Persoon"
-          TopLeft="274.9,5.50000000000007" />
-        <NodeLayout
-          Size="212,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Status"
-          TopLeft="555.9,5.50000000000007" />
-        <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\Test and Report\Data Conversion 1"
-          TopLeft="301.7,107.1" />
-        <NodeLayout
-          Size="208.8,41.6"
-          Id="Package\Test and Report\Test wijzigingen dim_Order"
-          TopLeft="5.50000000000009,5.50000000000007" />
-        <NodeLayout
-          Size="192,41.6"
-          Id="Package\Test and Report\Schrijf naar dim_Cursus"
-          TopLeft="816.9,208.7" />
-        <NodeLayout
           Size="233.6,41.6"
           Id="Package\Test and Report\Test wijzigingen dim_JunkFinCat"
           TopLeft="1080.1,107.1" />
-        <NodeLayout
-          Size="197.6,41.6"
-          Id="Package\Test and Report\Schrijf naar dim_Persoon"
-          TopLeft="286.1,208.7" />
         <NodeLayout
           Size="187.2,41.6"
           Id="Package\Test and Report\Schrijf naar dim_Order"
@@ -3332,21 +3104,117 @@
           Id="Package\Test and Report\Schrijf naar dim_Status"
           TopLeft="567.1,208.7" />
         <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_Persoon"
+          TopLeft="286.1,208.7" />
+        <NodeLayout
           Size="166.4,41.6"
           Id="Package\Test and Report\Data Conversion 2"
           TopLeft="578.7,107.1" />
-        <NodeLayout
-          Size="211.2,41.6"
-          Id="Package\Test and Report\Schrijf naar dim_JunkFinCat"
-          TopLeft="1091.3,208.7" />
         <NodeLayout
           Size="213.6,41.6"
           Id="Package\Test and Report\Test wijzigingen dim_Cursus"
           TopLeft="806.1,107.1" />
         <NodeLayout
+          Size="212,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Status"
+          TopLeft="555.9,5.50000000000007" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Test and Report\Data Conversion 1"
+          TopLeft="301.7,107.1" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_JunkFinCat"
+          TopLeft="1091.3,208.7" />
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Persoon"
+          TopLeft="274.9,5.50000000000007" />
+        <NodeLayout
+          Size="192,41.6"
+          Id="Package\Test and Report\Schrijf naar dim_Cursus"
+          TopLeft="816.9,208.7" />
+        <NodeLayout
           Size="156.8,41.6"
           Id="Package\Test and Report\Data Conversion"
           TopLeft="31.5000000000001,107.1" />
+        <NodeLayout
+          Size="208.8,41.6"
+          Id="Package\Test and Report\Test wijzigingen dim_Order"
+          TopLeft="5.50000000000009,5.50000000000007" />
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[Data Conversion Output2]"
+          TopLeft="661.9,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[Data Conversion Output1]"
+          TopLeft="384.9,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Test and Report.Paths[Data Conversion Output]"
+          TopLeft="109.9,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Test and Report.Paths[OLE DB Source Output4]"
           TopLeft="1196.9,148.7">
@@ -3467,136 +3335,14 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Test and Report.Paths[Data Conversion Output2]"
-          TopLeft="661.9,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Test and Report.Paths[Data Conversion Output1]"
-          TopLeft="384.9,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Test and Report.Paths[Data Conversion Output]"
-          TopLeft="109.9,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Test wijzigingen dim_Persoon">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Test wijzigingen dim_Status">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Test wijzigingen dim_Order">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Cursus">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Test and Report\Test wijzigingen dim_JunkFinCat">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_Persoon">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -3627,7 +3373,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Test and Report\Schrijf naar dim_JunkFinCat">
+    design-time-name="Package\Test and Report\Schrijf naar dim_Persoon">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3641,6 +3387,56 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Test and Report\Test wijzigingen dim_Cursus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Test wijzigingen dim_Status">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_JunkFinCat">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Test wijzigingen dim_Persoon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Schrijf naar dim_Cursus">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Test and Report\Test wijzigingen dim_Order">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

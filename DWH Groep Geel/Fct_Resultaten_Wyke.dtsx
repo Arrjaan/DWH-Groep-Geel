@@ -11,8 +11,8 @@
   DTS:LocaleID="1043"
   DTS:ObjectName="fct_Resultaten_Wyke"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{887B345D-01FC-46A7-9A61-C9B1BBC3FCA0}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{4F3C3B13-CCE9-4953-897B-AF5B63ABCFFE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -59,7 +59,6 @@
                       refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[PersoonID]"
                       cachedDataType="i4"
                       cachedName="PersoonID"
-                      cachedSortKeyPosition="1"
                       lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[PersoonID]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Checksum Transformation.Inputs[ChecksumInput].Columns[CursusID]"
@@ -118,12 +117,6 @@
                   name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[PersoonID]"
-                      cachedDataType="i4"
-                      cachedName="PersoonID"
-                      cachedSortKeyPosition="1"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonID]" />
-                    <inputColumn
                       refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[Checksum]"
                       cachedDataType="i4"
                       cachedName="Checksum"
@@ -134,10 +127,21 @@
                       cachedName="tgt_Checksum"
                       lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[ResultaatID]"
-                      cachedDataType="i8"
-                      cachedName="ResultaatID"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatID]" />
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[ResultaatId]"
+                      cachedDataType="i4"
+                      cachedName="ResultaatId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[FctKey]"
+                      cachedDataType="i4"
+                      cachedName="FctKey"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[FctKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[CurrentFlag]"
+                      cachedDataType="bool"
+                      cachedName="CurrentFlag"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CurrentFlag]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -157,13 +161,13 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">[ISNULL](#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatID]})</property>
+                      name="Expression">[ISNULL](#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[FctKey]})</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">ISNULL(ResultaatID)</property>
+                      name="FriendlyExpression">ISNULL(FctKey)</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -185,13 +189,13 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">[ISNULL](#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonID]})</property>
+                      name="Expression">[ISNULL](#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatId]})</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">ISNULL([Merge Join].PersoonID)</property>
+                      name="FriendlyExpression">ISNULL(ResultaatId)</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -213,13 +217,13 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Checksum]} != #{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]}</property>
+                      name="Expression">#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Checksum]} != #{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_Checksum]} || !#{Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CurrentFlag]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">Checksum != tgt_Checksum</property>
+                      name="FriendlyExpression">Checksum != tgt_Checksum || !CurrentFlag</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -258,174 +262,6 @@
                       refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Gewijzigde regels"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="Gewijzigde regels"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE Fct_Resultaten SET
-  [PersoonID] = ?,
-  [CursusID] = ?,
-  [Geslaagd] = ?,
-  [DatumGeslaagd] = ?
-WHERE ResultaatID = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Data Flow Task\Gewijzigde regels.Connections[OleDbConnection]"
-                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Command Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].Columns[tgt_PersoonID]"
-                      cachedDataType="i4"
-                      cachedName="tgt_PersoonID"
-                      externalMetadataColumnId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonID]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].Columns[tgt_CursusID]"
-                      cachedDataType="i4"
-                      cachedName="tgt_CursusID"
-                      externalMetadataColumnId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusID]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].Columns[Geslaagd]"
-                      cachedDataType="bool"
-                      cachedName="Geslaagd"
-                      externalMetadataColumnId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Geslaagd]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].Columns[DatumGeslaagd]"
-                      cachedDataType="dbDate"
-                      cachedName="DatumGeslaagd"
-                      externalMetadataColumnId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DatumGeslaagd]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].Columns[ResultaatID]"
-                      cachedDataType="i8"
-                      cachedName="ResultaatID"
-                      externalMetadataColumnId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatID]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      dataType="i4"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">81</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      dataType="i4"
-                      name="Param_1">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">81</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      dataType="bool"
-                      name="Param_2">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
-                      dataType="dbDate"
-                      name="Param_3">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
-                      dataType="i8"
-                      name="Param_4">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">81</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Output]"
-                  exclusionGroup="1"
-                  name="OLE DB Command Output"
-                  synchronousInputId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Command Error Output"
-                  synchronousInputId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Gewijzigde regels.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -543,20 +379,6 @@ where [refTable].[CursusId] = ?</property>
                   synchronousInputId="Package\Data Flow Task\Lookup Cursus.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup Cursus.Outputs[Lookup Match Output].Columns[CursusId]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Data Flow Task\Lookup Cursus.Outputs[Lookup Match Output].Columns[CursusId]"
-                      name="CursusId"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CursusId</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
                       refId="Package\Data Flow Task\Lookup Cursus.Outputs[Lookup Match Output].Columns[DimKey_Cursus]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
@@ -662,7 +484,7 @@ where [refTable].[PersoonId] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Data Flow Task\130:invalid};</property>
+                  name="ParameterMap">#{Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[PersoonID]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -689,7 +511,6 @@ where [refTable].[PersoonId] = ?</property>
                       refId="Package\Data Flow Task\Lookup Persoon.Inputs[Lookup Input].Columns[PersoonID]"
                       cachedDataType="i4"
                       cachedName="PersoonID"
-                      cachedSortKeyPosition="1"
                       lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[PersoonID]">
                       <properties>
                         <property
@@ -776,7 +597,7 @@ where [refTable].[PersoonId] = ?</property>
                   dataType="System.Int32"
                   description="Specifies the type of join to perform."
                   name="JoinType"
-                  typeConverter="JoinType">1</property>
+                  typeConverter="JoinType">0</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the number of columns in the ordering key."
@@ -797,11 +618,11 @@ where [refTable].[PersoonId] = ?</property>
                   name="Merge Join Left Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PersoonID]"
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[ResultaatId]"
                       cachedDataType="i4"
-                      cachedName="PersoonID"
+                      cachedName="ResultaatId"
                       cachedSortKeyPosition="1"
-                      lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[PersoonID]" />
+                      lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[ResultaatId]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[CursusID]"
                       cachedDataType="i4"
@@ -833,11 +654,6 @@ where [refTable].[PersoonId] = ?</property>
                       cachedName="DimKey_Persoon"
                       lineageId="Package\Data Flow Task\Lookup Persoon.Outputs[Lookup Match Output].Columns[DimKey_Persoon]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[CursusId]"
-                      cachedDataType="i4"
-                      cachedName="CursusId"
-                      lineageId="Package\Data Flow Task\Lookup Cursus.Outputs[Lookup Match Output].Columns[CursusId]" />
-                    <inputColumn
                       refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DimKey_Cursus]"
                       cachedDataType="i4"
                       cachedName="DimKey_Cursus"
@@ -851,26 +667,26 @@ where [refTable].[PersoonId] = ?</property>
                   name="Merge Join Right Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[PersoonID]"
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[ResultaatID]"
                       cachedDataType="i4"
-                      cachedName="PersoonID"
+                      cachedName="ResultaatID"
                       cachedSortKeyPosition="1"
-                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[PersoonID]" />
+                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[ResultaatID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[FctKey]"
+                      cachedDataType="i4"
+                      cachedName="FctKey"
+                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[FctKey]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[Checksum]"
                       cachedDataType="i4"
                       cachedName="Checksum"
                       lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[Checksum]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[CursusID]"
-                      cachedDataType="i4"
-                      cachedName="CursusID"
-                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[CursusID]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[ResultaatID]"
-                      cachedDataType="i8"
-                      cachedName="ResultaatID"
-                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[ResultaatID]" />
+                      refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[CurrentFlag]"
+                      cachedDataType="bool"
+                      cachedName="CurrentFlag"
+                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[CurrentFlag]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -881,20 +697,6 @@ where [refTable].[PersoonId] = ?</property>
                   isSorted="true"
                   name="Merge Join Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonID]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PersoonID]"
-                      name="PersoonID"
-                      sortKeyPosition="1">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="The input column associated with this output column"
-                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PersoonID]}</property>
-                      </properties>
-                    </outputColumn>
                     <outputColumn
                       refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CursusID]"
                       dataType="i4"
@@ -932,6 +734,20 @@ where [refTable].[PersoonId] = ?</property>
                           dataType="System.Int32"
                           description="The input column associated with this output column"
                           name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DatumGeslaagd]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatId]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatId]"
+                      name="ResultaatId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[ResultaatId]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -974,19 +790,6 @@ where [refTable].[PersoonId] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CursusId]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CursusId]"
-                      name="CursusId">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="The input column associated with this output column"
-                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[CursusId]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
                       refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DimKey_Cursus]"
                       dataType="i4"
                       lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DimKey_Cursus]"
@@ -997,6 +800,19 @@ where [refTable].[PersoonId] = ?</property>
                           dataType="System.Int32"
                           description="The input column associated with this output column"
                           name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[DimKey_Cursus]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[FctKey]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[FctKey]"
+                      name="FctKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[FctKey]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1013,42 +829,16 @@ where [refTable].[PersoonId] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonID]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_PersoonID]"
-                      name="tgt_PersoonID">
+                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CurrentFlag]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CurrentFlag]"
+                      name="CurrentFlag">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="The input column associated with this output column"
-                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[PersoonID]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusID]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[tgt_CursusID]"
-                      name="tgt_CursusID">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="The input column associated with this output column"
-                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[CursusID]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatID]"
-                      dataType="i8"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatID]"
-                      name="ResultaatID">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="The input column associated with this output column"
-                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[ResultaatID]}</property>
+                          name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[CurrentFlag]}</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -1164,6 +954,13 @@ where [refTable].[PersoonId] = ?</property>
                       cachedName="DimKey_Cursus"
                       externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels toevoegen.Inputs[OLE DB Destination Input].ExternalColumns[CursusID]"
                       lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DimKey_Cursus]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Nieuwe regels toevoegen.Inputs[OLE DB Destination Input].Columns[ResultaatId]"
+                      cachedDataType="i4"
+                      cachedName="ResultaatId"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Data Flow Task\Nieuwe regels toevoegen.Inputs[OLE DB Destination Input].ExternalColumns[ResultaatID]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatId]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1201,8 +998,12 @@ where [refTable].[PersoonId] = ?</property>
                       name="CurrentFlag" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\Nieuwe regels toevoegen.Inputs[OLE DB Destination Input].ExternalColumns[ResultaatID]"
-                      dataType="i8"
+                      dataType="i4"
                       name="ResultaatID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Nieuwe regels toevoegen.Inputs[OLE DB Destination Input].ExternalColumns[FctKey]"
+                      dataType="i4"
+                      name="FctKey" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1224,6 +1025,231 @@ where [refTable].[PersoonId] = ?</property>
                       refId="Package\Data Flow Task\Nieuwe regels toevoegen.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Data Flow Task\Nieuwe regels toevoegen.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE fct_Resultaten SET
+  [ResultaatID] = ?,
+  [PersoonID] = ?,
+  [CursusID] = ?,
+  [Geslaagd] = ?,
+  [DatumGeslaagd] = ?,
+  [Checksum] = ?,
+  [ValidFrom] = ?,
+  [ValidUntill] = '9999-12-31',
+  [CurrentFlag] = 1
+WHERE FctKey = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[ResultaatId]"
+                      cachedDataType="i4"
+                      cachedName="ResultaatId"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[DimKey_Persoon]"
+                      cachedDataType="i8"
+                      cachedName="DimKey_Persoon"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DimKey_Persoon]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[DimKey_Cursus]"
+                      cachedDataType="i4"
+                      cachedName="DimKey_Cursus"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DimKey_Cursus]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[Geslaagd]"
+                      cachedDataType="bool"
+                      cachedName="Geslaagd"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Geslaagd]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[DatumGeslaagd]"
+                      cachedDataType="dbDate"
+                      cachedName="DatumGeslaagd"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[DatumGeslaagd]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[Checksum]"
+                      cachedDataType="i4"
+                      cachedName="Checksum"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Checksum]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[Tijdstempel]"
+                      cachedDataType="date"
+                      cachedName="Tijdstempel"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[Tijdstempel]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].Columns[FctKey]"
+                      cachedDataType="i4"
+                      cachedName="FctKey"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[FctKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="bool"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="dbDate"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="i4"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="dbTimeStamp"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      dataType="i4"
+                      name="Param_7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1257,15 +1283,17 @@ where [refTable].[PersoonId] = ?</property>
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+t3.ResultaatId,
 t1.PersoonID,
 t2.CursusID,
 --Meetwaarden
 t3.Geslaagd,
 t3.Datum as DatumGeslaagd 
 FROM 
-Cursus.dbo.Resultaat t3
-LEFT OUTER JOIN Cursus.dbo.Persoon t1 on t3.CursistID = t1.PersoonID 
-LEFT OUTER JOIN Cursus.dbo.Cursus t2 on t3.CursusID = t2.CursusID</property>
+dbo.Resultaat t3
+LEFT OUTER JOIN dbo.Persoon t1 on t3.CursistID = t1.PersoonID 
+LEFT OUTER JOIN dbo.Cursus t2 on t3.CursusID = t2.CursusID
+order by t3.ResultaatId</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1310,7 +1338,6 @@ LEFT OUTER JOIN Cursus.dbo.Cursus t2 on t3.CursusID = t2.CursusID</property>
                       externalMetadataColumnId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
                       lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[PersoonID]"
                       name="PersoonID"
-                      sortKeyPosition="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[CursusID]"
@@ -1339,6 +1366,16 @@ LEFT OUTER JOIN Cursus.dbo.Cursus t2 on t3.CursusID = t2.CursusID</property>
                       lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[DatumGeslaagd]"
                       name="DatumGeslaagd"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[ResultaatId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].ExternalColumns[ResultaatId]"
+                      lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].Columns[ResultaatId]"
+                      name="ResultaatId"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1358,6 +1395,10 @@ LEFT OUTER JOIN Cursus.dbo.Cursus t2 on t3.CursusID = t2.CursusID</property>
                       refId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].ExternalColumns[DatumGeslaagd]"
                       dataType="dbDate"
                       name="DatumGeslaagd" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Output].ExternalColumns[ResultaatId]"
+                      dataType="i4"
+                      name="ResultaatId" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1365,6 +1406,11 @@ LEFT OUTER JOIN Cursus.dbo.Cursus t2 on t3.CursusID = t2.CursusID</property>
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Error Output].Columns[ResultaatId]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Error Output].Columns[ResultaatId]"
+                      name="ResultaatId" />
                     <outputColumn
                       refId="Package\Data Flow Task\Source Resultaten.Outputs[OLE DB Source Error Output].Columns[PersoonID]"
                       dataType="i4"
@@ -1428,13 +1474,16 @@ LEFT OUTER JOIN Cursus.dbo.Cursus t2 on t3.CursusID = t2.CursusID</property>
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+[FctKey],
 [ResultaatID], 
 [Checksum], 
 [PersoonID],
 [CursusID], 
 [Geslaagd],
-[DatumGeslaagd] 
-FROM dbo.Fct_Resultaten</property>
+[DatumGeslaagd],
+[CurrentFlag] 
+FROM dbo.fct_Resultaten
+order by ResultaatID</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1488,7 +1537,6 @@ FROM dbo.Fct_Resultaten</property>
                       externalMetadataColumnId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].ExternalColumns[PersoonID]"
                       lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[PersoonID]"
                       name="PersoonID"
-                      sortKeyPosition="1"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[CursusID]"
@@ -1519,12 +1567,31 @@ FROM dbo.Fct_Resultaten</property>
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[ResultaatID]"
-                      dataType="i8"
+                      dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].ExternalColumns[ResultaatID]"
                       lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[ResultaatID]"
                       name="ResultaatID"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[FctKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].ExternalColumns[FctKey]"
+                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[FctKey]"
+                      name="FctKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[CurrentFlag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].ExternalColumns[CurrentFlag]"
+                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].Columns[CurrentFlag]"
+                      name="CurrentFlag"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
@@ -1551,8 +1618,16 @@ FROM dbo.Fct_Resultaten</property>
                       name="DatumGeslaagd" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].ExternalColumns[ResultaatID]"
-                      dataType="i8"
+                      dataType="i4"
                       name="ResultaatID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].ExternalColumns[FctKey]"
+                      dataType="i4"
+                      name="FctKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Output].ExternalColumns[CurrentFlag]"
+                      dataType="bool"
+                      name="CurrentFlag" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1561,8 +1636,13 @@ FROM dbo.Fct_Resultaten</property>
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
+                      refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[FctKey]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[FctKey]"
+                      name="FctKey" />
+                    <outputColumn
                       refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[ResultaatID]"
-                      dataType="i8"
+                      dataType="i4"
                       lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[ResultaatID]"
                       name="ResultaatID" />
                     <outputColumn
@@ -1590,6 +1670,11 @@ FROM dbo.Fct_Resultaten</property>
                       dataType="dbDate"
                       lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[DatumGeslaagd]"
                       name="DatumGeslaagd" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[CurrentFlag]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[CurrentFlag]"
+                      name="CurrentFlag" />
                     <outputColumn
                       refId="Package\Data Flow Task\Target Fct_Resultaten tabel.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1698,8 +1783,8 @@ FROM dbo.Fct_Resultaten</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DELETE FROM Fct_Resultaten 
-WHERE [ResultaatID] = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DELETE FROM fct_Resultaten 
+WHERE FctKey = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1722,17 +1807,17 @@ WHERE [ResultaatID] = ?</property>
                   name="OLE DB Command Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Verwijderde regels.Inputs[OLE DB Command Input].Columns[ResultaatID]"
-                      cachedDataType="i8"
-                      cachedName="ResultaatID"
+                      refId="Package\Data Flow Task\Verwijderde regels.Inputs[OLE DB Command Input].Columns[FctKey]"
+                      cachedDataType="i4"
+                      cachedName="FctKey"
                       externalMetadataColumnId="Package\Data Flow Task\Verwijderde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[ResultaatID]" />
+                      lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[FctKey]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\Verwijderde regels.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      dataType="i8"
+                      dataType="i4"
                       name="Param_0">
                       <properties>
                         <property
@@ -1790,7 +1875,7 @@ WHERE [ResultaatID] = ?</property>
               startId="Package\Data Flow Task\Tijdsstempel.Outputs[Derived Column Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Gewijzigde regels]"
-              endId="Package\Data Flow Task\Gewijzigde regels.Inputs[OLE DB Command Input]"
+              endId="Package\Data Flow Task\OLE DB Command.Inputs[OLE DB Command Input]"
               name="Gewijzigde regels"
               startId="Package\Data Flow Task\Conditional Split.Outputs[Gewijzigde regels]" />
             <path
@@ -1860,46 +1945,42 @@ WHERE [ResultaatID] = ?</property>
         <NodeLayout
           Size="169.6,41.6"
           Id="Package\Data Flow Task\Verwijderde regels"
-          TopLeft="22.7000000000001,716.7" />
+          TopLeft="26.3000000000001,716.7" />
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Data Flow Task\Conditional Split"
-          TopLeft="274.9,615.1" />
-        <NodeLayout
-          Size="208,41.6"
-          Id="Package\Data Flow Task\Checksum Transformation"
-          TopLeft="5.5,107.1" />
-        <NodeLayout
-          Size="203.2,41.6"
-          Id="Package\Data Flow Task\Nieuwe regels toevoegen"
-          TopLeft="252.9,716.7" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Data Flow Task\Lookup Cursus"
-          TopLeft="33.1,411.9" />
-        <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Data Flow Task\Source Resultaten"
-          TopLeft="25.0999999999999,5.49999999999995" />
-        <NodeLayout
-          Size="215.2,41.6"
-          Id="Package\Data Flow Task\Target Fct_Resultaten tabel"
-          TopLeft="246.9,411.9" />
+          TopLeft="278.5,615.1" />
         <NodeLayout
           Size="140.8,41.6"
           Id="Package\Data Flow Task\Tijdsstempel"
-          TopLeft="39.1,208.7" />
+          TopLeft="287.7,208.7" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Data Flow Task\Checksum Transformation"
+          TopLeft="254.1,107.1" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Data Flow Task\Lookup Cursus"
+          TopLeft="281.7,411.9" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\Data Flow Task\Nieuwe regels toevoegen"
+          TopLeft="256.5,716.7" />
+        <NodeLayout
+          Size="215.2,41.6"
+          Id="Package\Data Flow Task\Target Fct_Resultaten tabel"
+          TopLeft="5.50000000000003,411.9" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Data Flow Task\Source Resultaten"
+          TopLeft="273.7,5.49999999999995" />
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Data Flow Task\Lookup Persoon"
-          TopLeft="29.9,310.3" />
-        <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\Data Flow Task\Gewijzigde regels"
-          TopLeft="516.3,716.7" />
+          TopLeft="278.5,310.3" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Verwijderde regels]"
-          TopLeft="316.7,656.7">
+          TopLeft="320.3,656.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1935,7 +2016,7 @@ WHERE [ResultaatID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="109.5,47.1">
+          TopLeft="358.1,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1957,7 +2038,7 @@ WHERE [ResultaatID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Nieuwe regels]"
-          TopLeft="354.5,656.7">
+          TopLeft="358.1,656.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1981,7 +2062,7 @@ WHERE [ResultaatID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Lookup Match Output]"
-          TopLeft="109.5,351.9">
+          TopLeft="358.1,351.9">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2004,8 +2085,152 @@ WHERE [ResultaatID] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="358.1,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ChecksumOutput]"
+          TopLeft="358.1,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="131.2,41.6"
+          Id="Package\Data Flow Task\Merge Join"
+          TopLeft="292.5,513.5" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Lookup Match Output1]"
+          TopLeft="358.1,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5333333333333,60.0000000000001"
+              Start="0,0"
+              End="20.5333333333333,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.566265060241"
+                    Point2="0,35.566265060241"
+                    Point3="4,35.566265060241" />
+                  <mssgle:LineSegment
+                    End="16.5333333333333,35.566265060241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5333333333333,35.566265060241"
+                    Point2="20.5333333333333,35.566265060241"
+                    Point3="20.5333333333333,39.566265060241" />
+                  <mssgle:LineSegment
+                    End="20.5333333333333,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-37.9247200520834,40.566265060241,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+          TopLeft="113.1,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="224.466666666667,59.9999999999999"
+              Start="0,0"
+              End="224.466666666667,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5662650602409" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5662650602409"
+                    Point2="0,35.5662650602409"
+                    Point3="4,35.5662650602409" />
+                  <mssgle:LineSegment
+                    End="220.466666666667,35.5662650602409" />
+                  <mssgle:CubicBezierSegment
+                    Point1="220.466666666667,35.5662650602409"
+                    Point2="224.466666666667,35.5662650602409"
+                    Point3="224.466666666667,39.5662650602409" />
+                  <mssgle:LineSegment
+                    End="224.466666666667,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Merge Join Output]"
+          TopLeft="358.1,555.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Data Flow Task\OLE DB Command"
+          TopLeft="519.9,716.7" />
+        <EdgeLayout
           Id="Package\Data Flow Task.Paths[Gewijzigde regels]"
-          TopLeft="392.3,656.7">
+          TopLeft="395.9,656.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2039,162 +2264,9 @@ WHERE [ResultaatID] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="109.5,250.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[ChecksumOutput]"
-          TopLeft="109.5,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="131.2,41.6"
-          Id="Package\Data Flow Task\Merge Join"
-          TopLeft="288.9,513.5" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup Match Output1]"
-          TopLeft="109.5,453.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="224.466666666667,59.9999999999999"
-              Start="0,0"
-              End="224.466666666667,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.5662650602409" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.5662650602409"
-                    Point2="0,35.5662650602409"
-                    Point3="4,35.5662650602409" />
-                  <mssgle:LineSegment
-                    End="220.466666666667,35.5662650602409" />
-                  <mssgle:CubicBezierSegment
-                    Point1="220.466666666667,35.5662650602409"
-                    Point2="224.466666666667,35.5662650602409"
-                    Point3="224.466666666667,39.5662650602409" />
-                  <mssgle:LineSegment
-                    End="224.466666666667,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="64.0419466145833,40.5662650602409,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output1]"
-          TopLeft="354.5,453.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="20.5333333333333,60.0000000000001"
-              Start="0,0"
-              End="20.5333333333333,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.566265060241" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.566265060241"
-                    Point2="0,35.566265060241"
-                    Point3="4,35.566265060241" />
-                  <mssgle:LineSegment
-                    End="16.5333333333333,35.566265060241" />
-                  <mssgle:CubicBezierSegment
-                    Point1="16.5333333333333,35.566265060241"
-                    Point2="20.5333333333333,35.566265060241"
-                    Point3="20.5333333333333,39.566265060241" />
-                  <mssgle:LineSegment
-                    End="20.5333333333333,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Merge Join Output]"
-          TopLeft="354.5,555.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Nieuwe regels toevoegen">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\Lookup Cursus">
     <Properties>
@@ -2219,10 +2291,15 @@ WHERE [ResultaatID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Source Resultaten">
+    design-time-name="Package\Data Flow Task\Nieuwe regels toevoegen">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -2235,12 +2312,20 @@ WHERE [ResultaatID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Source Resultaten">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\Lookup Persoon">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2250,7 +2335,7 @@ WHERE [ResultaatID] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>

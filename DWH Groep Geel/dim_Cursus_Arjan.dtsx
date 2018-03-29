@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_Cursus_Arjan"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{63A4BD2C-463A-433D-B9D2-8C50BA932293}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{DEB6083F-61BE-44F8-BC5B-60C4D34DE936}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -1102,7 +1102,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DimKey, Checksum, CursusId FROM dim_Cursus WHERE CurrentFlag = 1 ORDER BY CursusId</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from dim_Cursus where CurrentFlag = 1 order by CursusId</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1119,7 +1119,7 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
@@ -2801,33 +2801,13 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="121.6,41.6"
-          Id="Package\Inladen Dim_Cursus\Union All"
-          TopLeft="399.7,819.099999999999" />
-        <NodeLayout
-          Size="121.6,41.6"
-          Id="Package\Inladen Dim_Cursus\Multicast"
-          TopLeft="277.7,717.5" />
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Inladen Dim_Cursus\Update CurrentFlag"
-          TopLeft="374.9,920.699999999999" />
-        <NodeLayout
           Size="228,41.6"
           Id="Package\Inladen Dim_Cursus\Toevoegen CursusOmschrijving"
           TopLeft="5.5,107.1" />
         <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Inladen Dim_Cursus\Insert nieuwe rijen"
-          TopLeft="132.1,920.699999999999" />
-        <NodeLayout
           Size="184.8,41.6"
           Id="Package\Inladen Dim_Cursus\Toevoegen ValidDates"
           TopLeft="246.1,514.3" />
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\Inladen Dim_Cursus\Conditional Split"
-          TopLeft="260.5,615.9" />
         <NodeLayout
           Size="153.6,41.6"
           Id="Package\Inladen Dim_Cursus\Ophalen Cursus"
@@ -2837,6 +2817,14 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
           Id="Package\Inladen Dim_Cursus\Ophalen DWH"
           TopLeft="265.3,310.3" />
         <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Inladen Dim_Cursus\Multicast"
+          TopLeft="277.7,717.5" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Inladen Dim_Cursus\Conditional Split"
+          TopLeft="260.5,615.9" />
+        <NodeLayout
           Size="131.2,41.6"
           Id="Package\Inladen Dim_Cursus\Union All 1"
           TopLeft="150.9,819.099999999999" />
@@ -2845,9 +2833,25 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
           Id="Package\Inladen Dim_Cursus\Merge Join"
           TopLeft="272.9,411.9" />
         <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Inladen Dim_Cursus\Insert nieuwe rijen"
+          TopLeft="132.1,920.699999999999" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Inladen Dim_Cursus\Union All"
+          TopLeft="399.7,819.099999999999" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Inladen Dim_Cursus\Data Conversion"
+          TopLeft="41.1,208.7" />
+        <NodeLayout
           Size="169.6,41.6"
           Id="Package\Inladen Dim_Cursus\Bereken Checksum"
           TopLeft="34.7000000000001,310.3" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Inladen Dim_Cursus\Update CurrentFlag"
+          TopLeft="374.9,920.699999999999" />
         <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[Verwijderde Regels]"
           TopLeft="375.5,657.5">
@@ -3111,6 +3115,30 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
+          TopLeft="119.5,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453124999999,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[Gewijzigde Regels]"
           TopLeft="338.5,657.5">
           <EdgeLayout.Curve>
@@ -3157,6 +3185,28 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Inladen Dim_Cursus.Paths[Data Conversion Output]"
+          TopLeft="119.5,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Inladen Dim_Cursus.Paths[ChecksumOutput]"
           TopLeft="119.5,351.9">
           <EdgeLayout.Curve>
@@ -3182,56 +3232,6 @@ where [refTable].[CursusOmschrijvingId] = ?</property>
                     Point3="198.466666666667,39.566265060241" />
                   <mssgle:LineSegment
                     End="198.466666666667,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="156.8,41.6"
-          Id="Package\Inladen Dim_Cursus\Data Conversion"
-          TopLeft="41.1,208.7" />
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Lookup Match Output]"
-          TopLeft="119.5,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,20.4453124999999,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Inladen Dim_Cursus.Paths[Data Conversion Output]"
-          TopLeft="119.5,250.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="01 Load Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{9A5B989C-A7AB-4C88-88DC-6424EA5BD61B}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{69FD3BD5-960C-4C29-A5C0-3FC483734368}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -41,12 +41,12 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_JunkFinCat"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
-          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_JunkFinCat'))&#xA;BEGIN&#xA;create table  [DWH].[dbo].[dim_JunkFinCat](&#xA;[SurgetKey] nvarchar(334),&#xA;[Omschrijving] nvarchar(100),&#xA;[OrderCategorie1] nvarchar(32),&#xA;[OrderCategorie2] nvarchar(32),&#xA;[ValidFrom] date,&#xA;[ValidUntil] date,&#xA;[Currentflag] bit default 1,&#xA;[Checksum] int&#xA;)&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_JunkFinCat'))&#xA;BEGIN&#xA;create table  [dbo].[dim_JunkFinCat](&#xA;[DimKey] int not null identity(1,1),&#xA;[SurgetKey] nvarchar(334) not null,&#xA;[Omschrijving] nvarchar(100) not null,&#xA;[OrderCategorie1] nvarchar(32) not null,&#xA;[OrderCategorie2] nvarchar(32) not null,&#xA;[ValidFrom] date not null,&#xA;[ValidUntil] date not null default '9999-12-31',&#xA;[Currentflag] bit not null default 1,&#xA;[Checksum] int not null&#xA;)&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -57,12 +57,12 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_Order"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
-          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Order'))&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[dim_Order] (&#xA; [DimKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA; [OrderId] [int] NOT NULL,&#xA; [OrderNummer] [bigint] NOT NULL,&#xA; [OrderType] [varchar](32) NOT NULL,&#xA; [OrderOmschrijving] [varchar](100) NOT NULL,&#xA; [OrderCategorie1] [varchar](32) NULL,&#xA; [OrderCategorie2] [nvarchar](32) NULL,&#xA; [OrderDatum] [date] NOT NULL,&#xA; [OrderBedrag] [decimal](10,2) NOT NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [ValidFrom] [datetime] NOT NULL,&#xA; [ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31',&#xA; [CurrentFlag] [bit] NOT NULL DEFAULT 1&#xA;) &#xA;END&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'dim_Order'))&#xA;BEGIN&#xA;    CREATE TABLE [dbo].[dim_Order] (&#xA; [DimKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA; [OrderId] [int] NOT NULL,&#xA; [OrderNummer] [bigint] NOT NULL,&#xA; [OrderType] [varchar](32) NOT NULL,&#xA; [OrderDatum] [date] NOT NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [ValidFrom] [datetime] NOT NULL,&#xA; [ValidUntil] [datetime] NOT NULL DEFAULT '9999-12-31',&#xA; [CurrentFlag] [bit] NOT NULL DEFAULT 1&#xA;) &#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -73,7 +73,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_Persoon"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -90,7 +90,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Table dim_Status"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -243,6 +243,10 @@
           Id="Package\Create Table dim_Cursus"
           TopLeft="5.49999999999996,5.50000000000007" />
         <NodeLayout
+          Size="217.6,41.6"
+          Id="Package\Create Table dim_JunkFinCat"
+          TopLeft="1037.5,5.49999999999995" />
+        <NodeLayout
           Size="192.8,41.6"
           Id="Package\Create Table dim_Order"
           TopLeft="263.9,5.50000000000007" />
@@ -258,6 +262,10 @@
           Size="165.6,41.6"
           Id="Package\dim_Cursus_Arjan"
           TopLeft="21.5,107.1" />
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\dim_JunkFinCat_Bram"
+          TopLeft="1053.9,107.1" />
         <NodeLayout
           Size="176,41.6"
           Id="Package\dim_Order_EvertJan"
@@ -358,14 +366,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="184.8,41.6"
-          Id="Package\dim_JunkFinCat_Bram"
-          TopLeft="1053.9,107.1" />
-        <NodeLayout
-          Size="217.6,41.6"
-          Id="Package\Create Table dim_JunkFinCat"
-          TopLeft="1037.5,5.49999999999995" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="1146.3,47.1">

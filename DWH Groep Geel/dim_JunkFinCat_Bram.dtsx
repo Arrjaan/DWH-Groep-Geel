@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="dim_JunkFinCat_Bram"
   DTS:PackageType="5"
-  DTS:VersionBuild="29"
-  DTS:VersionGUID="{64F41FAE-B9AF-4346-9A3A-DEC39DC26CF4}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{4C144B72-89C5-4530-84D9-5A451E236802}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -229,7 +229,7 @@
                     <inputColumn
                       refId="Package\dimJunkFinCat\Conditional Split.Inputs[Conditional Split Input].Columns[tgt_SurgetKey]"
                       cachedDataType="wstr"
-                      cachedLength="164"
+                      cachedLength="334"
                       cachedName="tgt_SurgetKey"
                       lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]" />
                   </inputColumns>
@@ -692,10 +692,10 @@
                       externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[OrderCategorie2]"
                       lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[Con_OrderCategorie2]" />
                     <inputColumn
-                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[src_SurgetKey]"
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].Columns[SurgetKey]"
                       cachedDataType="wstr"
                       cachedLength="334"
-                      cachedName="src_SurgetKey"
+                      cachedName="SurgetKey"
                       externalMetadataColumnId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[SurgetKey]"
                       lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[src_SurgetKey]" />
                     <inputColumn
@@ -743,6 +743,10 @@
                       dataType="wstr"
                       length="334"
                       name="SurgetKey" />
+                    <externalMetadataColumn
+                      refId="Package\dimJunkFinCat\Invoegen rijen.Inputs[OLE DB Destination Input].ExternalColumns[DimKey]"
+                      dataType="i4"
+                      name="DimKey" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -864,7 +868,7 @@
                     <inputColumn
                       refId="Package\dimJunkFinCat\Merge Join.Inputs[Merge Join Right Input].Columns[SurgetKey]"
                       cachedDataType="wstr"
-                      cachedLength="164"
+                      cachedLength="334"
                       cachedName="SurgetKey"
                       cachedSortKeyPosition="1"
                       lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgetKey]" />
@@ -1060,7 +1064,7 @@
                     <outputColumn
                       refId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]"
                       dataType="wstr"
-                      length="164"
+                      length="334"
                       lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]"
                       name="tgt_SurgetKey">
                       <properties>
@@ -1112,17 +1116,17 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 2]"
+                  refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 1]"
                   deleteOutputOnPathDetached="true"
-                  name="Multicast Output 2"
+                  name="Multicast Output 1"
                   synchronousInputId="Package\dimJunkFinCat\Multicast.Inputs[Multicast Input 1]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 1]"
+                  refId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 2]"
                   dangling="true"
                   deleteOutputOnPathDetached="true"
-                  name="Multicast Output 1"
+                  name="Multicast Output 2"
                   synchronousInputId="Package\dimJunkFinCat\Multicast.Inputs[Multicast Input 1]">
                   <externalMetadataColumns />
                 </output>
@@ -1170,7 +1174,7 @@
       ,[ValidFrom]
       ,[ValidUntil]
       ,[Currentflag]
-  FROM [DWH].[dbo].[dim_JunkFinCat]</property>
+  FROM [dbo].[dim_JunkFinCat]</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1279,7 +1283,7 @@
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SurgetKey]"
-                      length="164"
+                      length="334"
                       lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgetKey]"
                       name="SurgetKey"
                       sortKeyPosition="1"
@@ -1321,7 +1325,7 @@
                     <externalMetadataColumn
                       refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SurgetKey]"
                       dataType="wstr"
-                      length="164"
+                      length="334"
                       name="SurgetKey" />
                   </externalMetadataColumns>
                 </output>
@@ -1333,7 +1337,7 @@
                     <outputColumn
                       refId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SurgetKey]"
                       dataType="wstr"
-                      length="164"
+                      length="334"
                       lineageId="Package\dimJunkFinCat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SurgetKey]"
                       name="SurgetKey" />
                     <outputColumn
@@ -2014,7 +2018,7 @@
                     <inputColumn
                       refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1].Columns[tgt_SurgetKey]"
                       cachedDataType="wstr"
-                      cachedLength="164"
+                      cachedLength="334"
                       cachedName="tgt_SurgetKey"
                       lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]">
                       <properties>
@@ -2231,7 +2235,7 @@
                     <inputColumn
                       refId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2].Columns[tgt_SurgetKey]"
                       cachedDataType="wstr"
-                      cachedLength="164"
+                      cachedLength="334"
                       cachedName="tgt_SurgetKey"
                       lineageId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output].Columns[tgt_SurgetKey]">
                       <properties>
@@ -2367,7 +2371,7 @@
                     <outputColumn
                       refId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_SurgetKey]"
                       dataType="wstr"
-                      length="164"
+                      length="334"
                       lineageId="Package\dimJunkFinCat\Union All.Outputs[Union All Output 1].Columns[tgt_SurgetKey]"
                       name="tgt_SurgetKey" />
                     <outputColumn
@@ -2414,7 +2418,7 @@
               startId="Package\dimJunkFinCat\Add date.Outputs[Derived Column Output]" />
             <path
               refId="Package\dimJunkFinCat.Paths[Gewijzigde]"
-              endId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1]"
+              endId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2]"
               name="Gewijzigde"
               startId="Package\dimJunkFinCat\Conditional Split.Outputs[Gewijzigde]" />
             <path
@@ -2423,10 +2427,10 @@
               name="Merge Join Output"
               startId="Package\dimJunkFinCat\Merge Join.Outputs[Merge Join Output]" />
             <path
-              refId="Package\dimJunkFinCat.Paths[Multicast Output 2]"
-              endId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 2]"
-              name="Multicast Output 2"
-              startId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 2]" />
+              refId="Package\dimJunkFinCat.Paths[Multicast Output 1]"
+              endId="Package\dimJunkFinCat\Union All.Inputs[Union All Input 1]"
+              name="Multicast Output 1"
+              startId="Package\dimJunkFinCat\Multicast.Outputs[Multicast Output 1]" />
             <path
               refId="Package\dimJunkFinCat.Paths[OLE DB Source Output]"
               endId="Package\dimJunkFinCat\Data Conversion.Inputs[Data Conversion Input]"
@@ -2508,7 +2512,7 @@
         <NodeLayout
           Size="121.6,41.6"
           Id="Package\dimJunkFinCat\Union All"
-          TopLeft="232.3,919.899999999999" />
+          TopLeft="219.428575165418,904.51764831147" />
         <NodeLayout
           Size="156.8,41.6"
           Id="Package\dimJunkFinCat\Data Conversion"
@@ -2531,18 +2535,30 @@
           TopLeft="231.9,615.099999999999" />
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[Union All Output 1]"
-          TopLeft="293.1,961.499999999999">
+          TopLeft="280.228575165418,946.11764831147">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
+              EndConnector="12.8714248345822,75.3823516885301"
               Start="0,0"
-              End="0,52.4999999999999">
+              End="12.8714248345822,67.8823516885301">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.4999999999999" />
+                    End="0,33.691175844265" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.691175844265"
+                    Point2="0,37.691175844265"
+                    Point3="4,37.691175844265" />
+                  <mssgle:LineSegment
+                    End="8.87142483458223,37.691175844265" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.87142483458223,37.691175844265"
+                    Point2="12.8714248345822,37.691175844265"
+                    Point3="12.8714248345822,41.691175844265" />
+                  <mssgle:LineSegment
+                    End="12.8714248345822,67.8823516885301" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2678,31 +2694,31 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\dimJunkFinCat.Paths[Multicast Output 2]"
+          Id="Package\dimJunkFinCat.Paths[Multicast Output 1]"
           TopLeft="171.1,859.899999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="103.066666666667,59.9999999999999"
+              EndConnector="109.128575165418,44.6176483114708"
               Start="0,0"
-              End="103.066666666667,52.4999999999999">
+              End="109.128575165418,37.1176483114708">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.5324675324675" />
+                    End="0,18.3088241557354" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.5324675324675"
-                    Point2="0,35.5324675324675"
-                    Point3="4,35.5324675324675" />
+                    Point1="0,18.3088241557354"
+                    Point2="0,22.3088241557354"
+                    Point3="4,22.3088241557354" />
                   <mssgle:LineSegment
-                    End="99.0666666666667,35.5324675324675" />
+                    End="105.128575165418,22.3088241557354" />
                   <mssgle:CubicBezierSegment
-                    Point1="99.0666666666667,35.5324675324675"
-                    Point2="103.066666666667,35.5324675324675"
-                    Point3="103.066666666667,39.5324675324675" />
+                    Point1="105.128575165418,22.3088241557354"
+                    Point2="109.128575165418,22.3088241557354"
+                    Point3="109.128575165418,26.3088241557354" />
                   <mssgle:LineSegment
-                    End="103.066666666667,52.4999999999999" />
+                    End="109.128575165418,37.1176483114708" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2735,25 +2751,37 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\dimJunkFinCat.Paths[Gewijzigde]"
-          TopLeft="314.9,758.299999999999">
+          TopLeft="317.766666666667,758.299999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,161.6"
+              EndConnector="-18.6047581679155,146.217648311471"
               Start="0,0"
-              End="0,154.1">
+              End="-18.6047581679155,138.717648311471">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,154.1" />
+                    End="0,68.8512088612426" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,68.8512088612426"
+                    Point2="0,72.8512088612426"
+                    Point3="-4,72.8512088612426" />
+                  <mssgle:LineSegment
+                    End="-14.6047581679155,72.8512088612426" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-14.6047581679155,72.8512088612426"
+                    Point2="-18.6047581679155,72.8512088612426"
+                    Point3="-18.6047581679155,76.8512088612426" />
+                  <mssgle:LineSegment
+                    End="-18.6047581679155,138.717648311471" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-24.4638671875,71.2184570312499,48.927734375,11.6630859375"
+              BoundingBox="-33.7662462714578,77.8512088612426,48.927734375,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

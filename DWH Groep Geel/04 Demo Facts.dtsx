@@ -1,0 +1,1221 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2018 2:53:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WS724"
+  DTS:CreatorName="WS724\User"
+  DTS:DTSID="{B8A2BBAF-15E8-44AE-95FC-BD7F43B44A44}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.92"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="04 Demo Facts"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{AEB5CF5D-DA4A-474B-8591-7C786538A83C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Aggegregen"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{726E92F6-F2DE-43D7-AE1F-C592D2C40536}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Aggegregen"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Aggegregen\Demo 1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Demo 1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select j.Omschrijving as Kostensoort, sum(k.OrderBedrag) as Totaal from fct_Kosten k
+left join dim_JunkFinCat j on j.DimKey = k.DimKey_JunkFinCat
+group by j.DimKey, j.Omschrijving</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Aggegregen\Demo 1.Connections[OleDbConnection]"
+                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].Columns[Kostensoort]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].ExternalColumns[Kostensoort]"
+                      length="100"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].Columns[Kostensoort]"
+                      name="Kostensoort"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].Columns[Totaal]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].ExternalColumns[Totaal]"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].Columns[Totaal]"
+                      name="Totaal"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].ExternalColumns[Kostensoort]"
+                      dataType="wstr"
+                      length="100"
+                      name="Kostensoort" />
+                    <externalMetadataColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].ExternalColumns[Totaal]"
+                      dataType="numeric"
+                      name="Totaal"
+                      precision="38"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[Kostensoort]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[Kostensoort]"
+                      name="Kostensoort" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[Totaal]"
+                      dataType="numeric"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[Totaal]"
+                      name="Totaal"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Aggegregen\Demo 2"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Demo 2"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select c.CursusId, cast(c.Omschrijving as varchar) as Cursus, sum(k.OrderBedrag) as Totaal from fct_Kosten k
+left join dim_Cursus c on c.DimKey = k.DimKey_Cursus
+group by c.DimKey, c.CursusId, cast(c.Omschrijving as varchar)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Aggegregen\Demo 2.Connections[OleDbConnection]"
+                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[CursusId]"
+                      name="CursusId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[Cursus]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].ExternalColumns[Cursus]"
+                      length="30"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[Cursus]"
+                      name="Cursus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[Totaal]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].ExternalColumns[Totaal]"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[Totaal]"
+                      name="Totaal"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].ExternalColumns[CursusId]"
+                      dataType="i4"
+                      name="CursusId" />
+                    <externalMetadataColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].ExternalColumns[Cursus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Cursus" />
+                    <externalMetadataColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].ExternalColumns[Totaal]"
+                      dataType="numeric"
+                      name="Totaal"
+                      precision="38"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[CursusId]"
+                      name="CursusId" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[Cursus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[Cursus]"
+                      name="Cursus" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[Totaal]"
+                      dataType="numeric"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[Totaal]"
+                      name="Totaal"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Aggegregen\Demo 3"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Demo 3"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select cast(c.Omschrijving as varchar) as Cursus, avg(k.OrderBedrag) as Gemiddelde from fct_Kosten k
+left join dim_Cursus c on c.DimKey = k.DimKey_Cursus
+group by cast(c.Omschrijving as varchar)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Aggegregen\Demo 3.Connections[OleDbConnection]"
+                  connectionManagerID="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WS724_SQLEXPRESS DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].Columns[Cursus]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].ExternalColumns[Cursus]"
+                      length="30"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].Columns[Cursus]"
+                      name="Cursus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].Columns[Gemiddelde]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].ExternalColumns[Gemiddelde]"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].Columns[Gemiddelde]"
+                      name="Gemiddelde"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].ExternalColumns[Cursus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Cursus" />
+                    <externalMetadataColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].ExternalColumns[Gemiddelde]"
+                      dataType="numeric"
+                      name="Gemiddelde"
+                      precision="38"
+                      scale="6" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[Cursus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[Cursus]"
+                      name="Cursus" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[Gemiddelde]"
+                      dataType="numeric"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[Gemiddelde]"
+                      name="Gemiddelde"
+                      precision="38"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Aggegregen\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Aggegregen\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Aggegregen\Multicast.Outputs[Multicast Output 1]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Aggegregen\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Aggegregen\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Aggegregen\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Aggegregen\Union All.Inputs[Union All Input 1].Columns[Kostensoort]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Kostensoort"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].Columns[Kostensoort]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Kostensoort]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Aggegregen\Union All.Inputs[Union All Input 1].Columns[Totaal]"
+                      cachedDataType="numeric"
+                      cachedName="Totaal"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      lineageId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output].Columns[Totaal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Totaal]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Aggegregen\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Aggegregen\Union All.Inputs[Union All Input 2].Columns[Totaal]"
+                      cachedDataType="numeric"
+                      cachedName="Totaal"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[Totaal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Totaal]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Aggegregen\Union All.Inputs[Union All Input 2].Columns[CursusId]"
+                      cachedDataType="i4"
+                      cachedName="CursusId"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[CursusId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[CursusId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Aggegregen\Union All.Inputs[Union All Input 2].Columns[Cursus]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Cursus"
+                      lineageId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output].Columns[Cursus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Cursus]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Aggegregen\Union All.Inputs[Union All Input 3]"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Aggegregen\Union All.Inputs[Union All Input 3].Columns[Cursus]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Cursus"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].Columns[Cursus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Cursus]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Aggegregen\Union All.Inputs[Union All Input 3].Columns[Gemiddelde]"
+                      cachedDataType="numeric"
+                      cachedName="Gemiddelde"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      lineageId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output].Columns[Gemiddelde]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Gemiddelde]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Aggegregen\Union All.Inputs[Union All Input 4]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 4">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Aggegregen\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Kostensoort]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Kostensoort]"
+                      name="Kostensoort" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Totaal]"
+                      dataType="numeric"
+                      lineageId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Totaal]"
+                      name="Totaal"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[CursusId]"
+                      dataType="i4"
+                      lineageId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[CursusId]"
+                      name="CursusId" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Cursus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Cursus]"
+                      name="Cursus" />
+                    <outputColumn
+                      refId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Gemiddelde]"
+                      dataType="numeric"
+                      lineageId="Package\Aggegregen\Union All.Outputs[Union All Output 1].Columns[Gemiddelde]"
+                      name="Gemiddelde"
+                      precision="38"
+                      scale="6" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Aggegregen.Paths[OLE DB Source Output]"
+              endId="Package\Aggegregen\Union All.Inputs[Union All Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Aggegregen\Demo 1.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Aggegregen.Paths[OLE DB Source Output1]"
+              endId="Package\Aggegregen\Union All.Inputs[Union All Input 2]"
+              name="OLE DB Source Output"
+              startId="Package\Aggegregen\Demo 2.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Aggegregen.Paths[OLE DB Source Output2]"
+              endId="Package\Aggegregen\Union All.Inputs[Union All Input 3]"
+              name="OLE DB Source Output"
+              startId="Package\Aggegregen\Demo 3.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Aggegregen.Paths[Union All Output 1]"
+              endId="Package\Aggegregen\Multicast.Inputs[Multicast Input 1]"
+              name="Union All Output 1"
+              startId="Package\Aggegregen\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Table fct_Deelname"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{586dbfb4-9f84-45c9-9c2c-84b9f825defc}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Table fct_Deelname"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
+          SQLTask:SqlStatementSource="IF (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'fct_Deelname'))&#xA;BEGIN&#xA; DROP TABLE fct_Deelname&#xA;END&#xA;&#xA;Create Table fct_Deelname (&#xA;[FctKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA;[DeelnameId] int NOT NULL Primary Key,&#xA;[AantalDagen] int NOT NULL,&#xA;[Bijzonderheden] varchar(400) NULL,&#xA;[DimKey_Status] int NOT NULL,&#xA;[DimKey_Persoon] int NOT NULL,&#xA;[DimKey_Cursus] int NOT NULL,&#xA;[Checksum] [int] NOT NULL,&#xA;[ValidFrom] [datetime] NOT NULL default Getdate(),&#xA;[ValidUntil] [datetime] NOT NULL default '9999-12-31',&#xA;[CurrentFlag] [bit] NOT NULL default '1'&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Table fct_Kosten"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1a35fded-b72d-49f3-a94c-7273fbfe40e3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Table fct_Kosten"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'fct_Kosten'))&#xA;BEGIN&#xA;CREATE TABLE [dbo].[fct_Kosten](&#xA; [FctKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA; [OrderID] [int] NOT NULL,&#xA; [DimKey_JunkFinCat] [int] NOT NULL,&#xA; [DimKey_Order] [bigint] NOT NULL,&#xA; [DimKey_Cursus] [int] NOT NULL,&#xA; [DimKey_Persoon] [int] NOT NULL,&#xA; [OrderNummer] [bigint] NULL,&#xA; [OrderBedrag] [decimal](10,2) NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [ValidFrom] [datetime] NOT NULL DEFAULT ('1900-01-01'),&#xA; [ValidUntil] [datetime] NOT NULL DEFAULT ('9999-12-31'),&#xA; [CurrentFlag] [bit] NOT NULL DEFAULT ((1))&#xA;)&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Table fct_Opbrengsten"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ab878895-0ee2-4a46-9f4b-9da33baf3d5f}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Table fct_Opbrengsten"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
+          SQLTask:SqlStatementSource="IF NOT (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'fct_Opbrengsten'))&#xA;BEGIN&#xA;&#xA;CREATE TABLE [dbo].[fct_Opbrengsten] (&#xA; [FctKey] [bigint] IDENTITY(1,1) NOT NULL,&#xA; [OrderID] [int] NOT NULL,&#xA; [DimKey_JunkFinCat] [int] NOT NULL,&#xA; [DimKey_Order] [bigint] NOT NULL,&#xA; [DimKey_Cursus] [int] NOT NULL,&#xA; [DimKey_Persoon] [int] NOT NULL,&#xA; [OrderNummer] [bigint] NULL,&#xA; [OrderBedrag] [decimal](10,2) NULL,&#xA; [Checksum] [int] NOT NULL,&#xA; [ValidFrom] [datetime] NOT NULL DEFAULT ('1900-01-01'),&#xA; [ValidUntil] [datetime] NOT NULL DEFAULT ('9999-12-31'),&#xA; [CurrentFlag] [bit] NOT NULL DEFAULT ((1))&#xA;)&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Table fct_Resultaten"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2680a9bc-9344-4865-98a1-5e2f13af2a4f}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Table fct_Resultaten"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7B77A3F5-433E-4866-AEAD-F3C813764EAB}"
+          SQLTask:SqlStatementSource="IF (EXISTS (SELECT * &#xA;                 FROM INFORMATION_SCHEMA.TABLES &#xA;                 WHERE TABLE_SCHEMA = 'dbo' &#xA;                 AND  TABLE_NAME = 'fct_Resultaten'))&#xA;BEGIN&#xA; DROP TABLE fct_Resultaten&#xA;END&#xA;&#xA;CREATE TABLE fct_Resultaten( &#xA;[FctKey] int not null identity(1,1),&#xA;[ResultaatID] int not null,&#xA;[PersoonID] int not null,&#xA;[CursusID] int not null,&#xA;[Geslaagd] bit not null, &#xA;[DatumGeslaagd] date not null,&#xA;[Checksum] INT NOT NULL,&#xA;[ValidFrom] DateTime NOT NULL DEFAULT '1900-01-01',&#xA;[ValidUntill] DateTime NOT NULL DEFAULT '9999-12-31',&#xA;[CurrentFlag] BIT NOT NULL DEFAULT 1&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\fct_Deelname_Pim"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{594dde89-8809-40c3-a784-0e2f059e2543}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="fct_Deelname_Pim"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>fct_Deelname_Pim.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\fct_Kosten_EvertJan"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{1bc965b5-3b80-4761-bb11-33d811fef657}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="fct_Kosten_EvertJan"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>fct_Kosten_EvertJan.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\fct_Opbrengsten_EvertJan"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{292ccffe-8cbe-49a0-82bb-e9aa48c160eb}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="fct_Opbrengsten_EvertJan"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>fct_Opbrengsten_EvertJan.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\fct_Resultaten_Wyke"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{731d1b51-dd2a-4c3b-8d76-c307aa78a9e8}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="fct_Resultaten_Wyke"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>fct_Resultaten_Wyke.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{06bda5cc-136b-452a-8002-f1238a5aaedf}"
+      DTS:From="Package\Create Table fct_Kosten"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\fct_Kosten_EvertJan" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{26b9e33e-b3ab-477b-8632-50a309171a33}"
+      DTS:From="Package\Create Table fct_Resultaten"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\fct_Resultaten_Wyke" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{ec31a725-69a6-486d-8bc6-cec6fda93825}"
+      DTS:From="Package\Create Table fct_Opbrengsten"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\fct_Opbrengsten_EvertJan" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{88e1a772-f850-4f56-a7ae-067d67adcc1f}"
+      DTS:From="Package\Create Table fct_Deelname"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\fct_Deelname_Pim" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{7D962145-671F-44D9-92AD-E1C0C90AA1A9}"
+      DTS:From="Package\fct_Kosten_EvertJan"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Aggegregen" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Create Table fct_Deelname"
+          TopLeft="60,60.0000000000001" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\Create Table fct_Kosten"
+          TopLeft="328.6,60.0000000000001" />
+        <NodeLayout
+          Size="221.6,41.6"
+          Id="Package\Create Table fct_Opbrengsten"
+          TopLeft="582.2,60" />
+        <NodeLayout
+          Size="210.4,41.6"
+          Id="Package\Create Table fct_Resultaten"
+          TopLeft="864.8,60" />
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\fct_Kosten_EvertJan"
+          TopLeft="347,161.6" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\fct_Deelname_Pim"
+          TopLeft="80,161.6" />
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\fct_Opbrengsten_EvertJan"
+          TopLeft="591,161.6" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\fct_Resultaten_Wyke"
+          TopLeft="880.4,161.6" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="425,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10,60.0000000000001"
+              Start="0,0"
+              End="10,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.0000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.0000000000001"
+                    Point2="0,30.0000000000001"
+                    Point3="4,30.0000000000001" />
+                  <mssgle:LineSegment
+                    End="6,30.0000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6,30.0000000000001"
+                    Point2="10,30.0000000000001"
+                    Point3="10,34.0000000000001" />
+                  <mssgle:LineSegment
+                    End="10,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="970,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="693,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="164,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Aggegregen"
+          TopLeft="365.828570669525,256.941180074091" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="434.614285334762,203.2">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.7411800740913"
+              Start="0,0"
+              End="0,46.2411800740913">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.2411800740913" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Aggegregen">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="116.8,41.6"
+          Id="Package\Aggegregen\Demo 1"
+          TopLeft="5.49999999999998,5.49999999999995" />
+        <NodeLayout
+          Size="116.8,41.6"
+          Id="Package\Aggegregen\Demo 2"
+          TopLeft="182.5,5.49999999999995" />
+        <NodeLayout
+          Size="116.8,41.6"
+          Id="Package\Aggegregen\Demo 3"
+          TopLeft="359.5,5.49999999999995" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Aggegregen\Union All"
+          TopLeft="180.1,107.1" />
+        <EdgeLayout
+          Id="Package\Aggegregen.Paths[OLE DB Source Output]"
+          TopLeft="63.9,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="148.6,59.9999999999999"
+              Start="0,0"
+              End="148.6,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.1416309012875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.1416309012875"
+                    Point2="0,39.1416309012875"
+                    Point3="4,39.1416309012875" />
+                  <mssgle:LineSegment
+                    End="144.6,39.1416309012875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="144.6,39.1416309012875"
+                    Point2="148.6,39.1416309012875"
+                    Point3="148.6,43.1416309012875" />
+                  <mssgle:LineSegment
+                    End="148.6,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="66.3,44.1416309012875,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Aggegregen.Paths[OLE DB Source Output1]"
+          TopLeft="240.9,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,18.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Aggegregen.Paths[OLE DB Source Output2]"
+          TopLeft="417.9,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-148.6,59.9999999999999"
+              Start="0,0"
+              End="-148.6,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.1416309012875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.1416309012875"
+                    Point2="0,39.1416309012875"
+                    Point3="-4,39.1416309012875" />
+                  <mssgle:LineSegment
+                    End="-144.6,39.1416309012875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-144.6,39.1416309012875"
+                    Point2="-148.6,39.1416309012875"
+                    Point3="-148.6,43.1416309012875" />
+                  <mssgle:LineSegment
+                    End="-148.6,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-82.3,44.1416309012875,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Aggegregen\Multicast"
+          TopLeft="180.1,208.7" />
+        <EdgeLayout
+          Id="Package\Aggegregen.Paths[Union All Output 1]"
+          TopLeft="240.9,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Aggegregen\Demo 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Aggegregen\Demo 2">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Aggegregen\Demo 3">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
